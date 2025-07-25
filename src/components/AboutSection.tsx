@@ -16,10 +16,10 @@ export default function AboutSection() {
           <div className="lg:w-1/3">
             <div className="relative w-64 h-64 md:w-80 md:h-80 mx-auto rounded-full overflow-hidden border-4 border-blue-400/30 shadow-xl">
               <Image
-                src="/images/elvin-removebg-preview.png" // Replace with your image
+                src="/images/profile-2.png" // Replace with your image
                 alt="Profile Picture"
                 fill
-                className="object-cover object-bottom"
+                className="object-cover object-top"
               />
             </div>
           </div>
