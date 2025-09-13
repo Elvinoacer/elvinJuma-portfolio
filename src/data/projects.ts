@@ -212,6 +212,25 @@
 
 export const projects = [
   {
+    id: 0,
+    title: "Church Management System",
+    description:
+      "A comprehensive church management system to streamline operations and enhance community engagement.",
+    tags: [
+      "Next.js",
+      "TypeScript",
+      "TailwindCSS",
+      "Framer Motion",
+      "Shadcn",
+      "Prisma",
+      "Postgresql",
+      "NextAuth",
+      "Intasend",
+    ],
+    image: "/images/church-platform.png",
+    link: "https://kenya-assemblies-of-god.vercel.app",
+  },
+  {
     id: 1,
     title: "E-commerce Platform",
     description:
