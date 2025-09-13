@@ -267,7 +267,7 @@ export const projects = [
     id: 4,
     title: "Blog App",
     description:
-      "A full-stack blogging platform with user authentication and rich media support.",
+      "A full-stack blogging platform with user authentication and rich media support. The app has a server that scrapes articles from external sources and stores them in a database.",
     tags: ["Next.js", "Prisma", "NextAuth.js", "Cloudinary", "Tailwind CSS"],
     image: "/images/blogapp.png",
     link: "https://blog-app-prototype.vercel.app",
