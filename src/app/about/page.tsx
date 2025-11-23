@@ -1,7 +1,11 @@
 "use client";
 import { motion } from "framer-motion";
-import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
-import { FaFileDownload } from "react-icons/fa";
+import {
+  FaEnvelope,
+  FaGithub,
+  FaLinkedin,
+  FaFileDownload,
+} from "react-icons/fa";
 import {
   SiAmazon,
   SiFirebase,
@@ -17,12 +21,13 @@ import {
   SiTypescript,
 } from "react-icons/si";
 
+// --- DATA ---
 const skills = [
   { name: "JavaScript", icon: SiJavascript },
   { name: "TypeScript", icon: SiTypescript },
   { name: "React", icon: SiReact },
   { name: "Next.js", icon: SiNextdotjs },
-  { name: "Tailwind CSS", icon: SiTailwindcss },
+  { name: "Tailwind", icon: SiTailwindcss },
   { name: "Node.js", icon: SiNodedotjs },
   { name: "PostgreSQL", icon: SiPostgresql },
   { name: "Langchain", icon: SiLangchain },
@@ -32,248 +37,250 @@ const skills = [
   { name: "AWS", icon: SiAmazon },
 ];
 
-const floatingVariants = {
-  float: {
-    y: [-15, 15, -15],
-    transition: {
-      y: {
-        duration: 5,
-        repeat: Infinity,
-        ease: "easeInOut",
-      },
-    },
-  },
-};
-
-const testimonials = [
+const endorsements = [
   {
-    quote:
-      "Elvin delivered our app ahead of schedule with flawless performance!",
-    author: "Julie Jayden, CEO of TechSpeedPart",
+    text: "Elvin delivered our app ahead of schedule with flawless performance!",
+    author: "Julie Jayden",
+    role: "CEO, TechSpeedPart",
   },
   {
-    quote: "His attention to detail and creative solutions are unmatched.",
-    author: "James Weed, Product Manager",
+    text: "His attention to detail and creative solutions are unmatched.",
+    author: "James Weed",
+    role: "Product Manager",
   },
 ];
 
-// SkillCard Component to Render Icons
-function SkillCard({ name, Icon }) {
-  return (
-    <div className="flex flex-col items-center justify-center gap-2">
-      <Icon className="text-3xl sm:text-4xl md:text-5xl text-white/90 group-hover:text-purple-300 transition-colors duration-300" />
-      <span className="text-sm sm:text-base md:text-lg font-medium text-gray-300 text-center">
-        {name}
-      </span>
-    </div>
-  );
-}
+// --- ANIMATION VARIANTS ---
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+};
 
 export default function About() {
   return (
-    <div className="relative overflow-hidden min-h-screen bg-gray-900">
-      {/* Dynamic Background with Radial Gradients and Infinite Animation */}
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-0 left-1/3 w-[400px] sm:w-[500px] h-[400px] sm:h-[500px] bg-gradient-radial from-purple-600/30 to-transparent rounded-full mix-blend-overlay filter blur-3xl opacity-60 animate-pulse animation-delay-2000"></div>
-        <div className="absolute top-20 right-1/4 w-[480px] sm:w-[600px] h-[480px] sm:h-[600px] bg-gradient-radial from-blue-600/30 to-transparent rounded-full mix-blend-overlay filter blur-3xl opacity-60 animate-pulse animation-delay-4000"></div>
-        <div className="absolute bottom-10 left-1/2 w-[400px] sm:w-[500px] h-[400px] sm:h-[500px] bg-gradient-radial from-teal-500/30 to-transparent rounded-full mix-blend-overlay filter blur-3xl opacity-60 animate-pulse"></div>
-      </div>
+    <section className="relative min-h-screen bg-slate-950 overflow-hidden py-24">
+      {/* --- BACKGROUND LAYERS --- */}
+      {/* 1. Grid */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease: "easeOut" }}
-        className="container mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 relative z-10"
-      >
-        {/* Headline with Enhanced Animation */}
+      {/* 2. Atmospheric Blurs (Emerald & Cyan) */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-emerald-500/10 blur-[120px] rounded-full pointer-events-none mix-blend-screen"></div>
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-cyan-500/10 blur-[120px] rounded-full pointer-events-none mix-blend-screen"></div>
+
+      <div className="container relative z-10 mx-auto px-6">
+        {/* --- HEADER --- */}
         <motion.div
-          variants={floatingVariants}
-          animate="float"
-          className="text-center mb-12 sm:mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="max-w-4xl mx-auto text-center mb-20"
         >
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 sm:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-blue-600">
-            About Elvin
+          <span className="inline-block py-1 px-3 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono text-sm tracking-widest uppercase mb-4">
+            // The Developer
+          </span>
+          <h1 className="text-4xl md:text-6xl font-bold text-slate-100 mb-6 tracking-tight">
+            I transform complex problems into <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">
+              elegant solutions.
+            </span>
           </h1>
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 max-w-3xl mx-auto"
-          >
-            I transform{" "}
-            <span className="font-semibold text-purple-300">ideas</span> into{" "}
-            <span className="font-semibold text-blue-300">innovative</span>{" "}
-            digital experiences.
-          </motion.p>
         </motion.div>
 
-        {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 mb-16 sm:mb-20">
-          {/* Bio Section with Professional Background and Mission */}
+        {/* --- MAIN CONTENT LAYOUT --- */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-20">
+          {/* LEFT: THE STORY (Span 7) */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-            className="bg-white/5 backdrop-blur-xl p-6 sm:p-8 rounded-2xl border border-white/10 shadow-2xl hover:shadow-purple-500/10 transition-shadow duration-300"
+            className="lg:col-span-7 flex flex-col gap-6"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
           >
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 text-white">
-              Hi, I'm <span className="text-purple-300">Elvin</span> 👋
-            </h2>
-            <p className="text-gray-300 mb-4 text-sm sm:text-base md:text-lg">
-              I'm a{" "}
-              <span className="font-semibold text-blue-300">
-                Web & Mobile Developer
-              </span>{" "}
-              with over{" "}
-              <span className="font-semibold">4 years of experience</span>{" "}
-              crafting seamless applications using{" "}
-              <span className="font-semibold">
-                React Native, Node, and Next.js
-              </span>
-              . My journey began with a quirky todo app that crashed every 5
-              minutes—a humbling lesson in resilience!
-            </p>
-            <p className="text-gray-300 mb-4 text-sm sm:text-base md:text-lg">
-              Since then, I've collaborated with{" "}
-              <span className="font-semibold">
-                startups, fintech, and e-commerce
-              </span>{" "}
-              companies to launch{" "}
-              <span className="font-semibold">10+ apps</span> that have
-              delighted thousands of users. My mission is to build{" "}
-              <span className="font-semibold text-teal-300">
-                user-first, scalable solutions
-              </span>{" "}
-              that blend performance with accessibility.
-            </p>
-            <p className="text-gray-300 text-sm sm:text-base md:text-lg">
-              When I'm not coding, you'll find me{" "}
-              <span className="font-semibold">
-                photographing vibrant street art
-              </span>
-              ,{" "}
-              <span className="font-semibold">
-                perfecting my pour-over coffee
-              </span>
-              , or diving into{" "}
-              <span className="font-semibold text-teal-300">
-                AI-driven app integrations
-              </span>
-              . Fun fact: I once built an app to settle a debate with a friend
-              over the best pizza topping (pineapple won, obviously).
-            </p>
+            {/* Bio Card */}
+            <motion.div
+              variants={itemVariants}
+              className="bg-slate-900/50 backdrop-blur-md border border-white/10 rounded-2xl p-8 hover:border-emerald-500/30 transition-colors duration-500"
+            >
+              <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                <span className="w-2 h-8 bg-emerald-500 rounded-full"></span>
+                Behind the Code
+              </h2>
+
+              <div className="space-y-4 text-slate-300 text-lg leading-relaxed">
+                <p>
+                  Hi, I'm <strong className="text-emerald-400">Elvin</strong>.
+                  I'm a Full-Stack Engineer with over{" "}
+                  <span className="text-white font-medium">
+                    4 years of experience
+                  </span>{" "}
+                  crafting seamless digital ecosystems.
+                </p>
+                <p>
+                  My journey began with a quirky todo app that crashed every 5
+                  minutes—a humbling lesson in resilience. Since then, I've
+                  scaled my skills to build high-performance applications using{" "}
+                  <span className="text-slate-100 border-b border-emerald-500/30">
+                    React, Node.js, and AI integrations
+                  </span>
+                  .
+                </p>
+                <p>
+                  When I'm not debugging, I'm photographing street art or
+                  perfecting my pour-over coffee. I believe in code that is{" "}
+                  <span className="text-white italic">
+                    clean, accessible, and remarkably fast.
+                  </span>
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Endorsements (Mini Testimonials) */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {endorsements.map((item, idx) => (
+                <motion.div
+                  key={idx}
+                  variants={itemVariants}
+                  className="bg-slate-900/30 border border-white/5 p-6 rounded-xl hover:bg-slate-800/50 transition-colors"
+                >
+                  <p className="text-slate-400 text-sm italic mb-4">
+                    "{item.text}"
+                  </p>
+                  <div>
+                    <p className="text-emerald-400 font-bold text-sm">
+                      {item.author}
+                    </p>
+                    <p className="text-slate-500 text-xs uppercase tracking-wider">
+                      {item.role}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
 
-          {/* Skills Section with Interactive Icon Cards */}
+          {/* RIGHT: THE TOOLKIT (Span 5) */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
-            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-3 gap-3 sm:gap-4"
+            className="lg:col-span-5"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
           >
-            {skills.map((skill, index) => (
-              <motion.div
-                key={index}
-                whileHover={{ scale: 1.1, y: -8, rotate: 2 }}
-                whileTap={{ scale: 0.95 }}
-                className="group bg-white/10 backdrop-blur-sm rounded-xl p-3 sm:p-4 border border-white/10 hover:border-purple-400/50 hover:shadow-lg transition-all duration-300 cursor-default"
-              >
-                <SkillCard name={skill.name} Icon={skill.icon} />
-              </motion.div>
-            ))}
+            <motion.div
+              variants={itemVariants}
+              className="bg-slate-900/50 backdrop-blur-md border border-white/10 rounded-2xl p-8 h-full"
+            >
+              <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                <SiJavascript className="text-emerald-500" />
+                Technical Arsenal
+              </h3>
+
+              <div className="grid grid-cols-3 gap-3">
+                {skills.map((skill, index) => (
+                  <motion.div
+                    key={index}
+                    whileHover={{
+                      scale: 1.05,
+                      backgroundColor: "rgba(16, 185, 129, 0.1)",
+                    }}
+                    className="flex flex-col items-center justify-center gap-2 p-3 rounded-xl bg-slate-950 border border-white/5 cursor-default group transition-colors"
+                  >
+                    <skill.icon className="text-3xl text-slate-500 group-hover:text-emerald-400 transition-colors duration-300" />
+                    <span className="text-[10px] font-medium text-slate-400 group-hover:text-slate-200 uppercase tracking-wide">
+                      {skill.name}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+
+              <div className="mt-8 pt-6 border-t border-white/5">
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-slate-400">Current Focus:</span>
+                  <span className="text-emerald-400 font-mono">
+                    Agentic AI & RAG
+                  </span>
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
 
-        {/* Testimonials Section */}
+        {/* --- BOTTOM CTA --- */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.8 }}
-          className="mb-16 sm:mb-20"
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="flex flex-col items-center justify-center gap-8 border-t border-white/5 pt-16"
         >
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-center text-white mb-6 sm:mb-8">
-            What People Say
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.9 + index * 0.2, duration: 0.8 }}
-                className="bg-white/5 backdrop-blur-lg p-4 sm:p-6 rounded-xl border border-white/10 hover:shadow-purple-500/10 transition-shadow"
-              >
-                <p className="text-gray-300 text-sm sm:text-base md:text-lg mb-4 italic">
-                  "{testimonial.quote}"
-                </p>
-                <p className="text-xs sm:text-sm text-gray-400 font-semibold">
-                  — {testimonial.author}
-                </p>
-              </motion.div>
-            ))}
+          <p className="text-2xl text-slate-300 text-center max-w-2xl">
+            Ready to create something{" "}
+            <span className="text-white font-bold">extraordinary</span>?
+          </p>
+
+          <div className="flex flex-wrap justify-center gap-4">
+            {/* Primary Contact */}
+            <a
+              href="mailto:omondielvin@gmail.com"
+              className="group relative px-8 py-3 bg-emerald-500 text-slate-950 font-bold rounded-full overflow-hidden transition-transform hover:scale-105"
+            >
+              <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:animate-shimmer" />
+              <span className="flex items-center gap-2 relative z-10">
+                <FaEnvelope /> Get In Touch
+              </span>
+            </a>
+
+            {/* Secondary Actions */}
+            <SocialBtn
+              href="/images/Elvin-Resume-template.pdf"
+              icon={<FaFileDownload />}
+              text="Resume"
+            />
+            <SocialBtn
+              href="https://linkedin.com"
+              icon={<FaLinkedin />}
+              text="LinkedIn"
+            />
+            <SocialBtn
+              href="https://github.com/Elvinoacer"
+              icon={<FaGithub />}
+              text="GitHub"
+            />
           </div>
         </motion.div>
+      </div>
+    </section>
+  );
+}
 
-        {/* Call-to-Action with Social Links */}
-     <motion.div
-  initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ delay: 1, duration: 0.8 }}
-  className="text-center mt-12"
->
-  <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-4 sm:mb-6">
-    Ready to create something{" "}
-    <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-500">
-      extraordinary
-    </span>
-    ? Let's make it happen!
-  </p>
-  <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
-    <motion.a
-      href="mailto:omondielvin@gmail.com"
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      className="px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full font-semibold text-sm sm:text-base text-white shadow-lg hover:shadow-purple-500/30 transition-all flex items-center justify-center gap-2"
-    >
-      <FaEnvelope className="text-lg sm:text-xl" /> Get In Touch
-    </motion.a>
-    <motion.a
-      href="/images/Elvin-Resume-template.pdf"
+// Helper Component for Social Buttons
+function SocialBtn({
+  href,
+  icon,
+  text,
+}: {
+  href: string;
+  icon: React.ReactNode;
+  text: string;
+}) {
+  return (
+    <a
+      href={href}
       target="_blank"
       rel="noopener noreferrer"
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      className="px-4 sm:px-6 py-2 sm:py-3 bg-gray-800 rounded-full font-semibold text-sm sm:text-base text-white shadow-lg hover:shadow-blue-500/30 transition-all flex items-center justify-center gap-2"
+      className="flex items-center gap-2 px-6 py-3 bg-slate-900 border border-white/10 rounded-full text-slate-300 font-medium hover:bg-slate-800 hover:text-white hover:border-emerald-500/30 transition-all duration-300"
     >
-      <FaFileDownload className="text-lg sm:text-xl" /> View Resume
-    </motion.a>
-    <motion.a
-      href="https://linkedin.com"
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      className="px-4 sm:px-6 py-2 sm:py-3 bg-gray-800 rounded-full font-semibold text-sm sm:text-base text-white shadow-lg hover:shadow-blue-500/30 transition-all flex items-center justify-center gap-2"
-    >
-      <FaLinkedin className="text-lg sm:text-xl" /> LinkedIn
-    </motion.a>
-    <motion.a
-      href="https://github.com/Elvinoacer"
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      className="px-4 sm:px-6 py-2 sm:py-3 bg-gray-800 rounded-full font-semibold text-sm sm:text-base text-white shadow-lg hover:shadow-blue-500/30 transition-all flex items-center justify-center gap-2"
-    >
-      <FaGithub className="text-lg sm:text-xl" /> GitHub
-    </motion.a>
-  </div>
-  <p className="text-xs sm:text-sm text-gray-400 mt-4 sm:mt-6">
-    Currently open to{" "}
-    <span className="font-semibold text-teal-300">
-      freelance projects
-    </span>{" "}
-    and exploring{" "}
-    <span className="font-semibold text-teal-300">AI integrations</span>.
-  </p>
-</motion.div>
-      </motion.div>
-    </div>
+      <span className="text-lg">{icon}</span>
+      <span>{text}</span>
+    </a>
   );
 }
