@@ -1,266 +1,196 @@
 "use client";
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
-// Organized skills by category
-const skillCategories = [
-  {
-    name: "Core Technologies",
-    skills: [
-      { name: "JavaScript", level: 95, color: "from-yellow-400 to-yellow-600" },
-      { name: "TypeScript", level: 90, color: "from-blue-500 to-blue-700" },
-      { name: "HTML", level: 90, color: "from-orange-300 to-orange-500" },
-      { name: "CSS", level: 90, color: "from-blue-300 to-blue-500" },
-      { name: "Tailwind CSS", level: 95, color: "from-teal-400 to-teal-600" },
-      { name: "Next.js", level: 95, color: "from-gray-300 to-gray-500" },
-      { name: "Node.js", level: 85, color: "from-green-500 to-green-700" },
-      { name: "React", level: 95, color: "from-cyan-400 to-cyan-600" },
-      { name: "React Native", level: 85, color: "from-cyan-300 to-cyan-500" },
-    ],
-  },
-  {
-    name: "DevOps & Cloud",
-    skills: [
-      { name: "Docker", level: 85, color: "from-blue-400 to-blue-600" },
-      { name: "Kubernetes", level: 75, color: "from-blue-500 to-blue-700" },
-      { name: "AWS", level: 80, color: "from-orange-400 to-orange-600" },
-      { name: "Azure", level: 75, color: "from-blue-300 to-blue-500" },
-      { name: "Google Cloud", level: 70, color: "from-green-400 to-green-600" },
-      { name: "Terraform", level: 75, color: "from-purple-400 to-purple-600" },
-      { name: "Ansible", level: 70, color: "from-red-400 to-red-600" },
-      {
-        name: "CI/CD Pipelines",
-        level: 85,
-        color: "from-green-500 to-green-700",
-      },
-      { name: "GitHub Actions", level: 80, color: "from-gray-400 to-gray-600" },
-      { name: "Jenkins", level: 75, color: "from-red-500 to-red-700" },
-      { name: "NGINX", level: 80, color: "from-green-300 to-green-500" },
-      {
-        name: "Linux Server",
-        level: 85,
-        color: "from-yellow-400 to-yellow-600",
-      },
-      { name: "Bash Scripting", level: 80, color: "from-gray-300 to-gray-500" },
-      { name: "Serverless", level: 75, color: "from-blue-200 to-blue-400" },
-    ],
-  },
-  {
-    name: "State Management",
-    skills: [
-      { name: "Redux", level: 85, color: "from-purple-400 to-purple-600" },
-      {
-        name: "Redux Toolkit",
-        level: 85,
-        color: "from-purple-500 to-purple-700",
-      },
-      { name: "RTK Query", level: 85, color: "from-purple-300 to-purple-500" },
-      { name: "Zustand", level: 85, color: "from-indigo-400 to-indigo-600" },
-      { name: "Tanstack Query", level: 85, color: "from-red-400 to-red-600" },
-      { name: "React Query", level: 85, color: "from-red-300 to-red-500" },
-    ],
-  },
-  {
-    name: "Backend & Databases",
-    skills: [
-      { name: "Express", level: 85, color: "from-gray-500 to-gray-700" },
-      { name: "PostgreSQL", level: 85, color: "from-blue-400 to-blue-600" },
-      { name: "MongoDB", level: 85, color: "from-green-400 to-green-600" },
-      { name: "Redis", level: 80, color: "from-red-500 to-red-700" },
-      { name: "MySQL", level: 80, color: "from-blue-300 to-blue-500" },
-      { name: "Prisma", level: 80, color: "from-gray-400 to-gray-600" },
-      { name: "TypeORM", level: 75, color: "from-purple-400 to-purple-600" },
-      { name: "Sequelize", level: 75, color: "from-blue-500 to-blue-700" },
-    ],
-  },
-  {
-    name: "Authentication & Security",
-    skills: [
-      { name: "Passport.js", level: 80, color: "from-blue-400 to-blue-600" },
-      {
-        name: "JSON Web Tokens (JWT)",
-        level: 85,
-        color: "from-purple-400 to-purple-600",
-      },
-      { name: "Bcrypt.js", level: 80, color: "from-green-400 to-green-600" },
-      {
-        name: "Express-session",
-        level: 80,
-        color: "from-gray-400 to-gray-600",
-      },
-      { name: "NextAuth", level: 80, color: "from-orange-400 to-orange-600" },
-      { name: "OpenID Connect", level: 75, color: "from-blue-300 to-blue-500" },
-      { name: "SSL/TLS", level: 80, color: "from-green-500 to-green-700" },
-      { name: "Web Security", level: 85, color: "from-red-400 to-red-600" },
-    ],
-  },
-  {
-    name: "Payments & APIs",
-    skills: [
-      { name: "Daraja API", level: 80, color: "from-green-300 to-green-500" },
-      { name: "PayPal", level: 80, color: "from-blue-200 to-blue-400" },
-      { name: "IntaSend", level: 80, color: "from-yellow-300 to-yellow-500" },
-      { name: "Stripe", level: 80, color: "from-indigo-300 to-indigo-500" },
-      { name: "OpenAPI", level: 80, color: "from-yellow-400 to-yellow-600" },
-      { name: "GraphQL", level: 80, color: "from-pink-400 to-pink-600" },
-      {
-        name: "RESTful API Design",
-        level: 85,
-        color: "from-blue-400 to-blue-600",
-      },
-    ],
-  },
-  {
-    name: "Infrastructure & Monitoring",
-    skills: [
-      { name: "Prometheus", level: 75, color: "from-orange-400 to-orange-600" },
-      { name: "Grafana", level: 75, color: "from-orange-300 to-orange-500" },
-      { name: "ELK Stack", level: 70, color: "from-blue-400 to-blue-600" },
-      { name: "Datadog", level: 70, color: "from-purple-400 to-purple-600" },
-      { name: "New Relic", level: 65, color: "from-blue-500 to-blue-700" },
-      { name: "Sentry", level: 75, color: "from-purple-300 to-purple-500" },
-      { name: "CloudWatch", level: 80, color: "from-orange-500 to-orange-700" },
-    ],
-  },
-  {
-    name: "Email Services",
-    skills: [
-      { name: "Nodemailer", level: 80, color: "from-gray-400 to-gray-600" },
-      { name: "SendGrid", level: 80, color: "from-blue-600 to-blue-800" },
-      { name: "Mailgun", level: 80, color: "from-orange-400 to-orange-600" },
-      { name: "AWS SES", level: 80, color: "from-orange-500 to-orange-700" },
-      { name: "Resend", level: 80, color: "from-teal-300 to-teal-500" },
-    ],
-  },
-  {
-    name: "AI & WebSockets",
-    skills: [
-      {
-        name: "TensorFlow.js",
-        level: 80,
-        color: "from-orange-400 to-orange-600",
-      },
-      { name: "Brain.js", level: 80, color: "from-red-400 to-red-600" },
-      { name: "LangChain.js", level: 80, color: "from-blue-500 to-blue-700" },
-      { name: "OpenAI", level: 80, color: "from-green-500 to-green-700" },
-      { name: "Pinecone", level: 80, color: "from-indigo-400 to-indigo-600" },
-      { name: "Langraph", level: 80, color: "from-blue-300 to-blue-500" },
-      { name: "Socket.io", level: 80, color: "from-gray-300 to-gray-500" },
-    ],
-  },
-  {
-    name: "Graphics & Design",
-    skills: [
-      { name: "Three.js", level: 80, color: "from-purple-300 to-purple-500" },
-      { name: "Framer Motion", level: 80, color: "from-pink-400 to-pink-600" },
-      { name: "Figma", level: 80, color: "from-pink-300 to-pink-500" },
-    ],
-  },
-  {
-    name: "Development Practices",
-    skills: [
-      {
-        name: "Good Coding Practices",
-        level: 90,
-        color: "from-gray-200 to-gray-400",
-      },
-      {
-        name: "Agile Methodologies",
-        level: 85,
-        color: "from-blue-400 to-blue-600",
-      },
-      {
-        name: "Git Workflows",
-        level: 90,
-        color: "from-orange-400 to-orange-600",
-      },
-      { name: "Code Reviews", level: 85, color: "from-green-400 to-green-600" },
-      {
-        name: "Testing (Unit, Integration)",
-        level: 80,
-        color: "from-red-400 to-red-600",
-      },
-    ],
-  },
+// --- DATA TRANSFORMATION ---
+// I have consolidated your categories into 4 clean tabs for better UX.
+const allSkills = {
+  frontend: [
+    { name: "React", level: "Expert" },
+    { name: "Next.js", level: "Expert" },
+    { name: "TypeScript", level: "Expert" },
+    { name: "Tailwind CSS", level: "Expert" },
+    { name: "Three.js", level: "Advanced" },
+    { name: "GSAP", level: "Advanced" },
+    { name: "Framer Motion", level: "Advanced" },
+    { name: "Redux Toolkit", level: "Advanced" },
+    { name: "Zustand", level: "Advanced" },
+    { name: "React Native", level: "Proficient" },
+  ],
+  backend: [
+    { name: "Node.js", level: "Expert" },
+    { name: "Express", level: "Advanced" },
+    { name: "PostgreSQL", level: "Advanced" },
+    { name: "MongoDB", level: "Advanced" },
+    { name: "Redis", level: "Proficient" },
+    { name: "Prisma", level: "Advanced" },
+    { name: "GraphQL", level: "Proficient" },
+    { name: "REST API", level: "Expert" },
+    { name: "WebSockets", level: "Proficient" },
+    { name: "LangChain", level: "Intermediate" },
+  ],
+  devops: [
+    { name: "Docker", level: "Advanced" },
+    { name: "AWS", level: "Proficient" },
+    { name: "CI/CD", level: "Advanced" },
+    { name: "Linux", level: "Advanced" },
+    { name: "Nginx", level: "Proficient" },
+    { name: "Kubernetes", level: "Intermediate" },
+    { name: "Terraform", level: "Intermediate" },
+    { name: "GitHub Actions", level: "Advanced" },
+  ],
+  security: [
+    { name: "OAuth 2.0", level: "Advanced" },
+    { name: "JWT", level: "Expert" },
+    { name: "NextAuth", level: "Advanced" },
+    { name: "OpenID", level: "Proficient" },
+  ],
+};
+
+const tabs = [
+  { id: "frontend", label: "Frontend & UI" },
+  { id: "backend", label: "Backend & Data" },
+  { id: "devops", label: "DevOps & Cloud" },
+  { id: "security", label: "Security" },
 ];
 
 export default function SkillsSection() {
-  return (
-    <section id="skills" className="py-20 bg-gray-900/50">
-      <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
-            My Skills
-          </h2>
-          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            I&apos;ve mastered a diverse set of technologies across the full
-            stack. Here&apos;s how I categorize my expertise.
-          </p>
-        </motion.div>
+  const [activeTab, setActiveTab] = useState("frontend");
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {skillCategories.map((category, catIndex) => (
-            <motion.div
-              key={catIndex}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: catIndex * 0.1 }}
-              viewport={{ once: true }}
-              className="bg-gray-800/30 rounded-xl p-6 border border-gray-700 hover:border-blue-400/30 transition-all duration-300"
-            >
-              <h3 className="text-xl font-bold mb-4 text-white flex items-center">
-                <span className="bg-gradient-to-r from-blue-400 to-purple-500 w-3 h-3 rounded-full mr-2"></span>
-                {category.name}
-              </h3>
-              <div className="space-y-4">
-                {category.skills.map((skill, skillIndex) => (
-                  <motion.div
-                    key={skillIndex}
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    transition={{ duration: 0.5, delay: skillIndex * 0.05 }}
-                    viewport={{ once: true }}
-                  >
-                    <div className="flex justify-between items-center mb-1">
-                      <span className="text-gray-300 font-medium text-sm md:text-base">
-                        {skill.name}
-                      </span>
-                      <span className="text-gray-400 text-xs md:text-sm">
-                        {skill.level}%
-                      </span>
-                    </div>
-                    <div className="w-full bg-gray-700 rounded-full h-2">
-                      <div
-                        className={`h-2 rounded-full bg-gradient-to-r ${skill.color} shadow-md`}
-                        style={{ width: `${skill.level}%` }}
-                      ></div>
-                    </div>
-                  </motion.div>
-                ))}
+  return (
+    <section className="relative py-24 bg-slate-950 overflow-hidden">
+      {/* Background Decor */}
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent"></div>
+      <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-emerald-500/10 to-transparent"></div>
+
+      <div className="container mx-auto px-4 md:px-8 relative z-10">
+        {/* --- SECTION HEADER --- */}
+        <div className="text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-block mb-3"
+          >
+            <span className="text-emerald-400 font-mono text-sm tracking-widest uppercase bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
+              Tech Stack
+            </span>
+          </motion.div>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-4xl md:text-5xl font-bold text-slate-200"
+          >
+            My Development <span className="text-emerald-400">Arsenal</span>
+          </motion.h2>
+        </div>
+
+        {/* --- INFINITE MARQUEE (Top Tier Tech) --- */}
+        <div className="relative w-full max-w-5xl mx-auto h-20 mb-20 overflow-hidden mask-linear-fade">
+          {/* Mask for fading edges */}
+          <div className="absolute inset-0 z-10 pointer-events-none bg-[linear-gradient(to_right,#020617,transparent_20%,transparent_80%,#020617)]"></div>
+
+          <motion.div
+            className="flex gap-12 items-center absolute left-0 top-0 h-full whitespace-nowrap"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ ease: "linear", duration: 25, repeat: Infinity }}
+          >
+            {/* Doubled list for seamless loop */}
+            {[
+              ...allSkills.frontend,
+              ...allSkills.backend,
+              ...allSkills.frontend,
+              ...allSkills.backend,
+            ].map((tech, i) => (
+              <div
+                key={i}
+                className="flex items-center gap-2 text-2xl font-bold text-slate-500 opacity-50 hover:opacity-100 hover:text-emerald-400 transition-all cursor-default"
+              >
+                <span>{tech.name}</span>
+                <span className="w-1 h-1 rounded-full bg-slate-700"></span>
               </div>
-            </motion.div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* --- TABBED NAVIGATION --- */}
+        <div className="flex flex-wrap justify-center gap-4 mb-12">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`relative px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${
+                activeTab === tab.id
+                  ? "text-slate-950"
+                  : "text-slate-400 hover:text-white hover:bg-white/5"
+              }`}
+            >
+              {activeTab === tab.id && (
+                <motion.div
+                  layoutId="activeTab"
+                  className="absolute inset-0 bg-emerald-400 rounded-xl"
+                  transition={{ type: "spring", duration: 0.6 }}
+                />
+              )}
+              <span className="relative z-10">{tab.label}</span>
+            </button>
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          viewport={{ once: true }}
-          className="mt-12 text-center"
-        >
-          <div className="inline-flex items-center px-4 py-2 bg-gray-800/50 rounded-full border border-gray-700">
-            <span className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
-            <span className="text-sm text-gray-300">
-              Currently learning new technologies
-            </span>
-          </div>
-        </motion.div>
+        {/* --- SKILL GRID --- */}
+        <div className="max-w-5xl mx-auto min-h-[400px]">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              exit={{ opacity: 0, y: -20, filter: "blur(10px)" }}
+              transition={{ duration: 0.4 }}
+              className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+            >
+              {allSkills[activeTab as keyof typeof allSkills].map(
+                (skill, index) => (
+                  <motion.div
+                    key={skill.name}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: index * 0.05 }}
+                    className="group relative p-4 rounded-xl bg-slate-900/40 border border-white/5 hover:border-emerald-500/30 overflow-hidden transition-colors duration-300"
+                  >
+                    {/* Hover Glow Effect */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                    <div className="relative z-10 flex flex-col items-start gap-2">
+                      <h3 className="text-lg font-bold text-slate-200 group-hover:text-emerald-300 transition-colors">
+                        {skill.name}
+                      </h3>
+                      <div className="flex items-center gap-2 w-full">
+                        <div className="h-1 flex-1 bg-slate-800 rounded-full overflow-hidden">
+                          <div
+                            className={`h-full bg-emerald-500/50 group-hover:bg-emerald-400 transition-all duration-500`}
+                            style={{
+                              width:
+                                skill.level === "Expert"
+                                  ? "95%"
+                                  : skill.level === "Advanced"
+                                  ? "75%"
+                                  : "50%",
+                            }}
+                          ></div>
+                        </div>
+                        <span className="text-[10px] uppercase tracking-wider text-slate-500 font-medium">
+                          {skill.level}
+                        </span>
+                      </div>
+                    </div>
+                  </motion.div>
+                )
+              )}
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </div>
     </section>
   );

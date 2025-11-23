@@ -2,103 +2,182 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { TypeAnimation } from "react-type-animation";
+import { useState, useEffect } from "react";
 
 export default function Hero() {
-  return (
-    <section className="relative flex flex-col items-center justify-center min-h-screen text-center px-4 overflow-hidden">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-blue-900/20 to-transparent"></div>
-        <div className="absolute top-0 left-0 w-full h-full bg-grid-pattern opacity-10"></div>
-      </div>
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-      <div className="relative z-10 max-w-6xl mx-auto">
+  // Optional: Parallax effect on mouse move
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({
+        x: e.clientX,
+        y: e.clientY,
+      });
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
+  return (
+    <>
+      <style jsx>{`
+        @keyframes shimmer {
+          0% {
+            transform: translateX(-100%);
+          }
+          100% {
+            transform: translateX(100%);
+          }
+        }
+        .animate-shimmer {
+          animation: shimmer 2s linear infinite;
+        }
+      `}</style>
+
+      <section className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden bg-slate-950 text-white selection:bg-emerald-500/30">
+        {/* --- BACKGROUND LAYERS --- */}
+
+        {/* 1. Grid Pattern with Mask */}
+        <div className="absolute inset-0 z-0 w-full h-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]">
+          <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-emerald-500 opacity-20 blur-[100px]"></div>
+        </div>
+
+        {/* 2. Dynamic Glowing Orbs (Replaces static gradient) */}
         <motion.div
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="mb-6"
-        >
-          <p className="text-blue-400 font-mono text-lg mb-2">
-            Hello, I&apos;m
-          </p>
-          <h1 className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600 mb-4">
-            Elvin Omondi
-          </h1>
-          <div className="text-2xl md:text-4xl font-semibold min-h-[60px]">
+          animate={{
+            x: mousePosition.x * 0.05,
+            y: mousePosition.y * 0.05,
+          }}
+          className="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-500/20 rounded-full blur-3xl -z-10 mix-blend-screen"
+        />
+        <motion.div
+          animate={{
+            x: mousePosition.x * -0.05,
+            y: mousePosition.y * -0.05,
+          }}
+          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl -z-10 mix-blend-screen"
+        />
+
+        {/* 3. Subtle Grain Overlay (Adds texture/premium feel) */}
+        <div
+          className="absolute inset-0 opacity-[0.03] pointer-events-none z-0 mix-blend-overlay"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+          }}
+        ></div>
+
+        {/* --- CONTENT LAYER --- */}
+
+        <div className="relative z-10 max-w-5xl mx-auto px-4 flex flex-col items-center text-center">
+          {/* Greeting Pill */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="mb-8"
+          >
+            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 text-sm font-medium tracking-wide backdrop-blur-sm">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              Available for Hire
+            </span>
+          </motion.div>
+
+          {/* Main Title */}
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="text-6xl md:text-8xl font-bold tracking-tight mb-6"
+          >
+            <span className="block text-slate-300 mb-2 text-2xl md:text-4xl font-normal">
+              I'm
+            </span>
+            <span className="bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-slate-400">
+              Elvin Omondi
+            </span>
+          </motion.h1>
+
+          {/* Type Animation */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="h-[40px] md:h-[60px] text-2xl md:text-4xl font-light text-emerald-400 mb-8"
+          >
             <TypeAnimation
               sequence={[
                 "Full-Stack Developer",
-                1500,
+                1000,
                 "UI/UX Enthusiast",
-                1500,
-                "Tech Blogger",
-                1500,
-                "Open Source Contributor",
-                1500,
+                1000,
+                "Problem Solver",
+                1000,
               ]}
               wrapper="span"
               speed={50}
               repeat={Infinity}
             />
-          </div>
-        </motion.div>
+          </motion.div>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-lg md:text-xl max-w-2xl mx-auto mb-8 text-gray-300"
-        >
-          I build exceptional digital experiences with modern web technologies.
-          Focused on creating performant, accessible, and visually appealing
-          applications.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="flex flex-wrap justify-center gap-4"
-        >
-          <Link
-            href="/projects"
-            className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-8 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105 shadow-lg"
+          {/* Description */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="text-lg md:text-xl max-w-2xl mx-auto mb-10 text-slate-400 leading-relaxed"
           >
-            View My Work
-          </Link>
-          <Link
-            href="/contact"
-            className="border-2 border-blue-400 text-blue-400 hover:bg-blue-400/10 px-8 py-3 rounded-lg font-medium transition-all duration-300 transform hover:scale-105"
-          >
-            Contact Me
-          </Link>
-        </motion.div>
+            Building digital experiences that blend{" "}
+            <span className="text-slate-100 font-medium">
+              technical excellence
+            </span>{" "}
+            with{" "}
+            <span className="text-slate-100 font-medium">visual mastery</span>.
+            Focused on performance, accessibility, and clean code.
+          </motion.p>
 
+          {/* Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full"
+          >
+            <Link
+              href="/projects"
+              className="group relative px-8 py-4 rounded-xl bg-emerald-500 text-slate-950 font-bold text-lg overflow-hidden transition-all hover:scale-105 hover:shadow-[0_0_40px_-10px_rgba(16,185,129,0.5)]"
+            >
+              <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:animate-shimmer" />
+              <span>View Work</span>
+            </Link>
+
+            <Link
+              href="/contact"
+              className="px-8 py-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm text-white font-medium text-lg transition-all hover:bg-white/10 hover:scale-105 hover:border-white/20"
+            >
+              Contact Me
+            </Link>
+          </motion.div>
+        </div>
+
+        {/* Scroll Indicator */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          className="mt-16"
+          transition={{ delay: 1.2, duration: 1 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2"
         >
-          <div className="animate-bounce w-6 h-6 mx-auto">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              className="w-6 h-6 text-blue-400"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 14l-7 7m0 0l-7-7m7 7V3"
-              />
-            </svg>
+          <div className="flex flex-col items-center gap-2">
+            <span className="text-xs uppercase tracking-widest text-slate-500">
+              Scroll
+            </span>
+            <div className="w-[1px] h-12 bg-gradient-to-b from-emerald-500 to-transparent"></div>
           </div>
         </motion.div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
