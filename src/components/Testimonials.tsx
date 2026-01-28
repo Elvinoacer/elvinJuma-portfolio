@@ -35,26 +35,26 @@ export default function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="relative py-24 bg-slate-950 overflow-hidden"
+      className="relative py-16 sm:py-20 md:py-24 bg-slate-950 overflow-hidden"
     >
       {/* --- BACKGROUND DECOR --- */}
       {/* Grid Pattern */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
 
       {/* Radial Glows */}
-      <div className="absolute left-0 top-0 w-[500px] h-[500px] bg-emerald-500/10 blur-[120px] rounded-full pointer-events-none mix-blend-screen"></div>
-      <div className="absolute right-0 bottom-0 w-[500px] h-[500px] bg-cyan-500/10 blur-[120px] rounded-full pointer-events-none mix-blend-screen"></div>
+      <div className="absolute left-0 top-0 w-[300px] sm:w-[400px] md:w-[500px] h-[300px] sm:h-[400px] md:h-[500px] bg-emerald-500/10 blur-[80px] sm:blur-[100px] md:blur-[120px] rounded-full pointer-events-none mix-blend-screen"></div>
+      <div className="absolute right-0 bottom-0 w-[300px] sm:w-[400px] md:w-[500px] h-[300px] sm:h-[400px] md:h-[500px] bg-cyan-500/10 blur-[80px] sm:blur-[100px] md:blur-[120px] rounded-full pointer-events-none mix-blend-screen"></div>
 
-      <div className="container relative z-10 mx-auto px-6">
+      <div className="container relative z-10 mx-auto px-4 sm:px-6">
         {/* --- SECTION HEADER --- */}
-        <div className="text-center mb-20">
+        <div className="text-center mb-12 sm:mb-16 md:mb-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-block mb-4"
+            className="inline-block mb-3 sm:mb-4"
           >
-            <span className="text-emerald-400 font-mono text-sm tracking-widest uppercase bg-emerald-950/30 px-4 py-2 rounded-full border border-emerald-500/20">
+            <span className="text-emerald-400 font-mono text-xs sm:text-sm tracking-widest uppercase bg-emerald-950/30 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-emerald-500/20">
               // Client Feedback
             </span>
           </motion.div>
@@ -63,7 +63,7 @@ export default function Testimonials() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl md:text-5xl font-bold text-slate-100"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-100"
           >
             Trusted by{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">
@@ -73,7 +73,7 @@ export default function Testimonials() {
         </div>
 
         {/* --- TESTIMONIALS GRID --- */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {testimonials.map((item, index) => (
             <motion.div
               key={item.id}
@@ -85,21 +85,21 @@ export default function Testimonials() {
               className="relative group h-full"
             >
               {/* Card Container */}
-              <div className="relative h-full p-8 rounded-2xl bg-slate-900/40 border border-white/5 backdrop-blur-sm transition-colors duration-300 hover:bg-slate-900/60 hover:border-emerald-500/30">
+              <div className="relative h-full p-5 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl bg-slate-900/40 border border-white/5 backdrop-blur-sm transition-colors duration-300 hover:bg-slate-900/60 hover:border-emerald-500/30">
                 {/* Decorative Quote Mark (Watermark) */}
-                <div className="absolute top-6 right-8 text-8xl font-serif text-white/[0.03] group-hover:text-emerald-500/[0.05] transition-colors leading-none select-none pointer-events-none">
+                <div className="absolute top-4 sm:top-6 right-6 sm:right-8 text-6xl sm:text-7xl md:text-8xl font-serif text-white/[0.03] group-hover:text-emerald-500/[0.05] transition-colors leading-none select-none pointer-events-none">
                   &rdquo;
                 </div>
 
                 {/* Stars */}
-                <div className="flex gap-1 mb-6">
+                <div className="flex gap-0.5 sm:gap-1 mb-4 sm:mb-6">
                   {[...Array(5)].map((_, i) => (
                     <svg
                       key={i}
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                       fill="currentColor"
-                      className={`w-5 h-5 ${
+                      className={`w-4 h-4 sm:w-5 sm:h-5 ${
                         i < item.rating ? "text-emerald-400" : "text-slate-700"
                       }`}
                     >
@@ -113,23 +113,23 @@ export default function Testimonials() {
                 </div>
 
                 {/* Content */}
-                <p className="text-slate-300 text-lg leading-relaxed mb-8 relative z-10">
+                <p className="text-slate-300 text-sm sm:text-base md:text-lg leading-relaxed mb-6 sm:mb-8 relative z-10">
                   {item.content}
                 </p>
 
                 {/* Author Info */}
-                <div className="flex items-center gap-4 mt-auto pt-6 border-t border-white/5 group-hover:border-white/10 transition-colors">
+                <div className="flex items-center gap-3 sm:gap-4 mt-auto pt-4 sm:pt-6 border-t border-white/5 group-hover:border-white/10 transition-colors">
                   {/* Avatar Placeholder with Gradient Ring */}
-                  <div className="relative w-12 h-12 rounded-full flex items-center justify-center bg-slate-800 text-slate-300 font-bold overflow-hidden">
+                  <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center bg-slate-800 text-slate-300 font-bold text-sm sm:text-base overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 to-cyan-500/20"></div>
                     {item.initials}
                   </div>
 
                   <div>
-                    <h4 className="text-slate-100 font-bold text-base group-hover:text-emerald-400 transition-colors">
+                    <h4 className="text-slate-100 font-bold text-sm sm:text-base group-hover:text-emerald-400 transition-colors">
                       {item.name}
                     </h4>
-                    <p className="text-slate-500 text-sm font-medium">
+                    <p className="text-slate-500 text-xs sm:text-sm font-medium">
                       {item.role}
                     </p>
                   </div>
@@ -148,12 +148,12 @@ export default function Testimonials() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.6 }}
-          className="mt-24 pt-10 border-t border-white/5"
+          className="mt-16 sm:mt-20 md:mt-24 pt-8 sm:pt-10 border-t border-white/5"
         >
-          <p className="text-center text-slate-500 text-sm mb-8 uppercase tracking-widest">
+          <p className="text-center text-slate-500 text-xs sm:text-sm mb-6 sm:mb-8 uppercase tracking-widest">
             Also worked with
           </p>
-          <div className="flex flex-wrap justify-center gap-12 md:gap-20 opacity-40 grayscale mix-blend-screen">
+          <div className="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-12 lg:gap-20 opacity-40 grayscale mix-blend-screen">
             {/* Simple Text Placeholders for Logos to keep it copy-pasteable */}
             {[
               "Startup Inc",
@@ -163,7 +163,7 @@ export default function Testimonials() {
             ].map((logo) => (
               <span
                 key={logo}
-                className="text-xl font-bold font-mono text-slate-300 hover:text-white transition-colors cursor-default"
+                className="text-sm sm:text-base md:text-lg lg:text-xl font-bold font-mono text-slate-300 hover:text-white transition-colors cursor-default"
               >
                 {logo}
               </span>
