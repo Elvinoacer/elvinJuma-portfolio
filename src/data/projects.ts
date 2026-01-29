@@ -1,5 +1,27 @@
 export const projects = [
   {
+    id: 17,
+    title: "German Virtual School (GVS)",
+    description:
+      "A comprehensive digital academy for German language education (A1-C2). Solves fragmentation in online education by unifying video (Jitsi), billing (Intasend), assignments, and GDPR-compliant reporting for students, teachers, and admins.",
+    tags: [
+      "Next.js 14",
+      "TypeScript",
+      "PostgreSQL",
+      "Prisma",
+      "Socket.io",
+      "Firebase",
+      "Jitsi Meet SDK",
+      "Resend",
+      "Intasend",
+      "Cloudinary",
+      "Vercel Blob",
+      "Tailwind CSS",
+    ],
+    image: "/images/gvs.png",
+    link: "https://germanvirtualschool.com",
+  },
+  {
     id: 16,
     title: "Concept Builders - Building & Construction",
     description:
