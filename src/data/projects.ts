@@ -1,5 +1,24 @@
 export const projects = [
   {
+    id: 18,
+    title: "Great Thumbs Software Solutions (GTSS)",
+    description:
+      "A parent software company building practical, scalable products for real-world local problems. Portfolio includes a QR-based Hotel Ordering System, E-commerce platforms, and the JustInTime community marketplace.",
+    tags: [
+      "Next.js 16",
+      "React 19",
+      "Tailwind CSS 4",
+      "PostgreSQL",
+      "Prisma",
+      "NextAuth",
+      "Framer Motion",
+      "TanStack Query",
+      "Cloudinary",
+    ],
+    image: "/images/gtss.png",
+    link: "https://gtss.vercel.app",
+  },
+  {
     id: 17,
     title: "German Virtual School (GVS)",
     description:
