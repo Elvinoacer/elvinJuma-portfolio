@@ -63,14 +63,14 @@ export default function ContactSection() {
               </span>
             </div>
 
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-slate-100 mb-4 sm:mb-6 leading-tight">
+            <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-slate-100 mb-3 sm:mb-6 leading-tight">
               Let&apos;s build something{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">
                 future-proof.
               </span>
             </h2>
 
-            <p className="text-sm sm:text-base md:text-lg text-slate-400 mb-8 sm:mb-10 md:mb-12 leading-relaxed max-w-lg">
+            <p className="text-xs sm:text-base md:text-lg text-slate-400 mb-6 sm:mb-10 md:mb-12 leading-relaxed max-w-lg">
               Have a project in mind? I am currently accepting new contracts.
               Let&apos;s discuss how we can solve your specific problems with
               modern tech.
@@ -111,8 +111,8 @@ export default function ContactSection() {
             {/* Glow Effect behind form */}
             <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-xl sm:rounded-2xl opacity-20 blur"></div>
 
-            <div className="relative bg-slate-900 border border-white/10 p-5 sm:p-6 md:p-8 lg:p-10 rounded-xl sm:rounded-2xl shadow-2xl">
-              <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-4 sm:mb-6">
+            <div className="relative bg-slate-900 border border-white/10 p-4 sm:p-6 md:p-8 lg:p-10 rounded-xl sm:rounded-2xl shadow-2xl">
+              <h3 className="text-base sm:text-xl md:text-2xl font-bold text-white mb-3 sm:mb-6">
                 Send a Message
               </h3>
 
@@ -133,7 +133,7 @@ export default function ContactSection() {
                       onChange={handleChange}
                       required
                       placeholder="John Doe"
-                      className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-slate-950 border border-slate-800 rounded-lg sm:rounded-xl text-slate-100 text-sm sm:text-base placeholder-slate-600 focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all"
+                      className="w-full px-2.5 sm:px-4 py-2 sm:py-3 bg-slate-950 border border-slate-800 rounded-lg sm:rounded-xl text-slate-100 text-xs sm:text-base placeholder-slate-600 focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all"
                     />
                   </div>
                   <div className="space-y-1.5 sm:space-y-2">
@@ -151,7 +151,7 @@ export default function ContactSection() {
                       onChange={handleChange}
                       required
                       placeholder="john@example.com"
-                      className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-slate-950 border border-slate-800 rounded-lg sm:rounded-xl text-slate-100 text-sm sm:text-base placeholder-slate-600 focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all"
+                      className="w-full px-2.5 sm:px-4 py-2 sm:py-3 bg-slate-950 border border-slate-800 rounded-lg sm:rounded-xl text-slate-100 text-xs sm:text-base placeholder-slate-600 focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all"
                     />
                   </div>
                 </div>
@@ -171,7 +171,7 @@ export default function ContactSection() {
                     required
                     rows={4}
                     placeholder="Tell me about your project..."
-                    className="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-slate-950 border border-slate-800 rounded-lg sm:rounded-xl text-slate-100 text-sm sm:text-base placeholder-slate-600 focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all resize-none"
+                    className="w-full px-2.5 sm:px-4 py-2 sm:py-3 bg-slate-950 border border-slate-800 rounded-lg sm:rounded-xl text-slate-100 text-xs sm:text-base placeholder-slate-600 focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all resize-none"
                   ></textarea>
                 </div>
 
@@ -180,7 +180,7 @@ export default function ContactSection() {
                   disabled={isSubmitting}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full group relative px-6 sm:px-8 py-3 sm:py-4 bg-emerald-500 text-slate-950 font-bold text-sm sm:text-base rounded-lg sm:rounded-xl overflow-hidden transition-all hover:bg-emerald-400 hover:shadow-[0_0_30px_-5px_rgba(16,185,129,0.4)]"
+                  className="w-full group relative px-4 sm:px-8 py-2.5 sm:py-4 bg-emerald-500 text-slate-950 font-bold text-xs sm:text-base rounded-lg sm:rounded-xl overflow-hidden transition-all hover:bg-emerald-400 hover:shadow-[0_0_30px_-5px_rgba(16,185,129,0.4)]"
                 >
                   <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:animate-shimmer" />
                   <span className="flex items-center justify-center gap-2">

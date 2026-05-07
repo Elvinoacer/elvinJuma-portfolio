@@ -89,7 +89,7 @@ export default function SkillsSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-200"
+            className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-200"
           >
             My Development <span className="text-emerald-400">Arsenal</span>
           </motion.h2>
@@ -129,7 +129,7 @@ export default function SkillsSection() {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`relative px-3 sm:px-4 md:px-6 py-2 sm:py-2.5 md:py-3 rounded-lg sm:rounded-xl text-xs sm:text-sm font-medium transition-all duration-300 ${
+              className={`relative px-2.5 sm:px-4 md:px-6 py-1.5 sm:py-2.5 md:py-3 rounded-lg sm:rounded-xl text-[10px] sm:text-sm font-medium transition-all duration-300 ${
                 activeTab === tab.id
                   ? "text-slate-950"
                   : "text-slate-400 hover:text-white hover:bg-white/5"
@@ -167,13 +167,13 @@ export default function SkillsSection() {
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: index * 0.05 }}
-                    className="group relative p-3 sm:p-4 rounded-lg sm:rounded-xl bg-slate-900/40 border border-white/5 hover:border-emerald-500/30 overflow-hidden transition-colors duration-300"
+                    className="group relative p-2.5 sm:p-4 rounded-lg sm:rounded-xl bg-slate-900/40 border border-white/5 hover:border-emerald-500/30 overflow-hidden transition-colors duration-300"
                   >
                     {/* Hover Glow Effect */}
                     <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
-                    <div className="relative z-10 flex flex-col items-start gap-1.5 sm:gap-2">
-                      <h3 className="text-sm sm:text-base md:text-lg font-bold text-slate-200 group-hover:text-emerald-300 transition-colors">
+                    <div className="relative z-10 flex flex-col items-start gap-1 sm:gap-2">
+                      <h3 className="text-xs sm:text-base md:text-lg font-bold text-slate-200 group-hover:text-emerald-300 transition-colors">
                         {skill.name}
                       </h3>
                       <div className="flex items-center gap-1.5 sm:gap-2 w-full">

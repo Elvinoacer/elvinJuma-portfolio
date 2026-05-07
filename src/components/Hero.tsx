@@ -108,9 +108,9 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-4 sm:mb-6"
+            className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-3 sm:mb-6"
           >
-            <span className="block text-slate-300 mb-1 sm:mb-2 text-lg sm:text-xl md:text-3xl lg:text-4xl font-normal">
+            <span className="block text-slate-300 mb-1 sm:mb-2 text-base sm:text-xl md:text-3xl lg:text-4xl font-normal">
               I&apos;m
             </span>
             <span className="bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-slate-400">
@@ -123,7 +123,7 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="h-[32px] sm:h-[40px] md:h-[50px] lg:h-[60px] text-xl sm:text-2xl md:text-3xl lg:text-4xl font-light text-emerald-400 mb-6 sm:mb-8"
+            className="h-[28px] sm:h-[40px] md:h-[50px] lg:h-[60px] text-lg sm:text-2xl md:text-3xl lg:text-4xl font-light text-emerald-400 mb-5 sm:mb-8"
           >
             <TypeAnimation
               sequence={[
@@ -145,7 +145,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-sm sm:text-base md:text-lg lg:text-xl max-w-2xl mx-auto mb-8 sm:mb-10 text-slate-400 leading-relaxed"
+            className="text-xs sm:text-base md:text-lg lg:text-xl max-w-2xl mx-auto mb-6 sm:mb-10 text-slate-400 leading-relaxed px-2 sm:px-0"
           >
             Building digital experiences that blend{" "}
             <span className="text-slate-100 font-medium">
@@ -161,11 +161,11 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center w-full"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center w-full max-w-[200px] sm:max-w-none mx-auto"
           >
             <Link
               href="/projects"
-              className="group relative px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl bg-emerald-500 text-slate-950 font-bold text-sm sm:text-base md:text-lg overflow-hidden transition-all hover:scale-105 hover:shadow-[0_0_40px_-10px_rgba(16,185,129,0.5)] w-full sm:w-auto text-center"
+              className="group relative px-4 sm:px-8 py-2.5 sm:py-4 rounded-lg sm:rounded-xl bg-emerald-500 text-slate-950 font-bold text-xs sm:text-base md:text-lg overflow-hidden transition-all hover:scale-105 hover:shadow-[0_0_40px_-10px_rgba(16,185,129,0.5)] w-full sm:w-auto text-center"
             >
               <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:animate-shimmer" />
               <span>View Work</span>
@@ -173,7 +173,7 @@ export default function Hero() {
 
             <Link
               href="/contact"
-              className="px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm text-white font-medium text-sm sm:text-base md:text-lg transition-all hover:bg-white/10 hover:scale-105 hover:border-white/20 w-full sm:w-auto text-center"
+              className="px-4 sm:px-8 py-2.5 sm:py-4 rounded-lg sm:rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm text-white font-medium text-xs sm:text-base md:text-lg transition-all hover:bg-white/10 hover:scale-105 hover:border-white/20 w-full sm:w-auto text-center"
             >
               Contact Me
             </Link>

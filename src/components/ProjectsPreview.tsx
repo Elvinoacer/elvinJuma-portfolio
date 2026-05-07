@@ -27,7 +27,7 @@ export default function ProjectsPreview() {
             <span className="text-emerald-400 font-mono text-xs sm:text-sm tracking-widest uppercase mb-2 block">
               // Selected Works
             </span>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-100 mb-2 sm:mb-4">
+            <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-100 mb-2 sm:mb-4">
               Digital products{" "}
               <span className="text-slate-500">that deliver results.</span>
             </h2>
@@ -60,7 +60,7 @@ export default function ProjectsPreview() {
               className="group relative flex flex-col h-full bg-slate-900/50 border border-white/5 rounded-xl sm:rounded-2xl overflow-hidden hover:border-emerald-500/50 hover:shadow-[0_0_30px_-10px_rgba(16,185,129,0.2)] transition-all duration-500"
             >
               {/* Image Container */}
-              <div className="relative h-40 sm:h-48 md:h-64 overflow-hidden">
+              <div className="relative h-32 sm:h-48 md:h-64 overflow-hidden">
                 {/* Overlay Gradient for contrast */}
                 <div className="absolute inset-0 bg-slate-950/20 z-10 group-hover:bg-slate-950/0 transition-colors duration-500"></div>
 
@@ -80,23 +80,22 @@ export default function ProjectsPreview() {
               </div>
 
               {/* Content Container */}
-              <div className="flex flex-col flex-1 p-4 sm:p-5 md:p-6">
-                <div className="mb-3 sm:mb-4">
-                  <h3 className="text-base sm:text-lg md:text-xl font-bold text-slate-100 mb-1 sm:mb-2 group-hover:text-emerald-400 transition-colors">
+              <div className="flex flex-col flex-1 p-3 sm:p-5 md:p-6">
+                <div className="mb-2 sm:mb-4">
+                  <h3 className="text-sm sm:text-lg md:text-xl font-bold text-slate-100 mb-1 sm:mb-2 group-hover:text-emerald-400 transition-colors">
                     {project.title}
                   </h3>
-                  <p className="text-slate-400 text-xs sm:text-sm leading-relaxed line-clamp-2 sm:line-clamp-3">
+                  <p className="text-slate-400 text-[10px] sm:text-sm leading-relaxed line-clamp-2 sm:line-clamp-3">
                     {project.description}
                   </p>
                 </div>
 
-                {/* Tags & Spacer */}
-                <div className="mt-auto pt-4 sm:pt-6 border-t border-white/5">
-                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                <div className="mt-auto pt-3 sm:pt-6 border-t border-white/5">
+                  <div className="flex flex-wrap gap-1 sm:gap-2">
                     {project.tags.slice(0, 3).map((tag, i) => (
                       <span
                         key={i}
-                        className="text-[10px] sm:text-xs font-medium px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-md bg-slate-800 text-slate-300 border border-white/5 group-hover:border-emerald-500/20 group-hover:text-emerald-300 transition-colors"
+                        className="text-[9px] sm:text-xs font-medium px-1.5 sm:px-2.5 py-0.5 sm:py-1 rounded-md bg-slate-800 text-slate-300 border border-white/5 group-hover:border-emerald-500/20 group-hover:text-emerald-300 transition-colors"
                       >
                         {tag}
                       </span>
