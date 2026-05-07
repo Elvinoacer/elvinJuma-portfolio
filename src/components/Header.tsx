@@ -1,162 +1,112 @@
 "use client";
+
+import { AnimatePresence, motion } from "framer-motion";
+import { Menu, X } from "lucide-react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+
+const navItems = [
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Skills", href: "/#skills" },
+  { name: "Projects", href: "/projects" },
+  { name: "Contact", href: "/contact" },
+];
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Handle scroll effect
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 16);
+    handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navItems = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Projects", href: "/projects" },
-    { name: "Contact", href: "/contact" },
-  ];
-
   return (
-    <>
+    <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-4">
       <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.45 }}
+        className={`mx-auto flex max-w-7xl items-center justify-between rounded-lg border px-3 py-2.5 transition sm:px-4 ${
           scrolled
-            ? "bg-slate-950/80 backdrop-blur-md border-b border-white/5 py-2.5 sm:py-3 md:py-4 shadow-[0_0_30px_-10px_rgba(0,0,0,0.5)]"
-            : "bg-transparent py-3 sm:py-4 md:py-6"
+            ? "border-white/10 bg-[#080a0e]/86 shadow-[0_18px_60px_rgba(0,0,0,0.35)] backdrop-blur-xl"
+            : "border-white/8 bg-white/[0.035] backdrop-blur-md"
         }`}
       >
-        <div className="container mx-auto px-3 sm:px-4 md:px-6 flex justify-between items-center">
-          {/* --- LOGO --- */}
-          <Link href="/" className="relative z-50 group">
-            <div className="flex items-center gap-1 sm:gap-1.5 md:gap-2">
-              <div className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 bg-gradient-to-tr from-emerald-500 to-cyan-500 rounded-md sm:rounded-lg flex items-center justify-center text-slate-950 font-bold font-mono text-sm sm:text-base md:text-xl group-hover:scale-110 transition-transform">
-                E
-              </div>
-              <span className="text-base sm:text-lg md:text-xl font-bold text-slate-100 tracking-tight">
-                Elvin<span className="text-emerald-500">.</span>
-              </span>
-            </div>
-          </Link>
+        <Link href="/" className="flex items-center gap-2" onClick={() => setIsOpen(false)}>
+          <span className="flex h-8 w-8 items-center justify-center rounded-md bg-[#f1d99f] text-sm font-black text-[#11100c]">
+            E
+          </span>
+          <span className="text-sm font-semibold tracking-tight text-white sm:text-base">
+            Elvin Omondi
+          </span>
+        </Link>
 
-          {/* --- DESKTOP NAV --- */}
-          <ul className="hidden md:flex items-center gap-6 lg:gap-8">
-            {navItems.map((item, index) => (
-              <li key={index}>
-                <Link
-                  href={item.href}
-                  className="relative text-xs lg:text-sm font-medium text-slate-400 hover:text-white transition-colors duration-300 group py-2"
-                >
-                  {item.name}
-                  {/* Hover Underline Animation */}
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-500 transition-all duration-300 group-hover:w-full"></span>
-                </Link>
-              </li>
-            ))}
-            {/* CTA Button */}
-            <li>
-              <Link
-                href="/images/Elvin-Resume-template.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-4 lg:px-5 py-2 lg:py-2.5 rounded-lg bg-white/5 border border-white/10 text-emerald-400 text-xs lg:text-sm font-medium hover:bg-emerald-500 hover:text-slate-950 hover:border-emerald-500 transition-all duration-300"
-              >
-                Resume
-              </Link>
-            </li>
-          </ul>
-
-          {/* --- MOBILE TOGGLE --- */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden relative z-50 p-1.5 sm:p-2 text-slate-300 hover:text-emerald-400 transition-colors"
-            aria-label="Toggle menu"
-          >
-            <div className="w-5 sm:w-6 flex flex-col items-end gap-1 sm:gap-1.5">
-              <span
-                className={`h-0.5 bg-current transition-all duration-300 ${
-                  isOpen ? "w-5 sm:w-6 rotate-45 translate-y-1.5 sm:translate-y-2" : "w-5 sm:w-6"
-                }`}
-              />
-              <span
-                className={`h-0.5 bg-current transition-all duration-300 ${
-                  isOpen ? "opacity-0" : "w-3.5 sm:w-4"
-                }`}
-              />
-              <span
-                className={`h-0.5 bg-current transition-all duration-300 ${
-                  isOpen ? "w-5 sm:w-6 -rotate-45 -translate-y-1.5 sm:-translate-y-2" : "w-2"
-                }`}
-              />
-            </div>
-          </button>
+        <div className="hidden items-center gap-1 md:flex">
+          {navItems.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              className="rounded-md px-3 py-2 text-sm font-medium text-slate-400 transition hover:bg-white/[0.055] hover:text-white"
+            >
+              {item.name}
+            </Link>
+          ))}
         </div>
+
+        <Link
+          href="/images/Elvin-Resume-template.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hidden rounded-md bg-[#f1d99f] px-4 py-2 text-sm font-bold text-[#11100c] transition hover:bg-white md:inline-flex"
+        >
+          Resume
+        </Link>
+
+        <button
+          type="button"
+          onClick={() => setIsOpen((value) => !value)}
+          className="flex h-9 w-9 items-center justify-center rounded-md border border-white/10 bg-white/[0.04] text-white md:hidden"
+          aria-label="Toggle navigation menu"
+        >
+          {isOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+        </button>
       </motion.nav>
 
-      {/* --- MOBILE MENU OVERLAY --- */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-slate-950/95 backdrop-blur-xl md:hidden flex flex-col items-center justify-center px-4"
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.22 }}
+            className="mx-auto mt-2 max-w-7xl rounded-lg border border-white/10 bg-[#0b0f15]/96 p-2 shadow-2xl backdrop-blur-xl md:hidden"
           >
-            {/* Background Decor */}
-            <div className="absolute top-0 right-0 w-40 sm:w-64 h-40 sm:h-64 bg-emerald-500/10 blur-2xl sm:blur-3xl rounded-full -translate-y-1/2 translate-x-1/2"></div>
-            <div className="absolute bottom-0 left-0 w-40 sm:w-64 h-40 sm:h-64 bg-cyan-500/10 blur-2xl sm:blur-3xl rounded-full translate-y-1/2 -translate-x-1/2"></div>
-
-            <nav className="relative z-10 w-full">
-              <ul className="flex flex-col gap-4 sm:gap-5 items-center">
-                {navItems.map((item, index) => (
-                  <motion.li
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 + index * 0.08 }}
-                  >
-                    <Link
-                      href={item.href}
-                      onClick={() => setIsOpen(false)}
-                      className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-300 hover:text-emerald-400 transition-colors"
-                    >
-                      {item.name}
-                    </Link>
-                  </motion.li>
-                ))}
-
-                <motion.li
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 + navItems.length * 0.08 }}
-                  className="mt-4 sm:mt-6"
-                >
-                  <Link
-                    href="/images/Elvin-Resume-template.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-5 sm:px-6 py-2 sm:py-2.5 rounded-full bg-emerald-500 text-slate-950 font-bold text-sm sm:text-base hover:bg-emerald-400 transition-colors"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    Download Resume
-                  </Link>
-                </motion.li>
-              </ul>
-            </nav>
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                onClick={() => setIsOpen(false)}
+                className="block rounded-md px-3 py-2.5 text-sm font-semibold text-slate-300 transition hover:bg-white/[0.055] hover:text-white"
+              >
+                {item.name}
+              </Link>
+            ))}
+            <Link
+              href="/images/Elvin-Resume-template.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setIsOpen(false)}
+              className="mt-1 block rounded-md bg-[#f1d99f] px-3 py-2.5 text-center text-sm font-bold text-[#11100c]"
+            >
+              Resume
+            </Link>
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </header>
   );
 }
