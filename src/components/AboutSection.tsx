@@ -35,44 +35,41 @@ export default function AboutSection() {
           viewport={{ once: true, margin: "-100px" }}
           className="flex flex-col lg:flex-row items-center lg:items-start gap-10 sm:gap-12 md:gap-16"
         >
-          {/* --- LEFT COLUMN: ABSTRACT COMPOSITION --- */}
+          {/* --- LEFT COLUMN: PORTRAIT COMPOSITION --- */}
           <div className="w-full lg:w-5/12 flex justify-center lg:justify-end relative group">
             {/* Decorative Background Glow */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 to-cyan-500/20 rounded-[2rem] blur-2xl transform rotate-6 scale-90 opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+            <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 to-cyan-500/20 rounded-[2rem] blur-2xl transform rotate-6 scale-90 opacity-0 transition-opacity duration-700 group-hover:opacity-100"></div>
 
-            {/* Main Abstract Container */}
+            {/* Main Image Container */}
             <motion.div
               whileHover={{ scale: 1.02, rotate: -2 }}
-              transition={{ duration: 0.4 }}
-              className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-full sm:rounded-[3rem] overflow-hidden border border-white/5 bg-slate-900/30 shadow-2xl backdrop-blur-md flex items-center justify-center"
+              transition={{ duration: 0.5 }}
+              className="relative w-56 h-72 sm:w-64 sm:h-80 md:w-72 md:h-96 lg:w-80 lg:h-[28rem] rounded-xl sm:rounded-2xl overflow-hidden border border-white/10 bg-slate-900/50 shadow-2xl backdrop-blur-sm"
             >
-              {/* Abstract Inner Glows */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/10 via-transparent to-cyan-500/10"></div>
-              <motion.div 
-                animate={{ rotate: 360 }} 
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="absolute w-[150%] h-[150%] bg-[conic-gradient(from_0deg,transparent_0_340deg,rgba(16,185,129,0.3)_360deg)] rounded-full"
-              />
-              <div className="absolute inset-[2px] bg-slate-950/90 rounded-full sm:rounded-[3rem] backdrop-blur-3xl"></div>
-              
-              {/* Core element */}
-              <motion.div
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="relative z-10 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full bg-gradient-to-tr from-emerald-500 to-cyan-500 blur-md opacity-70"
-              />
-              <div className="absolute z-20 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full border border-white/20 bg-white/5 backdrop-blur-md flex items-center justify-center shadow-inner">
-                 <span className="text-xl sm:text-2xl text-white font-mono opacity-80">{'</>'}</span>
-              </div>
+              {/* Image Overlay Gradient for Tech Noir Effect */}
+              <div className="absolute inset-0 bg-slate-950/40 mix-blend-color z-10 group-hover:bg-transparent transition-colors duration-700"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent z-10"></div>
 
-              {/* Tech Badge on Container */}
-              <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-30 flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-slate-950/80 border border-white/10 backdrop-blur-md whitespace-nowrap">
+              <Image
+                src="/images/potrait5.webp"
+                alt="Elvin Omondi"
+                fill
+                className="object-cover object-center grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105"
+              />
+
+              {/* Tech Badge on Image */}
+              <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 z-20 flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-slate-950/60 border border-white/10 backdrop-blur-md">
                 <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-500 animate-pulse"></div>
                 <span className="text-[10px] sm:text-xs font-mono text-emerald-400">
-                  System Core
+                  System Online
                 </span>
               </div>
             </motion.div>
+
+            {/* Floating Decorative Element */}
+            <div className="absolute -bottom-4 sm:-bottom-6 -right-4 sm:-right-6 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 bg-slate-900 rounded-lg sm:rounded-xl border border-emerald-500/30 flex items-center justify-center shadow-xl hidden sm:flex">
+              <span className="text-2xl sm:text-3xl md:text-4xl">✨</span>
+            </div>
           </div>
 
           {/* --- RIGHT COLUMN: CONTENT --- */}
