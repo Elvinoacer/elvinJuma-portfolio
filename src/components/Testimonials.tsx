@@ -1,7 +1,5 @@
 "use client";
-
 import { motion } from "framer-motion";
-import { Quote, Star } from "lucide-react";
 
 const testimonials = [
   {
@@ -9,21 +7,27 @@ const testimonials = [
     name: "Sarah Johnson",
     role: "CEO at TechStart",
     content:
-      "Elvin translated a vague product idea into a clean, reliable platform. The final experience felt considered at every breakpoint.",
+      "Working with Elvin was an absolute pleasure. They delivered our e-commerce platform ahead of schedule and with exceptional quality. Their attention to detail is top-notch.",
+    initials: "SJ",
+    rating: 5,
   },
   {
     id: 2,
     name: "Michael Chen",
-    role: "Product Manager at DesignHub",
+    role: "PM at DesignHub",
     content:
-      "The workflow app he built simplified how our team manages daily operations. Strong engineering, thoughtful UX, and clear communication.",
+      "The task management app they built for our team has revolutionized our workflow. Their understanding of user experience and clean code practices is impressive.",
+    initials: "MC",
+    rating: 5,
   },
   {
     id: 3,
     name: "Emily Rodriguez",
     role: "Director at BrandVision",
     content:
-      "He brings the rare mix of technical depth and visual taste. Our site now feels premium, fast, and easy for clients to trust.",
+      "We've worked with many developers, but none have shown the level of professionalism and technical expertise as Elvin. He is our go-to for all web projects now.",
+    initials: "ER",
+    rating: 5,
   },
 ];
 
@@ -31,52 +35,141 @@ export default function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="relative overflow-hidden bg-[#080a0e] py-16 sm:py-20 lg:py-28"
+      className="relative py-16 sm:py-20 md:py-24 bg-slate-950 overflow-hidden"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="mx-auto max-w-3xl text-center"
-        >
-          <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#f1d99f]">
-            Client notes
-          </p>
-          <h2 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">
-            Trusted for clean execution and refined digital experiences.
-          </h2>
-        </motion.div>
+      {/* --- BACKGROUND DECOR --- */}
+      {/* Grid Pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
 
-        <div className="mt-10 grid gap-4 md:grid-cols-3 lg:mt-14 lg:gap-5">
+      {/* Radial Glows */}
+      <div className="absolute left-0 top-0 w-[300px] sm:w-[400px] md:w-[500px] h-[300px] sm:h-[400px] md:h-[500px] bg-emerald-500/10 blur-[80px] sm:blur-[100px] md:blur-[120px] rounded-full pointer-events-none mix-blend-screen"></div>
+      <div className="absolute right-0 bottom-0 w-[300px] sm:w-[400px] md:w-[500px] h-[300px] sm:h-[400px] md:h-[500px] bg-cyan-500/10 blur-[80px] sm:blur-[100px] md:blur-[120px] rounded-full pointer-events-none mix-blend-screen"></div>
+
+      <div className="container relative z-10 mx-auto px-4 sm:px-6">
+        {/* --- SECTION HEADER --- */}
+        <div className="text-center mb-12 sm:mb-16 md:mb-20">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-block mb-3 sm:mb-4"
+          >
+            <span className="text-emerald-400 font-mono text-xs sm:text-sm tracking-widest uppercase bg-emerald-950/30 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-emerald-500/20">
+              // Client Feedback
+            </span>
+          </motion.div>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-100"
+          >
+            Trusted by{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">
+              innovators.
+            </span>
+          </motion.h2>
+        </div>
+
+        {/* --- TESTIMONIALS GRID --- */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {testimonials.map((item, index) => (
-            <motion.article
+            <motion.div
               key={item.id}
-              initial={{ opacity: 0, y: 22 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.55, delay: index * 0.08 }}
-              className="rounded-lg border border-white/10 bg-[#10141b] p-5 transition hover:border-[#f1d99f]/35 hover:bg-[#121821] sm:p-6"
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -5 }}
+              className="relative group h-full"
             >
-              <div className="mb-5 flex items-center justify-between">
-                <Quote className="h-5 w-5 text-[#f1d99f]" />
-                <div className="flex gap-0.5 text-[#f1d99f]">
-                  {Array.from({ length: 5 }).map((_, starIndex) => (
-                    <Star key={starIndex} className="h-3.5 w-3.5 fill-current" />
+              {/* Card Container */}
+              <div className="relative h-full p-5 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl bg-slate-900/40 border border-white/5 backdrop-blur-sm transition-colors duration-300 hover:bg-slate-900/60 hover:border-emerald-500/30">
+                {/* Decorative Quote Mark (Watermark) */}
+                <div className="absolute top-4 sm:top-6 right-6 sm:right-8 text-6xl sm:text-7xl md:text-8xl font-serif text-white/[0.03] group-hover:text-emerald-500/[0.05] transition-colors leading-none select-none pointer-events-none">
+                  &rdquo;
+                </div>
+
+                {/* Stars */}
+                <div className="flex gap-0.5 sm:gap-1 mb-4 sm:mb-6">
+                  {[...Array(5)].map((_, i) => (
+                    <svg
+                      key={i}
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className={`w-4 h-4 sm:w-5 sm:h-5 ${
+                        i < item.rating ? "text-emerald-400" : "text-slate-700"
+                      }`}
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
                   ))}
                 </div>
-              </div>
-              <p className="text-sm leading-7 text-slate-300">{item.content}</p>
-              <div className="mt-6 border-t border-white/10 pt-4">
-                <h3 className="text-sm font-semibold text-white">{item.name}</h3>
-                <p className="mt-1 text-xs font-medium text-slate-500">
-                  {item.role}
+
+                {/* Content */}
+                <p className="text-slate-300 text-sm sm:text-base md:text-lg leading-relaxed mb-6 sm:mb-8 relative z-10">
+                  {item.content}
                 </p>
+
+                {/* Author Info */}
+                <div className="flex items-center gap-3 sm:gap-4 mt-auto pt-4 sm:pt-6 border-t border-white/5 group-hover:border-white/10 transition-colors">
+                  {/* Avatar Placeholder with Gradient Ring */}
+                  <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center bg-slate-800 text-slate-300 font-bold text-sm sm:text-base overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 to-cyan-500/20"></div>
+                    {item.initials}
+                  </div>
+
+                  <div>
+                    <h4 className="text-slate-100 font-bold text-sm sm:text-base group-hover:text-emerald-400 transition-colors">
+                      {item.name}
+                    </h4>
+                    <p className="text-slate-500 text-xs sm:text-sm font-medium">
+                      {item.role}
+                    </p>
+                  </div>
+                </div>
               </div>
-            </motion.article>
+
+              {/* Bottom Glow Line on Hover */}
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1/2 h-1 bg-gradient-to-r from-transparent via-emerald-500 to-transparent opacity-0 group-hover:opacity-100 blur-[2px] transition-opacity duration-300"></div>
+            </motion.div>
           ))}
         </div>
+
+        {/* --- COMPANY LOGO STRIP (Placeholder) --- */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.6 }}
+          className="mt-16 sm:mt-20 md:mt-24 pt-8 sm:pt-10 border-t border-white/5"
+        >
+          <p className="text-center text-slate-500 text-xs sm:text-sm mb-6 sm:mb-8 uppercase tracking-widest">
+            Also worked with
+          </p>
+          <div className="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-12 lg:gap-20 opacity-40 grayscale mix-blend-screen">
+            {/* Simple Text Placeholders for Logos to keep it copy-pasteable */}
+            {[
+              "Startup Inc",
+              "Enterprise Corp",
+              "Future Tech",
+              "Global Systems",
+            ].map((logo) => (
+              <span
+                key={logo}
+                className="text-sm sm:text-base md:text-lg lg:text-xl font-bold font-mono text-slate-300 hover:text-white transition-colors cursor-default"
+              >
+                {logo}
+              </span>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );

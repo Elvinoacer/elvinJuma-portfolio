@@ -1,109 +1,140 @@
 "use client";
-
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Code2, Compass, ShieldCheck } from "lucide-react";
-
-const principles = [
-  {
-    icon: Compass,
-    title: "Product-minded",
-    text: "I shape flows around the business goal, the user journey, and the smallest path to real value.",
-  },
-  {
-    icon: Code2,
-    title: "Engineered cleanly",
-    text: "Readable architecture, typed interfaces, measured performance, and delivery habits that scale.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Built to last",
-    text: "Security, maintainability, and polish are treated as core product features from day one.",
-  },
-];
 
 export default function AboutSection() {
+  // Animation variants for staggered reveals
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  };
+
   return (
     <section
       id="about"
-      className="relative overflow-hidden bg-[#0a0d12] py-16 text-slate-200 sm:py-20 lg:py-28"
+      className="relative py-16 sm:py-20 md:py-24 overflow-hidden bg-slate-950 text-slate-200"
     >
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:36px_36px]" />
+      {/* Background Grid (Consistent with Hero) */}
+      <div className="absolute inset-0 z-0 w-full h-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
 
-      <div className="relative mx-auto grid max-w-7xl grid-cols-1 gap-10 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16 lg:px-8">
+      <div className="container relative z-10 mx-auto px-4 sm:px-6 md:px-12">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.6 }}
-          className="relative"
+          className="flex flex-col lg:flex-row items-center lg:items-start gap-10 sm:gap-12 md:gap-16"
         >
-          <div className="relative mx-auto max-w-sm overflow-hidden rounded-lg border border-white/10 bg-[#11161d] p-2 shadow-2xl lg:mx-0">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-md bg-slate-900">
+          {/* --- LEFT COLUMN: IMAGE COMPOSITION --- */}
+          <div className="w-full lg:w-5/12 flex justify-center lg:justify-end relative group">
+            {/* Decorative Background Glow */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 to-cyan-500/20 rounded-[2rem] blur-2xl transform rotate-6 scale-90 opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+
+            {/* Main Image Container */}
+            <motion.div
+              whileHover={{ scale: 1.02, rotate: -2 }}
+              transition={{ duration: 0.4 }}
+              className="relative w-56 h-72 sm:w-64 sm:h-80 md:w-72 md:h-96 lg:w-80 lg:h-[28rem] rounded-xl sm:rounded-2xl overflow-hidden border border-white/10 bg-slate-900/50 shadow-2xl backdrop-blur-sm"
+            >
+              {/* Image Overlay Gradient (Better text readability if you add text later) */}
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent z-10"></div>
+
               <Image
                 src="/images/profile-2.png"
                 alt="Elvin Omondi"
                 fill
-                className="object-cover object-center"
+                className="object-cover object-center transition-transform duration-700 group-hover:scale-110"
               />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#f1d99f]">
-                  Full-stack Developer
-                </p>
-                <p className="mt-1 text-lg font-semibold text-white">
-                  Elvin Omondi Juma
-                </p>
+
+              {/* Tech Badge on Image */}
+              <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 z-20 flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-slate-950/60 border border-white/10 backdrop-blur-md">
+                <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+                <span className="text-[10px] sm:text-xs font-mono text-emerald-400">
+                  System Online
+                </span>
               </div>
+            </motion.div>
+
+            {/* Floating Decorative Element */}
+            <div className="absolute -bottom-4 sm:-bottom-6 -right-4 sm:-right-6 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 bg-slate-900 rounded-lg sm:rounded-xl border border-emerald-500/30 flex items-center justify-center shadow-xl hidden sm:flex">
+              <span className="text-2xl sm:text-3xl md:text-4xl">🚀</span>
             </div>
           </div>
-        </motion.div>
 
-        <div className="flex flex-col justify-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6 }}
-          >
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#f1d99f]">
-              About
-            </p>
-            <h2 className="mt-3 max-w-3xl text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-6xl">
-              Calm execution for products that need to feel exceptional.
-            </h2>
-            <p className="mt-5 max-w-2xl text-sm leading-7 text-slate-400 sm:text-base">
-              I design and build modern web and mobile experiences with Next.js,
-              React, Node.js, databases, authentication, payments, and AI
-              integrations. The work is practical, polished, and organized
-              around outcomes: faster launches, cleaner operations, and better
-              user trust.
-            </p>
-          </motion.div>
+          {/* --- RIGHT COLUMN: CONTENT --- */}
+          <div className="w-full lg:w-7/12 text-center lg:text-left">
+            <motion.div variants={itemVariants}>
+              <h2 className="text-emerald-400 font-mono text-xs sm:text-sm tracking-widest uppercase mb-2">
+                // About The Developer
+              </h2>
+              <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight">
+                Crafting digital{" "}
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-slate-500">
+                  masterpieces with code.
+                </span>
+              </h3>
+            </motion.div>
 
-          <div className="mt-8 grid gap-3 sm:grid-cols-3">
-            {principles.map((item, index) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 18 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.5, delay: index * 0.08 }}
-                className="rounded-lg border border-white/10 bg-white/[0.035] p-4 transition hover:border-[#f1d99f]/35 hover:bg-white/[0.055]"
-              >
-                <div className="mb-4 flex h-9 w-9 items-center justify-center rounded-md bg-[#f1d99f] text-[#11100c]">
-                  <item.icon className="h-4 w-4" />
+            <motion.div
+              variants={itemVariants}
+              className="space-y-4 sm:space-y-5 md:space-y-6 text-sm sm:text-base md:text-lg text-slate-400 leading-relaxed"
+            >
+              <p>
+                I am not just a coder; I am a digital architect. With over{" "}
+                <span className="text-emerald-400 font-medium">
+                  5 years of experience
+                </span>
+                , I specialize in translating complex logic into elegant,
+                user-centric interfaces.
+              </p>
+              <p>
+                My toolbelt is stocked with modern heavyweights like{" "}
+                <span className="text-slate-200">
+                  React, Next.js, GSAP, and Three.js
+                </span>
+                . I believe that a website should not just inform—it should
+                perform and captivate.
+              </p>
+            </motion.div>
+
+            {/* --- METRICS GRID --- */}
+            <motion.div
+              variants={itemVariants}
+              className="grid grid-cols-3 gap-2 sm:gap-3 md:gap-4 mt-8 sm:mt-10"
+            >
+              {stats.map((stat, index) => (
+                <div
+                  key={index}
+                  className="p-3 sm:p-4 md:p-5 rounded-lg sm:rounded-xl bg-white/[0.03] border border-white/[0.05] hover:bg-white/[0.05] hover:border-emerald-500/30 transition-colors duration-300 group"
+                >
+                  <h4 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-0.5 sm:mb-1 group-hover:text-emerald-400 transition-colors">
+                    {stat.value}
+                  </h4>
+                  <p className="text-[10px] sm:text-xs md:text-sm text-slate-500 uppercase tracking-wider font-medium">
+                    {stat.label}
+                  </p>
                 </div>
-                <h3 className="text-sm font-semibold text-white sm:text-base">
-                  {item.title}
-                </h3>
-                <p className="mt-2 text-xs leading-6 text-slate-400 sm:text-sm">
-                  {item.text}
-                </p>
-              </motion.div>
-            ))}
+              ))}
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
 }
+
+const stats = [
+  { value: "05+", label: "Years Exp." },
+  { value: "30+", label: "Projects" },
+  { value: "15+", label: "Happy Clients" },
+];

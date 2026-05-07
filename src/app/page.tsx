@@ -12,8 +12,8 @@ export default function Home() {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.6 }}
-      className="bg-[#080a0e] text-white"
+      transition={{ duration: 1 }}
+      className="bg-gradient-to-b from-gray-900 to-gray-800 text-white"
     >
       <Hero />
       <AboutSection />

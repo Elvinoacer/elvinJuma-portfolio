@@ -69,11 +69,11 @@ export default function About() {
     <section className="relative min-h-screen bg-slate-950 overflow-hidden py-16 sm:py-20 md:py-24">
       {/* --- BACKGROUND LAYERS --- */}
       {/* 1. Grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px]"></div>
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
 
       {/* 2. Atmospheric Blurs (Emerald & Cyan) */}
-      <div className="absolute top-0 right-0 w-75 sm:w-100 md:w-150 h-75 sm:h-100 md:h-150 bg-emerald-500/10 blur-[80px] sm:blur-[100px] md:blur-[120px] rounded-full pointer-events-none mix-blend-screen"></div>
-      <div className="absolute bottom-0 left-0 w-62.5 sm:w-87.5 md:w-125 h-62.5 sm:h-87.5 md:h-125 bg-cyan-500/10 blur-[80px] sm:blur-[100px] md:blur-[120px] rounded-full pointer-events-none mix-blend-screen"></div>
+      <div className="absolute top-0 right-0 w-[300px] sm:w-[400px] md:w-[600px] h-[300px] sm:h-[400px] md:h-[600px] bg-emerald-500/10 blur-[80px] sm:blur-[100px] md:blur-[120px] rounded-full pointer-events-none mix-blend-screen"></div>
+      <div className="absolute bottom-0 left-0 w-[250px] sm:w-[350px] md:w-[500px] h-[250px] sm:h-[350px] md:h-[500px] bg-cyan-500/10 blur-[80px] sm:blur-[100px] md:blur-[120px] rounded-full pointer-events-none mix-blend-screen"></div>
 
       <div className="container relative z-10 mx-auto px-4 sm:px-6">
         {/* --- HEADER --- */}
@@ -89,7 +89,7 @@ export default function About() {
           </span>
           <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-slate-100 mb-4 sm:mb-6 tracking-tight leading-tight">
             I transform complex problems into{" "}
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-400 to-cyan-400">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">
               elegant solutions.
             </span>
           </h1>
@@ -117,9 +117,8 @@ export default function About() {
 
               <div className="space-y-3 sm:space-y-4 text-slate-300 text-sm sm:text-base md:text-lg leading-relaxed">
                 <p>
-                  Hi, I&apos;m{" "}
-                  <strong className="text-emerald-400">Elvin</strong>. I&apos;m
-                  a Full-Stack Engineer with over{" "}
+                  Hi, I&apos;m <strong className="text-emerald-400">Elvin</strong>.
+                  I&apos;m a Full-Stack Engineer with over{" "}
                   <span className="text-white font-medium">
                     4 years of experience
                   </span>{" "}
@@ -135,8 +134,8 @@ export default function About() {
                   .
                 </p>
                 <p>
-                  When I&apos;m not debugging, I&apos;m photographing street art
-                  or perfecting my pour-over coffee. I believe in code that is{" "}
+                  When I&apos;m not debugging, I&apos;m photographing street art or
+                  perfecting my pour-over coffee. I believe in code that is{" "}
                   <span className="text-white italic">
                     clean, accessible, and remarkably fast.
                   </span>
@@ -234,7 +233,7 @@ export default function About() {
               href="mailto:omondielvin@gmail.com"
               className="group relative px-6 sm:px-8 py-3 bg-emerald-500 text-slate-950 font-bold text-sm sm:text-base rounded-full overflow-hidden transition-transform hover:scale-105 text-center"
             >
-              <div className="absolute inset-0 w-full h-full bg-linear-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:animate-shimmer" />
+              <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:animate-shimmer" />
               <span className="flex items-center justify-center gap-2 relative z-10">
                 <FaEnvelope className="text-sm sm:text-base" /> Get In Touch
               </span>

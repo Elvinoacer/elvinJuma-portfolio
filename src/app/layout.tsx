@@ -39,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} bg-[#080a0e] text-white antialiased`}
+        className={`${inter.className} bg-gradient-to-br from-gray-900 via-purple-900 to-blue-900 text-white`}
       >
         <Header />
         <main className="min-h-screen">{children}</main>
