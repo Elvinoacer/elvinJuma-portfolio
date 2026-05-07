@@ -5,9 +5,9 @@ import {
   FaGithub,
   FaLinkedin,
   FaFileDownload,
+  FaAws,
 } from "react-icons/fa";
 import {
-  SiAmazon,
   SiFirebase,
   SiGraphql,
   SiJavascript,
@@ -34,7 +34,7 @@ const skills = [
   { name: "Firebase", icon: SiFirebase },
   { name: "Redux", icon: SiRedux },
   { name: "GraphQL", icon: SiGraphql },
-  { name: "AWS", icon: SiAmazon },
+  { name: "AWS", icon: FaAws },
 ];
 
 const endorsements = [
