@@ -1,141 +1,129 @@
 "use client";
+
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { principles, site } from "@/data/site";
+import { fadeUp, stagger } from "@/lib/motion";
 
 export default function AboutSection() {
-  // Animation variants for staggered reveals
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  };
-
   return (
-    <section
-      id="about"
-      className="relative py-16 sm:py-20 md:py-24 overflow-hidden bg-slate-950 text-slate-200"
-    >
-      {/* Background Grid (Consistent with Hero) */}
-      <div className="absolute inset-0 z-0 w-full h-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-
-      <div className="container relative z-10 mx-auto px-4 sm:px-6 md:px-12">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="flex flex-col lg:flex-row items-center lg:items-start gap-10 sm:gap-12 md:gap-16"
-        >
-          {/* --- LEFT COLUMN: PORTRAIT COMPOSITION --- */}
-          <div className="w-full lg:w-5/12 flex justify-center lg:justify-end relative group">
-            {/* Decorative Background Glow */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 to-cyan-500/20 rounded-[2rem] blur-2xl transform rotate-6 scale-90 opacity-0 transition-opacity duration-700 group-hover:opacity-100"></div>
-
-            {/* Main Image Container */}
-            <motion.div
-              whileHover={{ scale: 1.02, rotate: -2 }}
-              transition={{ duration: 0.5 }}
-              className="relative w-56 h-72 sm:w-64 sm:h-80 md:w-72 md:h-96 lg:w-80 lg:h-[28rem] rounded-xl sm:rounded-2xl overflow-hidden border border-white/10 bg-slate-900/50 shadow-2xl backdrop-blur-sm"
-            >
-              {/* Image Overlay Gradient for Tech Noir Effect */}
-              <div className="absolute inset-0 bg-slate-950/40 mix-blend-color z-10 group-hover:bg-transparent transition-colors duration-700"></div>
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent z-10"></div>
-
-              <Image
-                src="/images/potrait5.webp"
-                alt="Elvin Omondi"
-                fill
-                className="object-cover object-center grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105"
-              />
-
-              {/* Tech Badge on Image */}
-              <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 z-20 flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full bg-slate-950/60 border border-white/10 backdrop-blur-md">
-                <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-500 animate-pulse"></div>
-                <span className="text-[10px] sm:text-xs font-mono text-emerald-400">
-                  System Online
-                </span>
+    <section id="about" className="relative py-20 sm:py-24">
+      <div className="pointer-events-none absolute inset-0 bg-grid opacity-30" />
+      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="grid items-start gap-12 lg:grid-cols-12 lg:gap-16">
+          {/* Portrait */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:col-span-5"
+          >
+            <div className="relative mx-auto w-full max-w-sm lg:mx-0">
+              <div className="absolute -inset-3 rounded-3xl bg-gradient-to-br from-emerald-500/15 via-transparent to-cyan-500/10 blur-2xl" />
+              <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-white/10 bg-slate-900 shadow-2xl">
+                <Image
+                  src="/images/potrait5.webp"
+                  alt={site.name}
+                  fill
+                  className="object-cover object-center"
+                  sizes="(max-width: 768px) 320px, 400px"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#030712]/90 via-transparent to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <p className="font-mono text-[11px] uppercase tracking-widest text-emerald-400/90">
+                    {site.location}
+                  </p>
+                  <p className="mt-1 text-sm font-medium text-white">
+                    {site.company}
+                  </p>
+                </div>
               </div>
-            </motion.div>
-
-            {/* Floating Decorative Element */}
-            <div className="absolute -bottom-4 sm:-bottom-6 -right-4 sm:-right-6 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 bg-slate-900 rounded-lg sm:rounded-xl border border-emerald-500/30 flex items-center justify-center shadow-xl hidden sm:flex">
-              <span className="text-2xl sm:text-3xl md:text-4xl">✨</span>
             </div>
-          </div>
+          </motion.div>
 
-          {/* --- RIGHT COLUMN: CONTENT --- */}
-          <div className="w-full lg:w-7/12 text-center lg:text-left">
-            <motion.div variants={itemVariants}>
-              <h2 className="text-emerald-400 font-mono text-xs tracking-widest uppercase mb-2">
-                // About The Developer
-              </h2>
-              <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-6 leading-tight">
-                Crafting digital{" "}
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-slate-500">
-                  masterpieces with code.
-                </span>
-              </h3>
-            </motion.div>
+          {/* Copy */}
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+            className="lg:col-span-7"
+          >
+            <motion.p
+              variants={fadeUp}
+              className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-emerald-400/90"
+            >
+              About
+            </motion.p>
+            <motion.h2
+              variants={fadeUp}
+              className="text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl"
+            >
+              Engineer first.
+              <span className="font-normal text-slate-500"> Designer of systems second.</span>
+            </motion.h2>
 
             <motion.div
-              variants={itemVariants}
-              className="space-y-3 sm:space-y-5 md:space-y-6 text-sm sm:text-base md:text-lg text-slate-400 leading-relaxed"
+              variants={fadeUp}
+              className="mt-6 space-y-4 text-[15px] leading-relaxed text-slate-400 sm:text-base"
             >
               <p>
-                I am not just a coder; I am a digital architect. With over{" "}
-                <span className="text-emerald-400 font-medium">
-                  5 years of experience
-                </span>
-                , I specialize in translating complex logic into elegant,
-                user-centric interfaces.
+                I&apos;m{" "}
+                <span className="text-slate-200">{site.name}</span> — founding
+                engineer at{" "}
+                <span className="text-slate-200">{site.company}</span>. For{" "}
+                {site.yearsShipping} years I&apos;ve been shipping full-stack
+                products used by real businesses: schools, hotels, construction
+                firms, churches, and local commerce.
               </p>
               <p>
-                My toolbelt is stocked with modern heavyweights like{" "}
+                My stack is pragmatic —{" "}
                 <span className="text-slate-200">
-                  React, Next.js, GSAP, and Three.js
+                  Next.js, TypeScript, PostgreSQL, Prisma, realtime, payments
                 </span>
-                . I believe that a website should not just inform—it should
-                perform and captivate.
+                . I care about clean models, boring reliability, and interfaces
+                that feel inevitable.
+              </p>
+              <p>
+                I&apos;m also a Computer Science student at Moi University and an
+                Equity Leadership Program alumnus. Formal fundamentals, daily
+                production practice.
               </p>
             </motion.div>
 
-            {/* --- METRICS GRID --- */}
             <motion.div
-              variants={itemVariants}
-              className="grid grid-cols-3 gap-2 sm:gap-3 md:gap-4 mt-6 sm:mt-10"
+              variants={fadeUp}
+              className="mt-8 grid gap-3 sm:grid-cols-3"
             >
-              {stats.map((stat, index) => (
+              {principles.map((p) => (
                 <div
-                  key={index}
-                  className="p-2.5 sm:p-4 md:p-5 rounded-lg sm:rounded-xl bg-white/[0.03] border border-white/[0.05] hover:bg-white/[0.05] hover:border-emerald-500/30 transition-colors duration-300 group"
+                  key={p.title}
+                  className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4"
                 >
-                  <h4 className="text-lg sm:text-2xl md:text-3xl font-bold text-white mb-0.5 sm:mb-1 group-hover:text-emerald-400 transition-colors">
-                    {stat.value}
-                  </h4>
-                  <p className="text-[9px] sm:text-xs md:text-sm text-slate-500 uppercase tracking-wider font-medium">
-                    {stat.label}
+                  <h3 className="text-sm font-semibold text-white">{p.title}</h3>
+                  <p className="mt-2 text-xs leading-relaxed text-slate-500">
+                    {p.body}
                   </p>
                 </div>
               ))}
             </motion.div>
-          </div>
-        </motion.div>
+
+            <motion.div variants={fadeUp} className="mt-8">
+              <Link
+                href="/about"
+                className="group inline-flex items-center gap-1.5 text-sm font-medium text-emerald-400 transition-colors hover:text-emerald-300"
+              >
+                Full story & experience
+                <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Link>
+            </motion.div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
 }
-
-const stats = [
-  { value: "05+", label: "Years Exp." },
-  { value: "30+", label: "Projects" },
-  { value: "15+", label: "Happy Clients" },
-];

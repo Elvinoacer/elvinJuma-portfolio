@@ -1,159 +1,176 @@
 "use client";
+
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { navItems, site } from "@/data/site";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
-  // Handle scroll effect
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 16);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const navItems = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Projects", href: "/projects" },
-    { name: "Contact", href: "/contact" },
-  ];
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
     <>
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      <motion.header
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "bg-slate-950/80 backdrop-blur-md border-b border-white/5 py-2.5 sm:py-3 md:py-4 shadow-[0_0_30px_-10px_rgba(0,0,0,0.5)]"
-            : "bg-transparent py-3 sm:py-4 md:py-6"
+            ? "border-b border-white/[0.06] bg-[#030712]/80 backdrop-blur-xl py-3"
+            : "bg-transparent py-5"
         }`}
       >
-        <div className="container mx-auto px-3 sm:px-4 md:px-6 flex justify-between items-center">
-          {/* --- LOGO --- */}
-          <Link href="/" className="relative z-50 group">
-            <div className="flex items-center gap-1 sm:gap-1.5 md:gap-2">
-              <div className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 bg-gradient-to-tr from-emerald-500 to-cyan-500 rounded-md sm:rounded-lg flex items-center justify-center text-slate-950 font-bold font-mono text-sm sm:text-base md:text-xl group-hover:scale-110 transition-transform">
-                E
-              </div>
-              <span className="text-base sm:text-lg md:text-xl font-bold text-slate-100 tracking-tight">
-                Elvin<span className="text-emerald-500">.</span>
-              </span>
-            </div>
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 sm:px-6">
+          <Link href="/" className="group flex items-center gap-2.5 focus-ring rounded-lg">
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-emerald-400 to-cyan-500 font-mono text-sm font-bold text-slate-950 shadow-[0_0_24px_-6px_rgba(52,211,153,0.5)] transition-transform group-hover:scale-105">
+              E
+            </span>
+            <span className="text-[15px] font-semibold tracking-tight text-slate-100">
+              Elvin<span className="text-emerald-400">.</span>
+            </span>
           </Link>
 
-          {/* --- DESKTOP NAV --- */}
-          <ul className="hidden md:flex items-center gap-6 lg:gap-8">
-            {navItems.map((item, index) => (
-              <li key={index}>
-                <Link
-                  href={item.href}
-                  className="relative text-xs lg:text-sm font-medium text-slate-400 hover:text-white transition-colors duration-300 group py-2"
-                >
-                  {item.name}
-                  {/* Hover Underline Animation */}
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-500 transition-all duration-300 group-hover:w-full"></span>
-                </Link>
-              </li>
-            ))}
-            {/* CTA Button */}
-            <li>
+          <nav className="hidden items-center gap-1 md:flex" aria-label="Primary">
+            <Link
+              href="/"
+              className={`rounded-lg px-3.5 py-2 text-sm transition-colors ${
+                pathname === "/"
+                  ? "text-white"
+                  : "text-slate-400 hover:text-slate-100"
+              }`}
+            >
+              Home
+            </Link>
+            {navItems.map((item) => (
               <Link
-                href="/images/Elvin-Resume-template.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-4 lg:px-5 py-2 lg:py-2.5 rounded-lg bg-white/5 border border-white/10 text-emerald-400 text-xs lg:text-sm font-medium hover:bg-emerald-500 hover:text-slate-950 hover:border-emerald-500 transition-all duration-300"
+                key={item.href}
+                href={item.href}
+                className={`relative rounded-lg px-3.5 py-2 text-sm transition-colors ${
+                  isActive(item.href)
+                    ? "text-white"
+                    : "text-slate-400 hover:text-slate-100"
+                }`}
               >
-                Resume
+                {item.name}
+                {isActive(item.href) && (
+                  <motion.span
+                    layoutId="nav-pill"
+                    className="absolute inset-0 -z-10 rounded-lg bg-white/[0.06]"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
               </Link>
-            </li>
-          </ul>
+            ))}
+            <Link
+              href={site.resume}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-2 rounded-lg border border-white/10 bg-white/[0.03] px-4 py-2 text-sm font-medium text-emerald-400 transition-all hover:border-emerald-500/40 hover:bg-emerald-500 hover:text-slate-950"
+            >
+              Resume
+            </Link>
+          </nav>
 
-          {/* --- MOBILE TOGGLE --- */}
           <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden relative z-50 p-1.5 sm:p-2 text-slate-300 hover:text-emerald-400 transition-colors"
-            aria-label="Toggle menu"
+            type="button"
+            onClick={() => setIsOpen((v) => !v)}
+            className="relative z-50 flex h-10 w-10 items-center justify-center rounded-lg text-slate-300 transition-colors hover:text-white md:hidden focus-ring"
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isOpen}
           >
-            <div className="w-5 sm:w-6 flex flex-col items-end gap-1 sm:gap-1.5">
+            <span className="flex w-5 flex-col items-end gap-1.5">
               <span
-                className={`h-0.5 bg-current transition-all duration-300 ${
-                  isOpen ? "w-5 sm:w-6 rotate-45 translate-y-1.5 sm:translate-y-2" : "w-5 sm:w-6"
+                className={`h-px bg-current transition-all duration-300 ${
+                  isOpen ? "w-5 translate-y-[3.5px] rotate-45" : "w-5"
                 }`}
               />
               <span
-                className={`h-0.5 bg-current transition-all duration-300 ${
-                  isOpen ? "opacity-0" : "w-3.5 sm:w-4"
+                className={`h-px bg-current transition-all duration-300 ${
+                  isOpen ? "w-5 opacity-0" : "w-3.5"
                 }`}
               />
               <span
-                className={`h-0.5 bg-current transition-all duration-300 ${
-                  isOpen ? "w-5 sm:w-6 -rotate-45 -translate-y-1.5 sm:-translate-y-2" : "w-2"
+                className={`h-px bg-current transition-all duration-300 ${
+                  isOpen ? "w-5 -translate-y-[3.5px] -rotate-45" : "w-2.5"
                 }`}
               />
-            </div>
+            </span>
           </button>
         </div>
-      </motion.nav>
+      </motion.header>
 
-      {/* --- MOBILE MENU OVERLAY --- */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-slate-950/95 backdrop-blur-xl md:hidden flex flex-col items-center justify-center px-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 z-40 flex flex-col bg-[#030712]/95 backdrop-blur-2xl md:hidden"
           >
-            {/* Background Decor */}
-            <div className="absolute top-0 right-0 w-40 sm:w-64 h-40 sm:h-64 bg-emerald-500/10 blur-2xl sm:blur-3xl rounded-full -translate-y-1/2 translate-x-1/2"></div>
-            <div className="absolute bottom-0 left-0 w-40 sm:w-64 h-40 sm:h-64 bg-cyan-500/10 blur-2xl sm:blur-3xl rounded-full translate-y-1/2 -translate-x-1/2"></div>
-
-            <nav className="relative z-10 w-full">
-              <ul className="flex flex-col gap-4 sm:gap-5 items-center">
-                {navItems.map((item, index) => (
-                  <motion.li
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 + index * 0.08 }}
-                  >
-                    <Link
-                      href={item.href}
-                      onClick={() => setIsOpen(false)}
-                      className="text-xl sm:text-2xl md:text-3xl font-bold text-slate-300 hover:text-emerald-400 transition-colors"
-                    >
-                      {item.name}
-                    </Link>
-                  </motion.li>
-                ))}
-
-                <motion.li
-                  initial={{ opacity: 0, y: 20 }}
+            <div className="flex flex-1 flex-col items-center justify-center gap-2 px-6">
+              {[
+                { name: "Home", href: "/" },
+                ...navItems,
+              ].map((item, i) => (
+                <motion.div
+                  key={item.href}
+                  initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 + navItems.length * 0.08 }}
-                  className="mt-4 sm:mt-6"
+                  transition={{ delay: 0.05 + i * 0.05 }}
                 >
                   <Link
-                    href="/images/Elvin-Resume-template.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-5 sm:px-6 py-2 sm:py-2.5 rounded-full bg-emerald-500 text-slate-950 font-bold text-sm sm:text-base hover:bg-emerald-400 transition-colors"
+                    href={item.href}
                     onClick={() => setIsOpen(false)}
+                    className={`block py-3 text-2xl font-semibold tracking-tight ${
+                      isActive(item.href) ? "text-emerald-400" : "text-slate-200"
+                    }`}
                   >
-                    Download Resume
+                    {item.name}
                   </Link>
-                </motion.li>
-              </ul>
-            </nav>
+                </motion.div>
+              ))}
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="mt-6"
+              >
+                <Link
+                  href={site.resume}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setIsOpen(false)}
+                  className="inline-flex rounded-full bg-emerald-500 px-6 py-3 text-sm font-semibold text-slate-950"
+                >
+                  Download Resume
+                </Link>
+              </motion.div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

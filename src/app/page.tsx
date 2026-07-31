@@ -1,10 +1,12 @@
 "use client";
+
 import { motion } from "framer-motion";
 import Hero from "../components/Hero";
+import GitHubActivity from "../components/GitHubActivity";
 import AboutSection from "../components/AboutSection";
 import SkillsSection from "../components/SkillsSection";
 import ProjectsPreview from "../components/ProjectsPreview";
-import Testimonials from "../components/Testimonials";
+import ExperienceSection from "../components/ExperienceSection";
 import ContactSection from "../components/ContactSection";
 
 export default function Home() {
@@ -12,14 +14,15 @@ export default function Home() {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-      className="bg-gradient-to-b from-gray-900 to-gray-800 text-white"
+      transition={{ duration: 0.4 }}
+      className="bg-[#030712] text-slate-200"
     >
       <Hero />
-      <AboutSection />
-      <SkillsSection />
+      <GitHubActivity />
       <ProjectsPreview />
-      <Testimonials />
+      <AboutSection />
+      <ExperienceSection />
+      <SkillsSection />
       <ContactSection />
     </motion.div>
   );

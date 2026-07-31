@@ -1,300 +1,283 @@
 "use client";
+
 import { motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
 import {
   FaEnvelope,
   FaGithub,
-  FaLinkedin,
   FaFileDownload,
-  FaAws,
 } from "react-icons/fa";
 import {
-  SiFirebase,
-  SiGraphql,
   SiJavascript,
-  SiLangchain,
   SiNextdotjs,
   SiNodedotjs,
   SiPostgresql,
+  SiPrisma,
   SiReact,
-  SiRedux,
   SiTailwindcss,
   SiTypescript,
+  SiDocker,
+  SiFirebase,
 } from "react-icons/si";
+import { experience, principles, site } from "@/data/site";
+import { githubProfile } from "@/data/github";
+import { fadeUp, stagger } from "@/lib/motion";
 
-// --- DATA ---
 const skills = [
-  { name: "JavaScript", icon: SiJavascript },
   { name: "TypeScript", icon: SiTypescript },
   { name: "React", icon: SiReact },
   { name: "Next.js", icon: SiNextdotjs },
-  { name: "Tailwind", icon: SiTailwindcss },
   { name: "Node.js", icon: SiNodedotjs },
   { name: "PostgreSQL", icon: SiPostgresql },
-  { name: "Langchain", icon: SiLangchain },
+  { name: "Prisma", icon: SiPrisma },
+  { name: "Tailwind", icon: SiTailwindcss },
+  { name: "JavaScript", icon: SiJavascript },
+  { name: "Docker", icon: SiDocker },
   { name: "Firebase", icon: SiFirebase },
-  { name: "Redux", icon: SiRedux },
-  { name: "GraphQL", icon: SiGraphql },
-  { name: "AWS", icon: FaAws },
 ];
-
-const endorsements = [
-  {
-    text: "Elvin delivered our app ahead of schedule with flawless performance!",
-    author: "Julie Jayden",
-    role: "CEO, TechSpeedPart",
-  },
-  {
-    text: "His attention to detail and creative solutions are unmatched.",
-    author: "James Weed",
-    role: "Product Manager",
-  },
-];
-
-// --- ANIMATION VARIANTS ---
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
-};
 
 export default function About() {
   return (
-    <section className="relative min-h-screen bg-slate-950 overflow-hidden py-16 sm:py-20 md:py-24">
-      {/* --- BACKGROUND LAYERS --- */}
-      {/* 1. Grid */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+    <section className="relative min-h-screen overflow-hidden bg-[#030712] pb-20 pt-28 sm:pt-32">
+      <div className="pointer-events-none absolute inset-0 bg-radial-fade" />
+      <div className="pointer-events-none absolute inset-0 bg-grid opacity-40" />
 
-      {/* 2. Atmospheric Blurs (Emerald & Cyan) */}
-      <div className="absolute top-0 right-0 w-[300px] sm:w-[400px] md:w-[600px] h-[300px] sm:h-[400px] md:h-[600px] bg-emerald-500/10 blur-[80px] sm:blur-[100px] md:blur-[120px] rounded-full pointer-events-none mix-blend-screen"></div>
-      <div className="absolute bottom-0 left-0 w-[250px] sm:w-[350px] md:w-[500px] h-[250px] sm:h-[350px] md:h-[500px] bg-cyan-500/10 blur-[80px] sm:blur-[100px] md:blur-[120px] rounded-full pointer-events-none mix-blend-screen"></div>
-
-      <div className="container relative z-10 mx-auto px-4 sm:px-6">
-        {/* --- HEADER --- */}
+      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="max-w-4xl mx-auto text-center mb-12 sm:mb-16 md:mb-20"
+          initial="hidden"
+          animate="visible"
+          variants={stagger}
+          className="mb-14 max-w-3xl sm:mb-16"
         >
-          <span className="inline-block py-1 px-2.5 sm:px-3 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono text-xs sm:text-sm tracking-widest uppercase mb-3 sm:mb-4">
-            // The Developer
-          </span>
-          <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-slate-100 mb-4 sm:mb-6 tracking-tight leading-tight">
-            I transform complex problems into{" "}
+          <motion.p
+            variants={fadeUp}
+            className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-emerald-400/90"
+          >
+            About
+          </motion.p>
+          <motion.h1
+            variants={fadeUp}
+            className="text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-5xl"
+          >
+            A builder who measures work in{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">
-              elegant solutions.
+              shipped systems
             </span>
-          </h1>
+            , not slides.
+          </motion.h1>
+          <motion.p
+            variants={fadeUp}
+            className="mt-5 text-base leading-relaxed text-slate-400 sm:text-lg"
+          >
+            {site.tagline}
+          </motion.p>
         </motion.div>
 
-        {/* --- MAIN CONTENT LAYOUT --- */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 mb-12 sm:mb-16 md:mb-20">
-          {/* LEFT: THE STORY (Span 7) */}
+        <div className="mb-16 grid gap-8 lg:grid-cols-12 lg:gap-10">
+          {/* Story */}
           <motion.div
-            className="lg:col-span-7 flex flex-col gap-4 sm:gap-6"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            className="lg:col-span-7 space-y-6"
           >
-            {/* Bio Card */}
-            <motion.div
-              variants={itemVariants}
-              className="bg-slate-900/50 backdrop-blur-md border border-white/10 rounded-xl sm:rounded-2xl p-5 sm:p-6 md:p-8 hover:border-emerald-500/30 transition-colors duration-500"
-            >
-              <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-4 sm:mb-6 flex items-center gap-2 sm:gap-3">
-                <span className="w-1.5 sm:w-2 h-6 sm:h-8 bg-emerald-500 rounded-full"></span>
-                Behind the Code
-              </h2>
+            <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6 sm:p-8">
+              <div className="mb-6 flex items-center gap-4">
+                <div className="relative h-16 w-16 overflow-hidden rounded-xl border border-white/10">
+                  <Image
+                    src="/images/potrait5.webp"
+                    alt={site.name}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div>
+                  <h2 className="text-lg font-semibold text-white">{site.name}</h2>
+                  <p className="text-sm text-emerald-400/90">{site.title}</p>
+                  <p className="text-xs text-slate-500">{site.company}</p>
+                </div>
+              </div>
 
-              <div className="space-y-3 sm:space-y-4 text-slate-300 text-sm sm:text-base md:text-lg leading-relaxed">
+              <div className="space-y-4 text-sm leading-relaxed text-slate-400 sm:text-[15px]">
                 <p>
-                  Hi, I&apos;m <strong className="text-emerald-400">Elvin</strong>.
-                  I&apos;m a Full-Stack Engineer with over{" "}
-                  <span className="text-white font-medium">
-                    4 years of experience
-                  </span>{" "}
-                  crafting seamless digital ecosystems.
+                  I started like most developers — small apps that broke in
+                  entertaining ways. The difference is I kept shipping until the
+                  work became systems that real organizations depend on.
                 </p>
                 <p>
-                  My journey began with a quirky todo app that crashed every 5
-                  minutes—a humbling lesson in resilience. Since then, I&apos;ve
-                  scaled my skills to build high-performance applications using{" "}
-                  <span className="text-slate-100 border-b border-emerald-500/30">
-                    React, Node.js, and AI integrations
-                  </span>
-                  .
+                  Today I&apos;m founding engineer at{" "}
+                  <strong className="font-medium text-slate-200">
+                    {site.company}
+                  </strong>
+                  , building multi-product software for hotels, marketplaces,
+                  education, and local business operations. On the side (and
+                  often overlapping) I deliver client platforms end-to-end:
+                  auth, payments, realtime, media, and admin tooling.
                 </p>
                 <p>
-                  When I&apos;m not debugging, I&apos;m photographing street art or
-                  perfecting my pour-over coffee. I believe in code that is{" "}
-                  <span className="text-white italic">
-                    clean, accessible, and remarkably fast.
-                  </span>
+                  On GitHub, that shows up as{" "}
+                  <strong className="font-medium text-slate-200">
+                    {githubProfile.totalContributions.toLocaleString()}{" "}
+                    contributions
+                  </strong>{" "}
+                  in the last year across{" "}
+                  <strong className="font-medium text-slate-200">
+                    {githubProfile.totalRepos} repositories
+                  </strong>
+                  — most of the heavy lifting in private production code.
+                </p>
+                <p>
+                  I study Computer Science at Moi University and am an Equity
+                  Leadership Program alumnus. I believe clean architecture and
+                  clear UX are the same job viewed from different angles.
                 </p>
               </div>
-            </motion.div>
+            </div>
 
-            {/* Endorsements (Mini Testimonials) */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-              {endorsements.map((item, idx) => (
-                <motion.div
-                  key={idx}
-                  variants={itemVariants}
-                  className="bg-slate-900/30 border border-white/5 p-4 sm:p-5 md:p-6 rounded-lg sm:rounded-xl hover:bg-slate-800/50 transition-colors"
+            <div className="grid gap-3 sm:grid-cols-3">
+              {principles.map((p) => (
+                <div
+                  key={p.title}
+                  className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4"
                 >
-                  <p className="text-slate-400 text-xs sm:text-sm italic mb-3 sm:mb-4">
-                    &quot;{item.text}&quot;
+                  <h3 className="text-sm font-semibold text-white">{p.title}</h3>
+                  <p className="mt-2 text-xs leading-relaxed text-slate-500">
+                    {p.body}
                   </p>
-                  <div>
-                    <p className="text-emerald-400 font-bold text-xs sm:text-sm">
-                      {item.author}
-                    </p>
-                    <p className="text-slate-500 text-[10px] sm:text-xs uppercase tracking-wider">
-                      {item.role}
-                    </p>
-                  </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           </motion.div>
 
-          {/* RIGHT: THE TOOLKIT (Span 5) */}
+          {/* Toolkit + facts */}
           <motion.div
-            className="lg:col-span-5"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="lg:col-span-5 space-y-6"
           >
-            <motion.div
-              variants={itemVariants}
-              className="bg-slate-900/50 backdrop-blur-md border border-white/10 rounded-xl sm:rounded-2xl p-5 sm:p-6 md:p-8 h-full"
-            >
-              <h3 className="text-base sm:text-lg md:text-xl font-bold text-white mb-4 sm:mb-6 flex items-center gap-2">
-                <SiJavascript className="text-emerald-500 text-lg sm:text-xl" />
-                Technical Arsenal
+            <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-6 sm:p-8">
+              <h3 className="mb-5 text-sm font-semibold uppercase tracking-widest text-slate-500">
+                Core stack
               </h3>
-
-              <div className="grid grid-cols-3 gap-2 sm:gap-3">
-                {skills.map((skill, index) => (
-                  <motion.div
-                    key={index}
-                    whileHover={{
-                      scale: 1.05,
-                      backgroundColor: "rgba(16, 185, 129, 0.1)",
-                    }}
-                    className="flex flex-col items-center justify-center gap-1.5 sm:gap-2 p-2 sm:p-3 rounded-lg sm:rounded-xl bg-slate-950 border border-white/5 cursor-default group transition-colors"
+              <div className="grid grid-cols-5 gap-2 sm:grid-cols-5">
+                {skills.map((skill) => (
+                  <div
+                    key={skill.name}
+                    className="flex flex-col items-center gap-1.5 rounded-xl border border-white/[0.05] bg-slate-950/50 p-2.5 transition-colors hover:border-emerald-500/25"
+                    title={skill.name}
                   >
-                    <skill.icon className="text-xl sm:text-2xl md:text-3xl text-slate-500 group-hover:text-emerald-400 transition-colors duration-300" />
-                    <span className="text-[8px] sm:text-[10px] font-medium text-slate-400 group-hover:text-slate-200 uppercase tracking-wide text-center">
-                      {skill.name}
+                    <skill.icon className="text-xl text-slate-400" />
+                    <span className="text-[8px] uppercase tracking-wide text-slate-500">
+                      {skill.name.split(" ")[0]}
                     </span>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
-
-              <div className="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-white/5">
-                <div className="flex items-center justify-between text-xs sm:text-sm">
-                  <span className="text-slate-400">Current Focus:</span>
-                  <span className="text-emerald-400 font-mono">
-                    Agentic AI & RAG
-                  </span>
-                </div>
+              <div className="mt-6 flex items-center justify-between border-t border-white/[0.06] pt-4 text-sm">
+                <span className="text-slate-500">Current focus</span>
+                <span className="font-mono text-xs text-emerald-400">
+                  Product systems · Realtime · AI tooling
+                </span>
               </div>
-            </motion.div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3">
+              {[
+                {
+                  v: githubProfile.totalContributions.toLocaleString(),
+                  l: "Contributions / yr",
+                },
+                { v: String(githubProfile.totalRepos), l: "Repositories" },
+                { v: `${site.yearsShipping} yrs`, l: "Shipping software" },
+                { v: "18+", l: "Live products" },
+              ].map((s) => (
+                <div
+                  key={s.l}
+                  className="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4"
+                >
+                  <p className="text-xl font-semibold text-white">{s.v}</p>
+                  <p className="mt-0.5 text-[11px] text-slate-500">{s.l}</p>
+                </div>
+              ))}
+            </div>
           </motion.div>
         </div>
 
-        {/* --- BOTTOM CTA --- */}
+        {/* Experience timeline */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="flex flex-col items-center justify-center gap-5 sm:gap-8 border-t border-white/5 pt-12 sm:pt-16"
+          className="mb-16"
         >
-          <p className="text-lg sm:text-xl md:text-2xl text-slate-300 text-center max-w-2xl px-2">
-            Ready to create something{" "}
-            <span className="text-white font-bold">extraordinary</span>?
-          </p>
-
-          <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4 w-full sm:w-auto px-4 sm:px-0">
-            {/* Primary Contact */}
-            <a
-              href="mailto:omondielvin@gmail.com"
-              className="group relative px-6 sm:px-8 py-3 bg-emerald-500 text-slate-950 font-bold text-sm sm:text-base rounded-full overflow-hidden transition-transform hover:scale-105 text-center"
-            >
-              <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:animate-shimmer" />
-              <span className="flex items-center justify-center gap-2 relative z-10">
-                <FaEnvelope className="text-sm sm:text-base" /> Get In Touch
-              </span>
-            </a>
-
-            {/* Secondary Actions */}
-            <SocialBtn
-              href="/images/Elvin-Resume-template.pdf"
-              icon={<FaFileDownload />}
-              text="Resume"
-            />
-            <SocialBtn
-              href="https://linkedin.com"
-              icon={<FaLinkedin />}
-              text="LinkedIn"
-            />
-            <SocialBtn
-              href="https://github.com/Elvinoacer"
-              icon={<FaGithub />}
-              text="GitHub"
-            />
-          </div>
+          <h2 className="mb-8 text-2xl font-semibold text-white">Experience</h2>
+          <ol className="space-y-0 border-l border-white/[0.08] pl-6 sm:pl-8">
+            {experience.map((item) => (
+              <li key={item.role + item.org} className="relative pb-10 last:pb-0">
+                <span className="absolute -left-[1.9rem] top-1.5 h-2.5 w-2.5 rounded-full border-2 border-emerald-400 bg-[#030712] sm:-left-[2.4rem]" />
+                <div className="flex flex-wrap items-baseline gap-x-3">
+                  <h3 className="text-base font-semibold text-white">
+                    {item.role}
+                  </h3>
+                  <span className="font-mono text-xs text-slate-500">
+                    {item.period}
+                  </span>
+                </div>
+                <p className="mt-0.5 text-sm text-emerald-400/90">
+                  {item.org} · {item.location}
+                </p>
+                <ul className="mt-3 space-y-1.5">
+                  {item.points.map((pt) => (
+                    <li key={pt} className="text-sm text-slate-400">
+                      {pt}
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ol>
         </motion.div>
+
+        {/* CTA */}
+        <div className="flex flex-col items-center gap-6 border-t border-white/[0.06] pt-12 text-center">
+          <p className="max-w-lg text-lg text-slate-300">
+            Want someone who ships end-to-end and owns the outcome?
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <a
+              href={`mailto:${site.email}`}
+              className="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
+            >
+              <FaEnvelope /> Get in touch
+            </a>
+            <a
+              href={site.resume}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-5 py-3 text-sm text-slate-300 transition hover:border-emerald-500/30 hover:text-white"
+            >
+              <FaFileDownload /> Resume
+            </a>
+            <a
+              href={site.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-5 py-3 text-sm text-slate-300 transition hover:border-emerald-500/30 hover:text-white"
+            >
+              <FaGithub /> GitHub
+            </a>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-5 py-3 text-sm text-slate-300 transition hover:border-emerald-500/30 hover:text-white"
+            >
+              Contact form
+            </Link>
+          </div>
+        </div>
       </div>
-
-      <style jsx>{`
-        @keyframes shimmer {
-          0% {
-            transform: translateX(-100%);
-          }
-          100% {
-            transform: translateX(100%);
-          }
-        }
-        .animate-shimmer {
-          animation: shimmer 2s linear infinite;
-        }
-      `}</style>
     </section>
-  );
-}
-
-// Helper Component for Social Buttons
-function SocialBtn({
-  href,
-  icon,
-  text,
-}: {
-  href: string;
-  icon: React.ReactNode;
-  text: string;
-}) {
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 bg-slate-900 border border-white/10 rounded-full text-slate-300 font-medium text-sm sm:text-base hover:bg-slate-800 hover:text-white hover:border-emerald-500/30 transition-all duration-300"
-    >
-      <span className="text-base sm:text-lg">{icon}</span>
-      <span>{text}</span>
-    </a>
   );
 }

@@ -1,203 +1,157 @@
 "use client";
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 
-// --- DATA TRANSFORMATION ---
-// I have consolidated your categories into 4 clean tabs for better UX.
-const allSkills = {
-  frontend: [
-    { name: "React", level: "Expert" },
-    { name: "Next.js", level: "Expert" },
-    { name: "TypeScript", level: "Expert" },
-    { name: "Tailwind CSS", level: "Expert" },
-    { name: "Three.js", level: "Advanced" },
-    { name: "GSAP", level: "Advanced" },
-    { name: "Framer Motion", level: "Advanced" },
-    { name: "Redux Toolkit", level: "Advanced" },
-    { name: "Zustand", level: "Advanced" },
-    { name: "React Native", level: "Proficient" },
-  ],
-  backend: [
-    { name: "Node.js", level: "Expert" },
-    { name: "Express", level: "Advanced" },
-    { name: "PostgreSQL", level: "Advanced" },
-    { name: "MongoDB", level: "Advanced" },
-    { name: "Redis", level: "Proficient" },
-    { name: "Prisma", level: "Advanced" },
-    { name: "GraphQL", level: "Proficient" },
-    { name: "REST API", level: "Expert" },
-    { name: "WebSockets", level: "Proficient" },
-    { name: "LangChain", level: "Intermediate" },
-  ],
-  devops: [
-    { name: "Docker", level: "Advanced" },
-    { name: "AWS", level: "Proficient" },
-    { name: "CI/CD", level: "Advanced" },
-    { name: "Linux", level: "Advanced" },
-    { name: "Nginx", level: "Proficient" },
-    { name: "Kubernetes", level: "Intermediate" },
-    { name: "Terraform", level: "Intermediate" },
-    { name: "GitHub Actions", level: "Advanced" },
-  ],
-  security: [
-    { name: "OAuth 2.0", level: "Advanced" },
-    { name: "JWT", level: "Expert" },
-    { name: "NextAuth", level: "Advanced" },
-    { name: "OpenID", level: "Proficient" },
-  ],
-};
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
-const tabs = [
-  { id: "frontend", label: "Frontend", mobileLabel: "Frontend" },
-  { id: "backend", label: "Backend & Data", mobileLabel: "Backend" },
-  { id: "devops", label: "DevOps & Cloud", mobileLabel: "DevOps" },
-  { id: "security", label: "Security", mobileLabel: "Security" },
+const skillGroups = {
+  frontend: {
+    label: "Frontend",
+    items: [
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Three.js",
+      "GSAP",
+      "Zustand",
+      "TanStack Query",
+      "React Native",
+    ],
+  },
+  backend: {
+    label: "Backend & Data",
+    items: [
+      "Node.js",
+      "Express",
+      "PostgreSQL",
+      "Prisma",
+      "MongoDB",
+      "Redis",
+      "GraphQL",
+      "REST",
+      "Socket.IO",
+      "LangChain",
+    ],
+  },
+  product: {
+    label: "Product & Ops",
+    items: [
+      "Auth (NextAuth / Clerk / Kinde)",
+      "Payments (IntaSend / M-Pesa)",
+      "Cloudinary",
+      "AWS S3",
+      "Firebase",
+      "Vercel",
+      "CI/CD",
+      "Docker",
+      "Observability",
+      "GDPR-aware design",
+    ],
+  },
+} as const;
+
+type TabId = keyof typeof skillGroups;
+
+const marquee = [
+  "Next.js 16",
+  "React 19",
+  "TypeScript",
+  "PostgreSQL",
+  "Prisma",
+  "Socket.IO",
+  "IntaSend",
+  "Jitsi",
+  "Cloudinary",
+  "TanStack Query",
+  "Framer Motion",
+  "Docker",
 ];
 
 export default function SkillsSection() {
-  const [activeTab, setActiveTab] = useState("frontend");
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 640);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
+  const [active, setActive] = useState<TabId>("frontend");
 
   return (
-    <section className="relative py-16 sm:py-20 md:py-24 bg-slate-950 overflow-hidden">
-      {/* Background Decor */}
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent"></div>
-      <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-emerald-500/10 to-transparent"></div>
+    <section id="skills" className="relative overflow-hidden py-20 sm:py-24">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent" />
 
-      <div className="container mx-auto px-4 sm:px-6 md:px-8 relative z-10">
-        {/* --- SECTION HEADER --- */}
-        <div className="text-center mb-10 sm:mb-12 md:mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-block mb-2 sm:mb-3"
-          >
-            <span className="text-emerald-400 font-mono text-xs sm:text-sm tracking-widest uppercase bg-emerald-500/10 px-2.5 sm:px-3 py-1 rounded-full border border-emerald-500/20">
-              Tech Stack
-            </span>
-          </motion.div>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-200"
-          >
-            My Development <span className="text-emerald-400">Arsenal</span>
-          </motion.h2>
+      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="mb-12 text-center sm:mb-14">
+          <p className="mb-2 font-mono text-xs uppercase tracking-[0.2em] text-emerald-400/90">
+            Stack
+          </p>
+          <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+            Tools I reach for daily
+          </h2>
+          <p className="mx-auto mt-3 max-w-xl text-sm text-slate-400 sm:text-base">
+            Chosen for shipping speed and production durability — not résumé
+            padding.
+          </p>
         </div>
 
-        {/* --- INFINITE MARQUEE (Top Tier Tech) - Hidden on small mobile --- */}
-        <div className="relative w-full max-w-5xl mx-auto h-12 sm:h-16 md:h-20 mb-12 sm:mb-16 md:mb-20 overflow-hidden mask-linear-fade hidden sm:block">
-          {/* Mask for fading edges */}
-          <div className="absolute inset-0 z-10 pointer-events-none bg-[linear-gradient(to_right,#020617,transparent_20%,transparent_80%,#020617)]"></div>
-
-          <motion.div
-            className="flex gap-6 sm:gap-8 md:gap-12 items-center absolute left-0 top-0 h-full whitespace-nowrap"
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{ ease: "linear", duration: 25, repeat: Infinity }}
-          >
-            {/* Doubled list for seamless loop */}
-            {[
-              ...allSkills.frontend,
-              ...allSkills.backend,
-              ...allSkills.frontend,
-              ...allSkills.backend,
-            ].map((tech, i) => (
-              <div
-                key={i}
-                className="flex items-center gap-2 text-lg sm:text-xl md:text-2xl font-bold text-slate-500 opacity-50 hover:opacity-100 hover:text-emerald-400 transition-all cursor-default"
+        {/* Marquee */}
+        <div className="relative mb-12 hidden overflow-hidden sm:block">
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-[#030712] to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-[#030712] to-transparent" />
+          <div className="flex w-max animate-marquee gap-8 py-2">
+            {[...marquee, ...marquee].map((t, i) => (
+              <span
+                key={`${t}-${i}`}
+                className="text-sm font-medium tracking-wide text-slate-600"
               >
-                <span>{tech.name}</span>
-                <span className="w-1 h-1 rounded-full bg-slate-700"></span>
-              </div>
+                {t}
+                <span className="ml-8 text-slate-800">·</span>
+              </span>
             ))}
-          </motion.div>
+          </div>
         </div>
 
-        {/* --- TABBED NAVIGATION --- */}
-        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4 mb-8 sm:mb-10 md:mb-12">
-          {tabs.map((tab) => (
+        {/* Tabs */}
+        <div className="mb-8 flex flex-wrap justify-center gap-2">
+          {(Object.keys(skillGroups) as TabId[]).map((id) => (
             <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`relative px-2.5 sm:px-4 md:px-6 py-1.5 sm:py-2.5 md:py-3 rounded-lg sm:rounded-xl text-[10px] sm:text-sm font-medium transition-all duration-300 ${
-                activeTab === tab.id
+              key={id}
+              type="button"
+              onClick={() => setActive(id)}
+              className={`relative rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+                active === id
                   ? "text-slate-950"
-                  : "text-slate-400 hover:text-white hover:bg-white/5"
+                  : "text-slate-400 hover:text-slate-200"
               }`}
             >
-              {activeTab === tab.id && (
-                <motion.div
-                  layoutId="activeTab"
-                  className="absolute inset-0 bg-emerald-400 rounded-lg sm:rounded-xl"
-                  transition={{ type: "spring", duration: 0.6 }}
+              {active === id && (
+                <motion.span
+                  layoutId="skill-tab"
+                  className="absolute inset-0 rounded-full bg-emerald-400"
+                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
                 />
               )}
-              <span className="relative z-10">
-                {isMobile ? tab.mobileLabel : tab.label}
-              </span>
+              <span className="relative z-10">{skillGroups[id].label}</span>
             </button>
           ))}
         </div>
 
-        {/* --- SKILL GRID --- */}
-        <div className="max-w-5xl mx-auto min-h-[300px] sm:min-h-[350px] md:min-h-[400px]">
+        <div className="mx-auto min-h-[200px] max-w-4xl">
           <AnimatePresence mode="wait">
             <motion.div
-              key={activeTab}
-              initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              exit={{ opacity: 0, y: -20, filter: "blur(10px)" }}
-              transition={{ duration: 0.4 }}
-              className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4"
+              key={active}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.25 }}
+              className="flex flex-wrap justify-center gap-2 sm:gap-2.5"
             >
-              {allSkills[activeTab as keyof typeof allSkills].map(
-                (skill, index) => (
-                  <motion.div
-                    key={skill.name}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: index * 0.05 }}
-                    className="group relative p-2.5 sm:p-4 rounded-lg sm:rounded-xl bg-slate-900/40 border border-white/5 hover:border-emerald-500/30 overflow-hidden transition-colors duration-300"
-                  >
-                    {/* Hover Glow Effect */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-                    <div className="relative z-10 flex flex-col items-start gap-1 sm:gap-2">
-                      <h3 className="text-xs sm:text-base md:text-lg font-bold text-slate-200 group-hover:text-emerald-300 transition-colors">
-                        {skill.name}
-                      </h3>
-                      <div className="flex items-center gap-1.5 sm:gap-2 w-full">
-                        <div className="h-1 flex-1 bg-slate-800 rounded-full overflow-hidden">
-                          <div
-                            className={`h-full bg-emerald-500/50 group-hover:bg-emerald-400 transition-all duration-500`}
-                            style={{
-                              width:
-                                skill.level === "Expert"
-                                  ? "95%"
-                                  : skill.level === "Advanced"
-                                  ? "75%"
-                                  : "50%",
-                            }}
-                          ></div>
-                        </div>
-                        <span className="text-[8px] sm:text-[10px] uppercase tracking-wider text-slate-500 font-medium whitespace-nowrap">
-                          {skill.level}
-                        </span>
-                      </div>
-                    </div>
-                  </motion.div>
-                )
-              )}
+              {skillGroups[active].items.map((skill, i) => (
+                <motion.span
+                  key={skill}
+                  initial={{ opacity: 0, scale: 0.96 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: i * 0.03 }}
+                  className="rounded-full border border-white/[0.07] bg-white/[0.03] px-3.5 py-2 text-sm text-slate-300 transition-colors hover:border-emerald-500/30 hover:text-emerald-300"
+                >
+                  {skill}
+                </motion.span>
+              ))}
             </motion.div>
           </AnimatePresence>
         </div>

@@ -1,200 +1,156 @@
 "use client";
+
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { TypeAnimation } from "react-type-animation";
-import { useState, useEffect } from "react";
+import { ArrowUpRight, ArrowDown } from "lucide-react";
+import { site } from "@/data/site";
+import { githubProfile } from "@/data/github";
+import { fadeUp, stagger } from "@/lib/motion";
+
+const stats = [
+  {
+    value: `${githubProfile.totalContributions.toLocaleString()}+`,
+    label: "GitHub contributions",
+    sub: "Last 12 months",
+  },
+  {
+    value: String(githubProfile.totalRepos),
+    label: "Repositories",
+    sub: "Public + private",
+  },
+  {
+    value: `${site.yearsShipping}`,
+    label: "Years shipping",
+    sub: "Production software",
+  },
+  {
+    value: "18+",
+    label: "Shipped products",
+    sub: "Live on the web",
+  },
+];
 
 export default function Hero() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  // Optional: Parallax effect on mouse move (disabled on mobile)
-  useEffect(() => {
-    if (isMobile) return;
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: e.clientX,
-        y: e.clientY,
-      });
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [isMobile]);
-
   return (
-    <>
-      <style jsx>{`
-        @keyframes shimmer {
-          0% {
-            transform: translateX(-100%);
-          }
-          100% {
-            transform: translateX(100%);
-          }
-        }
-        .animate-shimmer {
-          animation: shimmer 2s linear infinite;
-        }
-      `}</style>
+    <section className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden pt-24 pb-16 sm:pt-28 sm:pb-20">
+      <div className="pointer-events-none absolute inset-0 bg-radial-fade" />
+      <div className="pointer-events-none absolute inset-0 bg-grid opacity-60" />
+      <div className="pointer-events-none absolute left-1/2 top-24 h-64 w-64 -translate-x-1/2 rounded-full bg-emerald-500/10 blur-[100px]" />
 
-      <section className="relative flex flex-col items-center justify-center min-h-screen overflow-hidden bg-slate-950 text-white selection:bg-emerald-500/30 px-4 sm:px-6">
-        {/* --- BACKGROUND LAYERS --- */}
-
-        {/* 1. Grid Pattern with Mask */}
-        <div className="absolute inset-0 z-0 w-full h-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]">
-          <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[200px] w-[200px] sm:h-[250px] sm:w-[250px] md:h-[310px] md:w-[310px] rounded-full bg-emerald-500 opacity-20 blur-[80px] sm:blur-[100px]"></div>
-        </div>
-
-        {/* 2. Dynamic Glowing Orbs (Replaces static gradient) */}
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-4 sm:px-6">
         <motion.div
-          animate={
-            isMobile
-              ? {}
-              : {
-                  x: mousePosition.x * 0.05,
-                  y: mousePosition.y * 0.05,
-                }
-          }
-          className="absolute top-1/4 left-1/4 w-48 h-48 sm:w-72 sm:h-72 md:w-96 md:h-96 bg-emerald-500/20 rounded-full blur-2xl sm:blur-3xl -z-10 mix-blend-screen"
-        />
-        <motion.div
-          animate={
-            isMobile
-              ? {}
-              : {
-                  x: mousePosition.x * -0.05,
-                  y: mousePosition.y * -0.05,
-                }
-          }
-          className="absolute bottom-1/4 right-1/4 w-48 h-48 sm:w-72 sm:h-72 md:w-96 md:h-96 bg-cyan-500/20 rounded-full blur-2xl sm:blur-3xl -z-10 mix-blend-screen"
-        />
-
-        {/* 3. Subtle Grain Overlay (Adds texture/premium feel) */}
-        <div
-          className="absolute inset-0 opacity-[0.03] pointer-events-none z-0 mix-blend-overlay"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-          }}
-        ></div>
-
-        {/* --- CONTENT LAYER --- */}
-
-        <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center text-center">
-          {/* Greeting Pill */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mb-6 sm:mb-8"
-          >
-            <span className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 text-xs sm:text-sm font-medium tracking-wide backdrop-blur-sm">
-              <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-1.5 w-1.5 sm:h-2 sm:w-2 bg-emerald-500"></span>
+          variants={stagger}
+          initial="hidden"
+          animate="visible"
+          className="max-w-4xl"
+        >
+          <motion.div variants={fadeUp} className="mb-8 flex flex-wrap items-center gap-3">
+            <span className="inline-flex items-center gap-2 rounded-full border border-emerald-500/25 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-400">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
               </span>
-              Available for Hire
+              {site.availability}
+            </span>
+            <span className="font-mono text-[11px] tracking-wide text-slate-500 sm:text-xs">
+              {site.location} · {site.company}
             </span>
           </motion.div>
 
-          {/* Main Title */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-3 sm:mb-6"
+          <motion.p
+            variants={fadeUp}
+            className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-slate-500 sm:text-sm"
           >
-            <span className="block text-slate-300 mb-1 sm:mb-2 text-base sm:text-xl md:text-3xl lg:text-4xl font-normal">
-              I&apos;m
-            </span>
-            <span className="bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-slate-400">
-              Elvin Omondi
+            Founding Engineer · Full-Stack
+          </motion.p>
+
+          <motion.h1
+            variants={fadeUp}
+            className="text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl md:text-6xl lg:text-[4.25rem] lg:leading-[1.05]"
+          >
+            Elvin Omondi
+            <span className="text-emerald-400">.</span>
+            <span className="mt-2 block text-2xl font-normal text-slate-400 sm:text-3xl md:text-4xl lg:text-[2.5rem]">
+              I ship software people actually use.
             </span>
           </motion.h1>
 
-          {/* Type Animation */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="h-[28px] sm:h-[40px] md:h-[50px] lg:h-[60px] text-lg sm:text-2xl md:text-3xl lg:text-4xl font-light text-emerald-400 mb-5 sm:mb-8"
-          >
-            <TypeAnimation
-              sequence={[
-                "Full-Stack Developer",
-                1000,
-                "UI/UX Enthusiast",
-                1000,
-                "Problem Solver",
-                1000,
-              ]}
-              wrapper="span"
-              speed={50}
-              repeat={Infinity}
-            />
-          </motion.div>
-
-          {/* Description */}
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xs sm:text-base md:text-lg lg:text-xl max-w-2xl mx-auto mb-6 sm:mb-10 text-slate-400 leading-relaxed px-2 sm:px-0"
+            variants={fadeUp}
+            className="mt-6 max-w-2xl text-base leading-relaxed text-slate-400 sm:text-lg"
           >
-            Building digital experiences that blend{" "}
-            <span className="text-slate-100 font-medium">
-              technical excellence
+            {site.tagline}{" "}
+            <span className="text-slate-300">
+              {githubProfile.totalContributions.toLocaleString()} contributions
             </span>{" "}
-            with{" "}
-            <span className="text-slate-100 font-medium">visual mastery</span>.
-            Focused on performance, accessibility, and clean code.
+            on GitHub in the last year — most of them in production systems, not
+            toy repos.
           </motion.p>
 
-          {/* Buttons */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center w-full max-w-[200px] sm:max-w-none mx-auto"
+            variants={fadeUp}
+            className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center"
           >
             <Link
               href="/projects"
-              className="group relative px-4 sm:px-8 py-2.5 sm:py-4 rounded-lg sm:rounded-xl bg-emerald-500 text-slate-950 font-bold text-xs sm:text-base md:text-lg overflow-hidden transition-all hover:scale-105 hover:shadow-[0_0_40px_-10px_rgba(16,185,129,0.5)] w-full sm:w-auto text-center"
+              className="group inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-500 px-6 py-3.5 text-sm font-semibold text-slate-950 transition-all hover:bg-emerald-400 hover:shadow-[0_0_40px_-10px_rgba(52,211,153,0.55)]"
             >
-              <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:animate-shimmer" />
-              <span>View Work</span>
+              View selected work
+              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
-
             <Link
               href="/contact"
-              className="px-4 sm:px-8 py-2.5 sm:py-4 rounded-lg sm:rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm text-white font-medium text-xs sm:text-base md:text-lg transition-all hover:bg-white/10 hover:scale-105 hover:border-white/20 w-full sm:w-auto text-center"
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-6 py-3.5 text-sm font-medium text-slate-200 transition-all hover:border-white/20 hover:bg-white/[0.06]"
             >
-              Contact Me
+              Start a conversation
             </Link>
+            <a
+              href={site.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-2 py-3.5 text-sm text-slate-500 transition-colors hover:text-slate-200 sm:ml-1"
+            >
+              GitHub
+              <ArrowUpRight className="h-3.5 w-3.5" />
+            </a>
           </motion.div>
-        </div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 1 }}
-          className="absolute bottom-6 sm:bottom-10 left-1/2 -translate-x-1/2"
-        >
-          <div className="flex flex-col items-center gap-1.5 sm:gap-2">
-            <span className="text-[10px] sm:text-xs uppercase tracking-widest text-slate-500">
-              Scroll
-            </span>
-            <div className="w-[1px] h-8 sm:h-12 bg-gradient-to-b from-emerald-500 to-transparent"></div>
-          </div>
         </motion.div>
-      </section>
-    </>
+
+        {/* Stats strip */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.45, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-16 grid grid-cols-2 gap-3 sm:mt-20 sm:grid-cols-4 sm:gap-4"
+        >
+          {stats.map((stat) => (
+            <div
+              key={stat.label}
+              className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-4 sm:p-5"
+            >
+              <p className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+                {stat.value}
+              </p>
+              <p className="mt-1 text-xs font-medium text-slate-300 sm:text-sm">
+                {stat.label}
+              </p>
+              <p className="mt-0.5 text-[11px] text-slate-500">{stat.sub}</p>
+            </div>
+          ))}
+        </motion.div>
+      </div>
+
+      <motion.a
+        href="#work"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1 }}
+        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-slate-600 transition-colors hover:text-slate-400 sm:flex"
+        aria-label="Scroll to work"
+      >
+        <span className="text-[10px] uppercase tracking-[0.25em]">Scroll</span>
+        <ArrowDown className="h-3.5 w-3.5 animate-bounce" />
+      </motion.a>
+    </section>
   );
 }

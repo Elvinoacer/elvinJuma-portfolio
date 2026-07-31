@@ -1,122 +1,131 @@
 "use client";
-import { projects } from "@/data/projects"; // Keep your data source
+
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react"; // Make sure to install lucide-react or use svg below
+import { ArrowUpRight } from "lucide-react";
+import { featuredProjects } from "@/data/projects";
+import { fadeUp } from "@/lib/motion";
 
 export default function ProjectsPreview() {
   return (
-    <section
-      id="projects"
-      className="relative py-16 sm:py-20 md:py-24 bg-slate-950 overflow-hidden"
-    >
-      {/* Background Elements (Consistent with Hero) */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-48 sm:w-72 md:w-96 h-48 sm:h-72 md:h-96 bg-emerald-500/10 blur-[60px] sm:blur-[80px] md:blur-[100px] rounded-full pointer-events-none"></div>
+    <section id="work" className="relative py-20 sm:py-24">
+      <div className="pointer-events-none absolute inset-0 bg-grid opacity-25" />
+      <div className="pointer-events-none absolute left-0 top-1/3 h-72 w-72 rounded-full bg-emerald-500/5 blur-[100px]" />
 
-      <div className="container relative z-10 mx-auto px-4 sm:px-6">
-        {/* --- HEADER --- */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 sm:mb-12 md:mb-16 gap-4 sm:gap-6">
+      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="mb-12 flex flex-col gap-4 sm:mb-14 sm:flex-row sm:items-end sm:justify-between">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
-            className="max-w-2xl"
+            variants={fadeUp}
           >
-            <span className="text-emerald-400 font-mono text-xs sm:text-sm tracking-widest uppercase mb-2 block">
-              // Selected Works
-            </span>
-            <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-slate-100 mb-2 sm:mb-4">
-              Digital products{" "}
-              <span className="text-slate-500">that deliver results.</span>
+            <p className="mb-2 font-mono text-xs uppercase tracking-[0.2em] text-emerald-400/90">
+              Selected work
+            </p>
+            <h2 className="max-w-xl text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+              Products in production.
+              <span className="font-normal text-slate-500">
+                {" "}
+                Not just demos.
+              </span>
             </h2>
           </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+          <Link
+            href="/projects"
+            className="group inline-flex items-center gap-1.5 text-sm text-slate-400 transition-colors hover:text-emerald-400"
           >
-            <Link
-              href="/projects"
-              className="group flex items-center gap-2 text-sm sm:text-base text-slate-300 hover:text-emerald-400 transition-colors duration-300 pb-1 border-b border-transparent hover:border-emerald-400"
-            >
-              View Full Portfolio
-              <ArrowUpRight className="w-3 h-3 sm:w-4 sm:h-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-            </Link>
-          </motion.div>
+            All projects
+            <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </Link>
         </div>
 
-        {/* --- PROJECTS GRID --- */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-          {projects.slice(0, 3).map((project, index) => (
-            <motion.div
+        <div className="grid gap-5 sm:gap-6 lg:grid-cols-2">
+          {featuredProjects.map((project, index) => (
+            <motion.article
               key={project.id}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="group relative flex flex-col h-full bg-slate-900/50 border border-white/5 rounded-xl sm:rounded-2xl overflow-hidden hover:border-emerald-500/50 hover:shadow-[0_0_30px_-10px_rgba(16,185,129,0.2)] transition-all duration-500"
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{
+                duration: 0.5,
+                delay: index * 0.08,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className={`group relative overflow-hidden rounded-2xl border border-white/[0.06] bg-[#0b1220]/60 transition-colors hover:border-emerald-500/25 ${
+                index === 0 ? "lg:col-span-2" : ""
+              }`}
             >
-              {/* Image Container */}
-              <div className="relative h-32 sm:h-48 md:h-64 overflow-hidden">
-                {/* Overlay Gradient for contrast */}
-                <div className="absolute inset-0 bg-slate-950/20 z-10 group-hover:bg-slate-950/0 transition-colors duration-500"></div>
-
+              <div
+                className={`relative overflow-hidden ${
+                  index === 0 ? "aspect-[21/9] sm:aspect-[2.4/1]" : "aspect-[16/10]"
+                }`}
+              >
                 <Image
                   src={project.image}
                   alt={project.title}
                   fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                  sizes={
+                    index === 0
+                      ? "(max-width: 1024px) 100vw, 1100px"
+                      : "(max-width: 1024px) 100vw, 550px"
+                  }
                 />
-
-                {/* Floating Action Button (Top Right) */}
-                <div className="absolute top-3 sm:top-4 right-3 sm:right-4 z-20 translate-y-[-10px] opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                  <div className="bg-slate-950/90 backdrop-blur border border-emerald-500/30 p-1.5 sm:p-2 rounded-full text-emerald-400">
-                    <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5" />
-                  </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-[#030712]/40 to-transparent" />
+                <div className="absolute right-4 top-4 flex items-center gap-2">
+                  {project.year && (
+                    <span className="rounded-full border border-white/10 bg-black/40 px-2.5 py-1 font-mono text-[10px] text-slate-300 backdrop-blur">
+                      {project.year}
+                    </span>
+                  )}
+                  <span className="rounded-full border border-white/10 bg-black/40 px-2.5 py-1 text-[10px] font-medium uppercase tracking-wider text-emerald-300 backdrop-blur">
+                    {project.category}
+                  </span>
                 </div>
               </div>
 
-              {/* Content Container */}
-              <div className="flex flex-col flex-1 p-3 sm:p-5 md:p-6">
-                <div className="mb-2 sm:mb-4">
-                  <h3 className="text-sm sm:text-lg md:text-xl font-bold text-slate-100 mb-1 sm:mb-2 group-hover:text-emerald-400 transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-slate-400 text-[10px] sm:text-sm leading-relaxed line-clamp-2 sm:line-clamp-3">
-                    {project.description}
-                  </p>
-                </div>
-
-                <div className="mt-auto pt-3 sm:pt-6 border-t border-white/5">
-                  <div className="flex flex-wrap gap-1 sm:gap-2">
-                    {project.tags.slice(0, 3).map((tag, i) => (
-                      <span
-                        key={i}
-                        className="text-[9px] sm:text-xs font-medium px-1.5 sm:px-2.5 py-0.5 sm:py-1 rounded-md bg-slate-800 text-slate-300 border border-white/5 group-hover:border-emerald-500/20 group-hover:text-emerald-300 transition-colors"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                    {project.tags.length > 3 && (
-                      <span className="text-[10px] sm:text-xs font-medium px-1.5 sm:px-2 py-0.5 sm:py-1 text-slate-500">
-                        +{project.tags.length - 3}
-                      </span>
+              <div className="relative p-5 sm:p-6 md:p-7">
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <h3 className="text-lg font-semibold text-white transition-colors group-hover:text-emerald-300 sm:text-xl">
+                      {project.title}
+                    </h3>
+                    {project.outcome && (
+                      <p className="mt-1 text-xs font-medium text-emerald-400/80 sm:text-sm">
+                        {project.outcome}
+                      </p>
                     )}
                   </div>
+                  <span className="mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/10 text-slate-400 transition-all group-hover:border-emerald-500/40 group-hover:text-emerald-400">
+                    <ArrowUpRight className="h-4 w-4" />
+                  </span>
+                </div>
+                <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-slate-400">
+                  {project.description}
+                </p>
+                <div className="mt-5 flex flex-wrap gap-1.5">
+                  {project.tags.slice(0, index === 0 ? 6 : 4).map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-md border border-white/[0.05] bg-white/[0.03] px-2 py-0.5 text-[11px] text-slate-400"
+                    >
+                      {tag}
+                    </span>
+                  ))}
                 </div>
               </div>
 
-              {/* Clickable Area Overlay */}
               <Link
-                href={project.link || "#"}
-                className="absolute inset-0 z-30 focus:outline-none"
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute inset-0 z-10 focus-ring rounded-2xl"
               >
-                <span className="sr-only">View {project.title}</span>
+                <span className="sr-only">Open {project.title}</span>
               </Link>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
       </div>
