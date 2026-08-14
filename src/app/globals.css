@@ -1,24 +1,24 @@
 @import "tailwindcss";
 
 :root {
-  --background: #030712;
+  --background: #0f0f11;
   --foreground: #e2e8f0;
-  --muted: #94a3b8;
-  --surface: #0b1220;
-  --surface-2: #111827;
-  --border: rgba(255, 255, 255, 0.06);
-  --border-strong: rgba(255, 255, 255, 0.1);
-  --accent: #34d399;
-  --accent-dim: rgba(52, 211, 153, 0.12);
-  --accent-2: #22d3ee;
-  --ring: rgba(52, 211, 153, 0.35);
+  --muted: #8b949e;
+  --surface: #15161b;
+  --surface-2: #1c1d24;
+  --border: rgba(255, 255, 255, 0.07);
+  --border-strong: rgba(255, 255, 255, 0.12);
+  --brand-color: #66d9ed;
+  --brand-accent: #66d9ed;
+  --font-poppins: 'Poppins', system-ui, -apple-system, sans-serif;
+  --font-roboto-mono: 'Roboto Mono', monospace;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: 'Poppins', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Roboto Mono', monospace;
 }
 
 * {
@@ -27,147 +27,260 @@
 
 html {
   scroll-behavior: smooth;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
+  background-color: #0f0f11;
+  color: #e2e8f0;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background-color: #0f0f11;
+  color: #e2e8f0;
   min-height: 100vh;
+  font-family: 'Poppins', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  overflow-x: hidden;
 }
 
-::selection {
-  background: rgba(52, 211, 153, 0.25);
-  color: #f8fafc;
+/* ==========================================================================
+   CHONKY UNDERLINES (Signature Creative DNA from Tamal Sen)
+   ========================================================================== */
+
+.chonky-underline-megenta {
+  z-index: 0;
+  position: relative;
+  color: white;
+  display: inline-block;
 }
 
-/* Scrollbar — quiet, professional */
-::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+.chonky-underline-megenta::after {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  content: "";
+  position: absolute;
+  bottom: 12%;
+  z-index: -1;
+  height: 0.32em;
+  width: 104%;
+  left: -1%;
+  background: linear-gradient(65deg, #df058d 0%, #df058d 100%, rgba(255, 209, 0, 0) 100%);
 }
 
-::-webkit-scrollbar-track {
-  background: #030712;
+.chonky-underline-megenta:hover::after,
+.chonky-underline-megenta.has-hover-anim:hover::after {
+  height: 0.95em;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #1e293b;
-  border-radius: 999px;
-  border: 2px solid #030712;
+.chonky-underline-blue {
+  z-index: 0;
+  position: relative;
+  color: white;
+  display: inline-block;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+.chonky-underline-blue::after {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  content: "";
+  position: absolute;
+  bottom: 12%;
+  z-index: -1;
+  height: 0.32em;
+  width: 104%;
+  left: -1%;
+  background: linear-gradient(65deg, #2c49d8 0%, #2c49d8 100%, rgba(255, 209, 0, 0) 100%);
 }
 
-/* Subtle page grain */
-.noise-overlay {
-  pointer-events: none;
-  position: fixed;
-  inset: 0;
-  z-index: 50;
-  opacity: 0.035;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+.chonky-underline-blue:hover::after,
+.chonky-underline-blue.has-hover-anim:hover::after {
+  height: 0.95em;
 }
 
-.bg-grid {
-  background-image:
-    linear-gradient(to right, rgba(148, 163, 184, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(148, 163, 184, 0.04) 1px, transparent 1px);
-  background-size: 64px 64px;
+.chonky-underline-yellow {
+  z-index: 0;
+  position: relative;
+  color: white;
+  display: inline-block;
 }
 
-.bg-radial-fade {
-  background:
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(52, 211, 153, 0.12), transparent),
-    radial-gradient(ellipse 60% 40% at 100% 0%, rgba(34, 211, 238, 0.06), transparent);
+.chonky-underline-yellow::after {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  content: "";
+  position: absolute;
+  bottom: 12%;
+  z-index: -1;
+  height: 0.32em;
+  width: 104%;
+  left: -1%;
+  background: linear-gradient(65deg, #ff6b2b 0%, #ff6b2b 100%, rgba(255, 209, 0, 0) 100%);
 }
 
-/* Contribution graph levels */
-.contrib-0 {
-  background: #161b22;
-}
-.contrib-1 {
-  background: #0e4429;
-}
-.contrib-2 {
-  background: #006d32;
-}
-.contrib-3 {
-  background: #26a641;
-}
-.contrib-4 {
-  background: #39d353;
+.chonky-underline-yellow:hover::after,
+.chonky-underline-yellow.has-hover-anim:hover::after {
+  height: 0.95em;
 }
 
-/* Text balance for headings */
-.text-balance {
-  text-wrap: balance;
+.chonky-underline-violet {
+  z-index: 0;
+  position: relative;
+  color: white;
+  display: inline-block;
 }
 
-/* Focus ring utility */
-.focus-ring:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
+.chonky-underline-violet::after {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  content: "";
+  position: absolute;
+  bottom: 12%;
+  z-index: -1;
+  height: 0.32em;
+  width: 104%;
+  left: -1%;
+  background: linear-gradient(65deg, #9440e8 0%, #9440e8 100%, rgba(255, 209, 0, 0) 100%);
 }
 
-/* Soft card surface */
-.surface-card {
-  background: linear-gradient(180deg, rgba(17, 24, 39, 0.9), rgba(11, 18, 32, 0.95));
-  border: 1px solid var(--border);
-  backdrop-filter: blur(12px);
+.chonky-underline-violet:hover::after,
+.chonky-underline-violet.has-hover-anim:hover::after {
+  height: 0.95em;
 }
 
-.surface-card:hover {
-  border-color: rgba(52, 211, 153, 0.22);
+/* ==========================================================================
+   CODE EDITOR STYLE (Signature Style from Tamal Sen)
+   ========================================================================== */
+
+.code-editor-style {
+  position: relative;
+  padding-left: 28px;
 }
 
-/* Shimmer for CTAs — used sparingly */
-@keyframes shimmer {
+.code-editor-style::before {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 14px;
+  bottom: 14px;
+  width: 1px;
+  background-color: rgba(255, 255, 255, 0.22);
+}
+
+.code-tag {
+  font-family: 'Roboto Mono', monospace;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: -0.5px;
+  display: block;
+}
+
+/* ==========================================================================
+   GLOWING HERO FLOATING DOT
+   ========================================================================== */
+
+.circle-yel {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #fcb900;
+  box-shadow: 0 0 24px 6px rgba(252, 185, 0, 0.55);
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 12px;
+  animation: floatYel 3.5s ease-in-out infinite alternate;
+}
+
+@keyframes floatYel {
   0% {
-    transform: translateX(-100%);
+    transform: translate(0, 0) scale(1);
+    box-shadow: 0 0 20px 4px rgba(252, 185, 0, 0.45);
+  }
+  50% {
+    transform: translate(3px, -5px) scale(1.15);
+    box-shadow: 0 0 32px 10px rgba(252, 185, 0, 0.75);
   }
   100% {
-    transform: translateX(100%);
+    transform: translate(-3px, 3px) scale(0.95);
+    box-shadow: 0 0 22px 5px rgba(252, 185, 0, 0.5);
   }
 }
 
-.animate-shimmer {
-  animation: shimmer 1.4s ease-in-out infinite;
+/* ==========================================================================
+   PRIMARY MENU (Roboto Mono, // Prefix)
+   ========================================================================== */
+
+.primary-menu-item {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.95rem;
+  letter-spacing: -0.5px;
 }
 
-/* Marquee */
+/* ==========================================================================
+   QUOTE WATERMARK
+   ========================================================================== */
+
+.has-quote-watermark {
+  position: relative;
+}
+
+.has-quote-watermark::before {
+  content: "“";
+  font-family: serif;
+  font-size: 80px;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.08);
+  position: absolute;
+  top: -16px;
+  left: 12px;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   MARQUEE ANIMATION
+   ========================================================================== */
+
 @keyframes marquee {
-  from {
-    transform: translateX(0);
+  0% {
+    transform: translateX(0%);
   }
-  to {
+  100% {
     transform: translateX(-50%);
   }
 }
 
 .animate-marquee {
-  animation: marquee 40s linear infinite;
+  display: flex;
+  width: max-content;
+  animation: marquee 35s linear infinite;
 }
 
 .animate-marquee:hover {
   animation-play-state: paused;
+}
+
+/* ==========================================================================
+   CUSTOM SCROLLBAR
+   ========================================================================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f0f11;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #24262f;
+  border-radius: 999px;
+  border: 2px solid #0f0f11;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3b3e4c;
+}
+
+/* Subtle background grid */
+.bg-grid-subtle {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 56px 56px;
 }

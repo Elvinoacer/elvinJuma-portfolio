@@ -1,11 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { useState } from "react";
+import { motion } from "framer-motion";
+import { Send, Loader2, Mail, MessageSquare, ExternalLink, CheckCircle } from "lucide-react";
 import { sendEmail } from "@/actions/sendEmail";
 import { site } from "@/data/site";
-import { fadeUp } from "@/lib/motion";
-import { Mail, MapPin, Phone, Send, Loader2 } from "lucide-react";
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -37,210 +36,198 @@ export default function ContactSection() {
       }
     } catch {
       setIsError(true);
-      setSubmitMessage("Something went wrong. Please try email directly.");
+      setSubmitMessage("Something went wrong. Please reach out via email directly.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  const socialLinks = [
+    { name: "WhatsApp", href: site.whatsapp },
+    { name: "LinkedIn", href: site.linkedin },
+    { name: "GitHub", href: site.github },
+    { name: "Twitter / X", href: site.twitter },
+  ];
+
   return (
-    <section id="contact" className="relative py-20 sm:py-24">
-      <div className="pointer-events-none absolute inset-0 bg-grid opacity-25" />
-      <div className="pointer-events-none absolute right-0 top-0 h-96 w-96 rounded-full bg-emerald-500/5 blur-[120px]" />
+    <section
+      id="contact"
+      className="relative overflow-hidden py-24 sm:py-32 border-t border-white/[0.05] bg-[#0f0f11]"
+    >
+      <div className="pointer-events-none absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-[#9440e8]/5 blur-[160px]" />
+      <div className="pointer-events-none absolute top-10 left-10 h-[400px] w-[400px] rounded-full bg-[#66d9ed]/5 blur-[140px]" />
 
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="grid gap-14 lg:grid-cols-12 lg:gap-16 items-start">
+          {/* Left Column: Headline, Big Underlined Email, Social Links */}
           <motion.div
-            initial="hidden"
-            whileInView="visible"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            variants={fadeUp}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-6"
           >
-            <p className="mb-2 font-mono text-xs uppercase tracking-[0.2em] text-emerald-400/90">
-              Contact
-            </p>
-            <h2 className="text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-5xl">
-              Let&apos;s build something that lasts.
+            <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl md:text-5xl leading-tight">
+              Available for select freelance &amp; engineering opportunities.
             </h2>
-            <p className="mt-4 max-w-md text-sm leading-relaxed text-slate-400 sm:text-base">
-              Open to thoughtful freelance engagements and full-time roles.
-              Prefer clear problems, real users, and teams that care about craft.
+
+            <p className="mt-6 text-base text-slate-300 sm:text-lg leading-relaxed">
+              Have an exciting project you need help with?
+              <br />
+              Send me an email or contact me via instant message!
             </p>
 
-            <div className="mt-8 space-y-3">
-              <ContactRow
-                icon={<Mail className="h-4 w-4" />}
-                label="Email"
-                value={site.email}
+            {/* Big Chonky Underline Email */}
+            <div className="mt-8">
+              <a
                 href={`mailto:${site.email}`}
-              />
-              <ContactRow
-                icon={<Phone className="h-4 w-4" />}
-                label="Phone"
-                value={site.phone}
-                href={site.phoneHref}
-              />
-              <ContactRow
-                icon={<MapPin className="h-4 w-4" />}
-                label="Based in"
-                value={site.location}
-              />
+                className="chonky-underline-violet has-hover-anim font-mono text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-white transition-colors cursor-link"
+              >
+                {site.email}
+              </a>
             </div>
 
-            <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-2 text-xs text-emerald-400">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              Typically replies within 24 hours
+            {/* Instant Message & Social Links */}
+            <div className="mt-10">
+              <p className="font-mono text-xs uppercase tracking-widest text-slate-500 mb-4">
+                Instant Message &amp; Social
+              </p>
+              <div className="flex flex-wrap gap-4">
+                {socialLinks.map((link) => (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 font-mono text-sm text-slate-400 hover:text-[#66d9ed] transition-colors cursor-link"
+                  >
+                    <span>{link.name}</span>
+                    <ExternalLink className="h-3 w-3 text-slate-500" />
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Quick Status Pill */}
+            <div className="mt-10 inline-flex items-center gap-2.5 rounded-full border border-[#66d9ed]/25 bg-[#66d9ed]/10 px-4 py-2 text-xs font-mono text-[#66d9ed]">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#66d9ed] opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-[#66d9ed]" />
+              </span>
+              <span>Available for projects in {new Date().getFullYear()}</span>
             </div>
           </motion.div>
 
+          {/* Right Column: Contact Message Form */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.55, delay: 0.1 }}
-            className="relative"
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="lg:col-span-6"
           >
-            <div className="absolute -inset-px rounded-2xl bg-gradient-to-b from-emerald-500/20 via-transparent to-cyan-500/10 opacity-60" />
-            <form
-              onSubmit={handleSubmit}
-              className="relative rounded-2xl border border-white/[0.08] bg-[#0b1220]/90 p-5 sm:p-7 md:p-8"
-            >
-              <h3 className="mb-6 text-lg font-semibold text-white">
-                Send a message
+            <div className="rounded-3xl border border-white/10 bg-[#15161c] p-7 sm:p-9 shadow-2xl backdrop-blur-sm">
+              <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2.5">
+                <MessageSquare className="h-5 w-5 text-[#66d9ed]" />
+                <span>Send a Message</span>
               </h3>
 
-              <div className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid gap-4 sm:grid-cols-2">
-                  <Field
-                    label="Name"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="Your name"
-                    required
-                  />
-                  <Field
-                    label="Email"
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="you@company.com"
-                    required
-                  />
+                  <div>
+                    <label
+                      htmlFor="name"
+                      className="mb-1.5 block font-mono text-xs text-slate-400"
+                    >
+                      Your Name
+                    </label>
+                    <input
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder="e.g. John Doe"
+                      required
+                      className="w-full rounded-xl border border-white/10 bg-[#0f0f11] px-4 py-3 font-sans text-sm text-white placeholder:text-slate-600 focus:border-[#66d9ed] focus:outline-none focus:ring-1 focus:ring-[#66d9ed] transition-all"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="email"
+                      className="mb-1.5 block font-mono text-xs text-slate-400"
+                    >
+                      Your Email
+                    </label>
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="e.g. john@company.com"
+                      required
+                      className="w-full rounded-xl border border-white/10 bg-[#0f0f11] px-4 py-3 font-sans text-sm text-white placeholder:text-slate-600 focus:border-[#66d9ed] focus:outline-none focus:ring-1 focus:ring-[#66d9ed] transition-all"
+                    />
+                  </div>
                 </div>
+
                 <div>
                   <label
                     htmlFor="message"
-                    className="mb-1.5 block text-xs font-medium text-slate-400"
+                    className="mb-1.5 block font-mono text-xs text-slate-400"
                   >
-                    Message
+                    Your Message
                   </label>
                   <textarea
                     id="message"
                     name="message"
+                    rows={4}
                     value={formData.message}
                     onChange={handleChange}
+                    placeholder="Tell me about your project, timeline, or idea..."
                     required
-                    rows={5}
-                    placeholder="What are you building? Timeline? Constraints?"
-                    className="w-full resize-none rounded-xl border border-white/10 bg-slate-950/60 px-3.5 py-3 text-sm text-slate-100 placeholder:text-slate-600 transition focus:border-emerald-500/40 focus:outline-none focus:ring-1 focus:ring-emerald-500/30"
+                    className="w-full resize-none rounded-xl border border-white/10 bg-[#0f0f11] px-4 py-3 font-sans text-sm text-white placeholder:text-slate-600 focus:border-[#66d9ed] focus:outline-none focus:ring-1 focus:ring-[#66d9ed] transition-all"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="group flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-500 py-3.5 text-sm font-semibold text-slate-950 transition-all hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-60"
+                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#66d9ed] py-3.5 font-mono text-xs font-bold text-[#0f0f11] transition-all hover:bg-[#52cde2] hover:shadow-[0_0_25px_rgba(102,217,237,0.4)] disabled:opacity-60 cursor-link"
                 >
                   {isSubmitting ? (
                     <>
                       <Loader2 className="h-4 w-4 animate-spin" />
-                      Sending…
+                      <span>Sending message...</span>
                     </>
                   ) : (
                     <>
-                      Send message
-                      <Send className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                      <span>Send Message</span>
+                      <Send className="h-3.5 w-3.5" />
                     </>
                   )}
                 </button>
 
                 {submitMessage && (
-                  <p
-                    className={`rounded-lg px-3 py-2.5 text-center text-xs sm:text-sm ${
+                  <motion.div
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className={`flex items-center gap-2 rounded-xl p-3.5 font-mono text-xs ${
                       isError
-                        ? "border border-red-500/20 bg-red-500/10 text-red-400"
-                        : "border border-emerald-500/20 bg-emerald-500/10 text-emerald-400"
+                        ? "border border-red-500/30 bg-red-500/10 text-red-400"
+                        : "border border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
                     }`}
                   >
-                    {submitMessage}
-                  </p>
+                    {!isError && <CheckCircle className="h-4 w-4 shrink-0" />}
+                    <span>{submitMessage}</span>
+                  </motion.div>
                 )}
-              </div>
-            </form>
+              </form>
+            </div>
           </motion.div>
         </div>
       </div>
     </section>
   );
-}
-
-function Field({
-  label,
-  id,
-  ...props
-}: React.InputHTMLAttributes<HTMLInputElement> & { label: string; id: string }) {
-  return (
-    <div>
-      <label
-        htmlFor={id}
-        className="mb-1.5 block text-xs font-medium text-slate-400"
-      >
-        {label}
-      </label>
-      <input
-        id={id}
-        className="w-full rounded-xl border border-white/10 bg-slate-950/60 px-3.5 py-3 text-sm text-slate-100 placeholder:text-slate-600 transition focus:border-emerald-500/40 focus:outline-none focus:ring-1 focus:ring-emerald-500/30"
-        {...props}
-      />
-    </div>
-  );
-}
-
-function ContactRow({
-  icon,
-  label,
-  value,
-  href,
-}: {
-  icon: React.ReactNode;
-  label: string;
-  value: string;
-  href?: string;
-}) {
-  const inner = (
-    <div className="flex items-center gap-3.5 rounded-xl border border-white/[0.05] bg-white/[0.02] p-3.5 transition-colors hover:border-emerald-500/25 hover:bg-white/[0.04]">
-      <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-slate-950 text-slate-400">
-        {icon}
-      </div>
-      <div className="min-w-0">
-        <p className="text-[10px] uppercase tracking-wider text-slate-500">
-          {label}
-        </p>
-        <p className="truncate text-sm font-medium text-slate-200">{value}</p>
-      </div>
-    </div>
-  );
-
-  if (href) {
-    return (
-      <a href={href} className="block">
-        {inner}
-      </a>
-    );
-  }
-  return inner;
 }

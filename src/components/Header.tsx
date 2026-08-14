@@ -1,176 +1,200 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import { navItems, site } from "@/data/site";
+
+const navLinks = [
+  { num: "01", name: "// home", href: "#hero-section" },
+  { num: "02", name: "// expertise", href: "#expertise" },
+  { num: "03", name: "// work", href: "#work" },
+  { num: "04", name: "// experience", href: "#experience" },
+  { num: "05", name: "// contact", href: "#contact" },
+];
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const pathname = usePathname();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("hero-section");
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 16);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 30);
+
+      const sections = ["hero-section", "expertise", "work", "experience", "contact"];
+      const scrollPosition = window.scrollY + 250;
+
+      for (const sectionId of sections) {
+        const el = document.getElementById(sectionId);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPosition >= top && scrollPosition < top + height) {
+            setActiveSection(sectionId);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
-    setIsOpen(false);
-  }, [pathname]);
-
-  useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "";
-    return () => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
       document.body.style.overflow = "";
-    };
-  }, [isOpen]);
+    }
+  }, [mobileMenuOpen]);
 
-  const isActive = (href: string) =>
-    href === "/" ? pathname === "/" : pathname.startsWith(href);
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith("#")) {
+      e.preventDefault();
+      setMobileMenuOpen(false);
+      const targetId = href.replace("#", "");
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        const topOffset = 70;
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - topOffset;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
+        });
+      }
+    }
+  };
 
   return (
     <>
-      <motion.header
-        initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      <header
         className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "border-b border-white/[0.06] bg-[#030712]/80 backdrop-blur-xl py-3"
-            : "bg-transparent py-5"
+            ? "bg-[#0f0f11]/90 backdrop-blur-xl border-b border-white/[0.06] py-4"
+            : "bg-transparent py-6"
         }`}
       >
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 sm:px-6">
-          <Link href="/" className="group flex items-center gap-2.5 focus-ring rounded-lg">
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-emerald-400 to-cyan-500 font-mono text-sm font-bold text-slate-950 shadow-[0_0_24px_-6px_rgba(52,211,153,0.5)] transition-transform group-hover:scale-105">
-              E
-            </span>
-            <span className="text-[15px] font-semibold tracking-tight text-slate-100">
-              Elvin<span className="text-emerald-400">.</span>
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 sm:px-10">
+          {/* Logo (TamalSen._ styled for ElvinJuma._) */}
+          <Link
+            href="/#hero-section"
+            onClick={(e) => handleNavClick(e, "#hero-section")}
+            className="group flex items-center cursor-link select-none"
+          >
+            <span className="font-mono text-2xl font-bold tracking-tight text-[#66d9ed] transition-colors group-hover:brightness-110">
+              ElvinJuma<span className="text-white">.</span>
+              <span className="text-[#df058d] animate-pulse">_</span>
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-1 md:flex" aria-label="Primary">
-            <Link
-              href="/"
-              className={`rounded-lg px-3.5 py-2 text-sm transition-colors ${
-                pathname === "/"
-                  ? "text-white"
-                  : "text-slate-400 hover:text-slate-100"
-              }`}
-            >
-              Home
-            </Link>
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`relative rounded-lg px-3.5 py-2 text-sm transition-colors ${
-                  isActive(item.href)
-                    ? "text-white"
-                    : "text-slate-400 hover:text-slate-100"
-                }`}
-              >
-                {item.name}
-                {isActive(item.href) && (
-                  <motion.span
-                    layoutId="nav-pill"
-                    className="absolute inset-0 -z-10 rounded-lg bg-white/[0.06]"
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                  />
-                )}
-              </Link>
-            ))}
-            <Link
-              href={site.resume}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="ml-2 rounded-lg border border-white/10 bg-white/[0.03] px-4 py-2 text-sm font-medium text-emerald-400 transition-all hover:border-emerald-500/40 hover:bg-emerald-500 hover:text-slate-950"
-            >
-              Resume
-            </Link>
+          {/* Desktop Nav with 01, 02, 03 numbers on top */}
+          <nav className="hidden items-center gap-9 md:flex" aria-label="Primary">
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.href.replace("#", "");
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  className={`group flex flex-col items-center font-mono cursor-link transition-colors duration-200 ${
+                    isActive
+                      ? "text-[#66d9ed]"
+                      : "text-slate-300 hover:text-white"
+                  }`}
+                >
+                  <span className="text-[10px] tracking-widest text-slate-500 group-hover:text-slate-300 transition-colors mb-0.5">
+                    {link.num}
+                  </span>
+                  <span className="text-[15px] font-medium tracking-tight">
+                    {link.name}
+                  </span>
+                </a>
+              );
+            })}
           </nav>
 
+          {/* Mobile Hamburger */}
           <button
             type="button"
-            onClick={() => setIsOpen((v) => !v)}
-            className="relative z-50 flex h-10 w-10 items-center justify-center rounded-lg text-slate-300 transition-colors hover:text-white md:hidden focus-ring"
-            aria-label={isOpen ? "Close menu" : "Open menu"}
-            aria-expanded={isOpen}
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="relative z-50 flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-slate-200 transition-colors hover:border-[#66d9ed] hover:text-[#66d9ed] md:hidden cursor-link"
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
           >
-            <span className="flex w-5 flex-col items-end gap-1.5">
+            <div className="flex flex-col items-center justify-center gap-1.5 w-5">
               <span
-                className={`h-px bg-current transition-all duration-300 ${
-                  isOpen ? "w-5 translate-y-[3.5px] rotate-45" : "w-5"
+                className={`h-0.5 bg-current transition-all duration-300 ${
+                  mobileMenuOpen ? "w-5 translate-y-2 rotate-45" : "w-5"
                 }`}
               />
               <span
-                className={`h-px bg-current transition-all duration-300 ${
-                  isOpen ? "w-5 opacity-0" : "w-3.5"
+                className={`h-0.5 bg-current transition-all duration-200 ${
+                  mobileMenuOpen ? "opacity-0 w-5" : "w-4 self-end"
                 }`}
               />
               <span
-                className={`h-px bg-current transition-all duration-300 ${
-                  isOpen ? "w-5 -translate-y-[3.5px] -rotate-45" : "w-2.5"
+                className={`h-0.5 bg-current transition-all duration-300 ${
+                  mobileMenuOpen ? "w-5 -translate-y-2 -rotate-45" : "w-5"
                 }`}
               />
-            </span>
+            </div>
           </button>
         </div>
-      </motion.header>
+      </header>
 
+      {/* Mobile Drawer */}
       <AnimatePresence>
-        {isOpen && (
+        {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-40 flex flex-col bg-[#030712]/95 backdrop-blur-2xl md:hidden"
+            className="fixed inset-0 z-40 flex flex-col bg-[#0f0f11]/98 backdrop-blur-2xl px-8 pt-32 pb-12 md:hidden justify-between"
           >
-            <div className="flex flex-1 flex-col items-center justify-center gap-2 px-6">
-              {[
-                { name: "Home", href: "/" },
-                ...navItems,
-              ].map((item, i) => (
-                <motion.div
-                  key={item.href}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.05 + i * 0.05 }}
-                >
-                  <Link
-                    href={item.href}
-                    onClick={() => setIsOpen(false)}
-                    className={`block py-3 text-2xl font-semibold tracking-tight ${
-                      isActive(item.href) ? "text-emerald-400" : "text-slate-200"
-                    }`}
+            <div className="flex flex-col gap-6">
+              {navLinks.map((link, i) => {
+                const isActive = activeSection === link.href.replace("#", "");
+                return (
+                  <motion.div
+                    key={link.href}
+                    initial={{ opacity: 0, x: -16 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.05 + i * 0.05 }}
                   >
-                    {item.name}
-                  </Link>
-                </motion.div>
-              ))}
-              <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="mt-6"
-              >
-                <Link
-                  href={site.resume}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setIsOpen(false)}
-                  className="inline-flex rounded-full bg-emerald-500 px-6 py-3 text-sm font-semibold text-slate-950"
-                >
-                  Download Resume
-                </Link>
-              </motion.div>
+                    <a
+                      href={link.href}
+                      onClick={(e) => handleNavClick(e, link.href)}
+                      className="group flex items-baseline gap-3 py-2 font-mono"
+                    >
+                      <span className="text-xs text-slate-500">{link.num}</span>
+                      <span
+                        className={`text-2xl tracking-tight transition-colors ${
+                          isActive
+                            ? "text-[#66d9ed] font-bold"
+                            : "text-slate-300 group-hover:text-white"
+                        }`}
+                      >
+                        {link.name}
+                      </span>
+                    </a>
+                  </motion.div>
+                );
+              })}
             </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="flex flex-col gap-4 pt-6 border-t border-white/10"
+            >
+              <p className="font-mono text-xs text-slate-500 text-center">
+                © {new Date().getFullYear()} Elvin Omondi Juma. All rights reserved.
+              </p>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
