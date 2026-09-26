@@ -307,17 +307,6 @@ export default function WorkSection() {
               )}
 
               <div className="mt-7 flex flex-wrap justify-end gap-3 border-t border-white/[0.07] pt-5">
-                {selectedProject.repo && (
-                  <a
-                    href={`https://github.com/${selectedProject.repo}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full border border-white/10 px-4 py-2 text-xs text-slate-300 transition hover:bg-white/[0.05] hover:text-white"
-                  >
-                    Repository
-                    <ArrowUpRight className="h-3.5 w-3.5" />
-                  </a>
-                )}
                 <a
                   href={selectedProject.link}
                   target="_blank"
