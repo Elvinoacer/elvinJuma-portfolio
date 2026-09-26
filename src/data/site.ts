@@ -1,12 +1,12 @@
-/** Central site content — honest, employer-grade copy */
+/** Central site content for Elvin's portfolio */
 
 export const site = {
   name: "Elvin Omondi Juma",
   shortName: "Elvin",
-  title: "Founding Engineer · Full-Stack Developer",
+  title: "Founding Engineer · Product Systems Builder",
   tagline:
-    "I design and ship production software for real businesses — from education platforms to commerce and operations systems.",
-  location: "Eldoret, Kenya",
+    "I architect and ship production software across healthcare, marketplaces, education, payments and realtime operations.",
+  location: "Kenya",
   email: "omondielvin@gmail.com",
   phone: "+254 790 670 542",
   phoneHref: "tel:+254790670542",
@@ -17,91 +17,98 @@ export const site = {
   resume: "/images/Elvin-Resume-template.pdf",
   company: "Great Thumbs Software Solutions",
   companyUrl: "https://gtss.vercel.app",
-  availability: "Open to select freelance & full-time roles",
+  availability: "Open to selected product, freelance and full-time engineering work",
   yearsShipping: "2+",
-  focus: ["Next.js", "TypeScript", "PostgreSQL", "Realtime systems", "Product engineering"],
+  focus: [
+    "Multi-tenant products",
+    "Next.js 16",
+    "TypeScript",
+    "PostgreSQL",
+    "Realtime systems",
+    "Payments",
+  ],
 } as const;
 
 export const navItems = [
-  { name: "Work", href: "/projects" },
+  { name: "Work", href: "/#work" },
+  { name: "Archive", href: "/projects" },
   { name: "About", href: "/about" },
   { name: "Contact", href: "/contact" },
 ] as const;
 
 export const experience = [
   {
-    role: "Founding Engineer",
+    role: "Founder & Product Engineer",
     org: "Great Thumbs Software Solutions",
     period: "2025 — Present",
     location: "Kenya",
     points: [
-      "Architect and ship multi-product systems for hotels, marketplaces, and local businesses.",
-      "Own full stack: Next.js 16, React 19, PostgreSQL, Prisma, auth, payments, and realtime.",
-      "Lead product decisions from problem discovery through production launch.",
+      "Build and operate products across pharmacy, marketplace, restaurant, healthcare and local-business workflows.",
+      "Own architecture across Next.js 16, React 19, PostgreSQL, Prisma, authentication, payments, realtime systems and deployment.",
+      "Lead products from field discovery and sales conversations through implementation, reliability work and production iteration.",
     ],
   },
   {
-    role: "Full-Stack Developer",
-    org: "Independent / Client work",
+    role: "Full-Stack Engineer",
+    org: "Independent / Client systems",
     period: "2024 — Present",
     location: "Remote",
     points: [
-      "Delivered production platforms: German Virtual School, Concept Builders, church ops, e-commerce.",
-      "Integrated payments (IntaSend/M-Pesa), live video (Jitsi), sockets, and cloud media pipelines.",
-      "Built systems used by real users — students, staff, vendors — not demos.",
+      "Shipped education, construction, church operations, commerce, messaging and AI-assisted application systems.",
+      "Integrated M-Pesa/IntaSend, Jitsi, Socket.IO, cloud media, notifications and role-heavy operational workflows.",
+      "Moved from frontend experimentation into full product and systems ownership as project complexity increased.",
     ],
   },
   {
     role: "Computer Science",
     org: "Moi University",
     period: "Ongoing",
-    location: "Eldoret",
+    location: "Kenya",
     points: [
-      "Formal CS foundation paired with aggressive shipping practice.",
-      "Equity Leadership Program alumnus — leadership + community impact.",
+      "Formal computer science study paired with continuous production shipping and entrepreneurship.",
+      "Apply software engineering directly to problems observed in local businesses and service environments.",
     ],
   },
 ] as const;
 
 export const principles = [
   {
-    title: "Ship, then refine",
-    body: "Production is the best teacher. I move fast without leaving messes that compound.",
+    title: "Systems over screenshots",
+    body: "The interface is the visible edge. Reliability, data, payments, permissions and failure handling make the product real.",
   },
   {
-    title: "Systems over screens",
-    body: "UI is the surface. I care about data models, auth, payments, and failure modes.",
+    title: "Ship into reality",
+    body: "I prefer feedback from actual operators and users over polishing assumptions in isolation.",
   },
   {
-    title: "Respect the user",
-    body: "Clarity, speed, and accessibility beat clever animations every time.",
+    title: "Use leverage carefully",
+    body: "AI accelerates implementation and research, but runtime evidence, source control and product judgment stay in the loop.",
   },
 ] as const;
 
-/** Real products / clients — no fabricated social proof */
 export const productsShipped = [
   {
+    name: "Afyvia",
+    role: "Connected pharmacy network",
+    blurb: "Multi-tenant pharmacy storefronts, services, medicine operations, billing and verification.",
+    href: "https://afyvia.gtss.software",
+  },
+  {
+    name: "JustInTime",
+    role: "Services marketplace + business OS",
+    blurb: "Discovery, proposals, bookings, realtime communication, payments and provider operations.",
+    href: "https://justintime.gtss.software",
+  },
+  {
     name: "German Virtual School",
-    role: "Full-stack platform",
-    blurb: "Live classes, billing, assignments, GDPR reporting — A1–C2 German education.",
+    role: "Education operations platform",
+    blurb: "Live classes, billing, assignments, reporting and role-based learning workflows.",
     href: "https://germanvirtualschool.com",
   },
   {
     name: "Concept Builders",
     role: "Construction web system",
-    blurb: "Project portfolios, design galleries, and client inquiry workflows.",
+    blurb: "Project discovery, design galleries, inquiries and client-facing operational flows.",
     href: "https://conceptbuilders.co.ke",
-  },
-  {
-    name: "GTSS",
-    role: "Parent product company",
-    blurb: "Hotel ordering, marketplace, and commerce products for local operators.",
-    href: "https://gtss.vercel.app",
-  },
-  {
-    name: "Zion Hill Platform",
-    role: "Church operations",
-    blurb: "Community engagement, payments, and day-to-day church management.",
-    href: "https://zion-hill.vercel.app/",
   },
 ] as const;
