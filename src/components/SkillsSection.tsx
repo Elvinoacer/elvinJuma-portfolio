@@ -1,159 +1,156 @@
 "use client";
 
-import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
+import {
+  Bot,
+  Boxes,
+  Cloud,
+  CreditCard,
+  Database,
+  MonitorSmartphone,
+  RadioTower,
+  Wrench,
+} from "lucide-react";
 
-const skillGroups = {
-  frontend: {
-    label: "Frontend",
-    items: [
-      "React",
-      "Next.js",
-      "TypeScript",
-      "Tailwind CSS",
-      "Framer Motion",
-      "Three.js",
-      "GSAP",
-      "Zustand",
-      "TanStack Query",
-      "React Native",
-    ],
+const layers = [
+  {
+    icon: MonitorSmartphone,
+    label: "01 · product surface",
+    title: "Interface systems",
+    body: "Fast, responsive application surfaces with enough motion to feel alive without hiding the product.",
+    items: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS 4", "Framer Motion", "Three.js"],
   },
-  backend: {
-    label: "Backend & Data",
-    items: [
-      "Node.js",
-      "Express",
-      "PostgreSQL",
-      "Prisma",
-      "MongoDB",
-      "Redis",
-      "GraphQL",
-      "REST",
-      "Socket.IO",
-      "LangChain",
-    ],
+  {
+    icon: Database,
+    label: "02 · application core",
+    title: "Data & backend",
+    body: "The part users rarely see: schemas, auth, state boundaries, server actions, APIs and failure handling.",
+    items: ["PostgreSQL", "Prisma", "Node.js", "NextAuth", "TanStack Query", "REST APIs"],
   },
-  product: {
-    label: "Product & Ops",
-    items: [
-      "Auth (NextAuth / Clerk / Kinde)",
-      "Payments (IntaSend / M-Pesa)",
-      "Cloudinary",
-      "AWS S3",
-      "Firebase",
-      "Vercel",
-      "CI/CD",
-      "Docker",
-      "Observability",
-      "GDPR-aware design",
-    ],
+  {
+    icon: RadioTower,
+    label: "03 · distributed behavior",
+    title: "Realtime & workflows",
+    body: "Systems that react to people, payments and events instead of waiting for a refresh.",
+    items: ["Socket.IO", "FCM", "Webhooks", "Jitsi", "Background jobs", "Event flows"],
   },
-} as const;
+  {
+    icon: CreditCard,
+    label: "04 · business rails",
+    title: "Payments & operations",
+    body: "Local and global integrations that make software useful to actual operators, not just technically complete.",
+    items: ["M-Pesa Daraja", "IntaSend", "Cloudinary", "R2", "OSM", "Email/SMS"],
+  },
+];
 
-type TabId = keyof typeof skillGroups;
-
-const marquee = [
-  "Next.js 16",
-  "React 19",
-  "TypeScript",
-  "PostgreSQL",
-  "Prisma",
-  "Socket.IO",
-  "IntaSend",
-  "Jitsi",
-  "Cloudinary",
-  "TanStack Query",
-  "Framer Motion",
-  "Docker",
+const cockpit = [
+  { icon: Cloud, title: "Ship", items: ["Vercel", "Cloudflare", "DigitalOcean"] },
+  { icon: Boxes, title: "Source", items: ["GitHub", "CI/CD", "Prisma migrations"] },
+  { icon: Bot, title: "AI-assisted", items: ["Codex", "GitHub Copilot", "Claude", "Gemini"] },
+  { icon: Wrench, title: "Observe", items: ["Runtime logs", "Sentry", "Lighthouse", "Manual E2E"] },
 ];
 
 export default function SkillsSection() {
-  const [active, setActive] = useState<TabId>("frontend");
-
   return (
-    <section id="skills" className="relative overflow-hidden py-20 sm:py-24">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent" />
-
-      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="mb-12 text-center sm:mb-14">
-          <p className="mb-2 font-mono text-xs uppercase tracking-[0.2em] text-emerald-400/90">
-            Stack
-          </p>
-          <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-            Tools I reach for daily
-          </h2>
-          <p className="mx-auto mt-3 max-w-xl text-sm text-slate-400 sm:text-base">
-            Chosen for shipping speed and production durability — not résumé
-            padding.
+    <section id="skills" className="relative overflow-hidden border-t border-white/[0.06] bg-[#090b0b] py-24 sm:py-32">
+      <div className="portfolio-grid pointer-events-none absolute inset-0 opacity-[0.16]" />
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-8 lg:grid-cols-[.8fr_1.2fr] lg:items-end">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-cyan-300">
+              Engineering stack
+            </p>
+            <h2 className="mt-4 text-4xl font-semibold tracking-[-0.05em] text-white sm:text-5xl">
+              My stack is a pipeline, not a logo wall.
+            </h2>
+          </motion.div>
+          <p className="max-w-2xl text-base leading-7 text-slate-400 lg:justify-self-end">
+            The technologies change. The pattern does not: interface, application core,
+            data, event flow, business integrations, deployment, observation. I choose
+            tools based on what the product needs to survive in production.
           </p>
         </div>
 
-        {/* Marquee */}
-        <div className="relative mb-12 hidden overflow-hidden sm:block">
-          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-[#030712] to-transparent" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-[#030712] to-transparent" />
-          <div className="flex w-max animate-marquee gap-8 py-2">
-            {[...marquee, ...marquee].map((t, i) => (
-              <span
-                key={`${t}-${i}`}
-                className="text-sm font-medium tracking-wide text-slate-600"
+        <div className="mt-12 grid gap-4 lg:grid-cols-2">
+          {layers.map((layer, index) => {
+            const Icon = layer.icon;
+            return (
+              <motion.article
+                key={layer.title}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05 }}
+                className="rounded-[1.6rem] border border-white/[0.07] bg-[#0c1010] p-5 sm:p-6"
               >
-                {t}
-                <span className="ml-8 text-slate-800">·</span>
-              </span>
-            ))}
+                <div className="flex items-start justify-between gap-5">
+                  <div>
+                    <p className="font-mono text-[10px] uppercase tracking-[0.17em] text-lime-300">
+                      {layer.label}
+                    </p>
+                    <h3 className="mt-2 text-2xl font-semibold tracking-[-0.035em] text-white">
+                      {layer.title}
+                    </h3>
+                  </div>
+                  <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/[0.07] bg-white/[0.025] text-slate-400">
+                    <Icon className="h-4 w-4" />
+                  </span>
+                </div>
+
+                <p className="mt-4 max-w-xl text-sm leading-6 text-slate-500">{layer.body}</p>
+
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {layer.items.map((item) => (
+                    <span
+                      key={item}
+                      className="rounded-lg border border-white/[0.06] bg-white/[0.025] px-2.5 py-1.5 font-mono text-[10px] text-slate-400"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </motion.article>
+            );
+          })}
+        </div>
+
+        <div className="mt-5 rounded-[1.6rem] border border-white/[0.07] bg-white/[0.02] p-5 sm:p-6">
+          <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+            <div>
+              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-slate-600">
+                Shipping cockpit
+              </p>
+              <h3 className="mt-2 text-xl font-semibold text-white">
+                The tools around the code matter too.
+              </h3>
+            </div>
+            <p className="max-w-lg text-sm leading-6 text-slate-500">
+              I use AI heavily, but I keep the engineering loop grounded in source control,
+              runtime evidence, deployment checks and manual product testing.
+            </p>
           </div>
-        </div>
 
-        {/* Tabs */}
-        <div className="mb-8 flex flex-wrap justify-center gap-2">
-          {(Object.keys(skillGroups) as TabId[]).map((id) => (
-            <button
-              key={id}
-              type="button"
-              onClick={() => setActive(id)}
-              className={`relative rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-                active === id
-                  ? "text-slate-950"
-                  : "text-slate-400 hover:text-slate-200"
-              }`}
-            >
-              {active === id && (
-                <motion.span
-                  layoutId="skill-tab"
-                  className="absolute inset-0 rounded-full bg-emerald-400"
-                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                />
-              )}
-              <span className="relative z-10">{skillGroups[id].label}</span>
-            </button>
-          ))}
-        </div>
-
-        <div className="mx-auto min-h-[200px] max-w-4xl">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={active}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.25 }}
-              className="flex flex-wrap justify-center gap-2 sm:gap-2.5"
-            >
-              {skillGroups[active].items.map((skill, i) => (
-                <motion.span
-                  key={skill}
-                  initial={{ opacity: 0, scale: 0.96 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: i * 0.03 }}
-                  className="rounded-full border border-white/[0.07] bg-white/[0.03] px-3.5 py-2 text-sm text-slate-300 transition-colors hover:border-emerald-500/30 hover:text-emerald-300"
+          <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {cockpit.map((group) => {
+              const Icon = group.icon;
+              return (
+                <div
+                  key={group.title}
+                  className="rounded-2xl border border-white/[0.06] bg-[#080a0a] p-4"
                 >
-                  {skill}
-                </motion.span>
-              ))}
-            </motion.div>
-          </AnimatePresence>
+                  <Icon className="h-4 w-4 text-cyan-300" />
+                  <p className="mt-3 text-sm font-semibold text-white">{group.title}</p>
+                  <p className="mt-2 font-mono text-[10px] leading-5 text-slate-600">
+                    {group.items.join(" · ")}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
