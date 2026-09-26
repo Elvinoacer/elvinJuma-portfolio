@@ -4,126 +4,97 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { site } from "@/data/site";
 
+const links = [
+  { label: "work", href: "/#work" },
+  { label: "archive", href: "/projects" },
+  { label: "about", href: "/about" },
+  { label: "contact", href: "/contact" },
+];
+
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href.startsWith("#")) {
-      e.preventDefault();
-      const targetId = href.replace("#", "");
-      const targetElement = document.getElementById(targetId);
-      if (targetElement) {
-        const topOffset = 70;
-        const elementPosition = targetElement.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - topOffset;
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: "smooth",
-        });
-      }
-    }
-  };
-
   return (
-    <footer className="relative overflow-hidden border-t border-white/[0.06] bg-[#0c0d10] py-14">
-      <div className="pointer-events-none absolute inset-0 bg-grid-subtle opacity-30" />
+    <footer className="relative overflow-hidden border-t border-white/[0.07] bg-[#070909] py-14 sm:py-16">
+      <div className="portfolio-grid pointer-events-none absolute inset-0 opacity-[0.14]" />
 
-      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8 pb-10 border-b border-white/[0.06]">
-          {/* Brand */}
-          <div className="flex flex-col items-center md:items-start text-center md:text-left">
-            <Link
-              href="/#hero-section"
-              onClick={(e) => handleNavClick(e, "#hero-section")}
-              className="flex items-center gap-2 font-bold text-lg text-white group cursor-link"
-            >
-              <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#66d9ed] font-mono text-xs font-bold text-[#0f0f11]">
-                E
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-10 border-b border-white/[0.07] pb-10 lg:grid-cols-[1.2fr_.8fr] lg:items-end">
+          <div>
+            <div className="flex items-center gap-3">
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-lime-300/20 bg-lime-300/[0.06] font-mono text-sm font-bold text-lime-300">
+                EJ
               </span>
-              <span>Elvin Juma</span>
-            </Link>
-            <p className="mt-2 text-xs text-slate-400 max-w-sm">
-              Founding Engineer &amp; Full-Stack Developer creating resilient software systems.
+              <div>
+                <p className="font-mono text-xs font-semibold text-white">elvin://build</p>
+                <p className="mt-0.5 font-mono text-[9px] text-slate-600">
+                  Kenya · product systems · full-stack
+                </p>
+              </div>
+            </div>
+
+            <h2 className="mt-7 max-w-2xl text-3xl font-semibold tracking-[-0.045em] text-white sm:text-4xl">
+              Build something that still makes sense after the demo ends.
+            </h2>
+            <p className="mt-3 max-w-xl text-sm leading-6 text-slate-500">
+              I work across product thinking, interface design, architecture, data,
+              integrations and the reliability work that turns software into an operating system.
             </p>
           </div>
 
-          {/* Quick Monospace Links */}
-          <div className="flex flex-wrap justify-center gap-6 font-mono text-xs text-slate-400">
-            <a
-              href="#hero-section"
-              onClick={(e) => handleNavClick(e, "#hero-section")}
-              className="hover:text-[#66d9ed] transition-colors cursor-link"
-            >
-              // home
-            </a>
-            <a
-              href="#expertise"
-              onClick={(e) => handleNavClick(e, "#expertise")}
-              className="hover:text-[#66d9ed] transition-colors cursor-link"
-            >
-              // expertise
-            </a>
-            <a
-              href="#work"
-              onClick={(e) => handleNavClick(e, "#work")}
-              className="hover:text-[#66d9ed] transition-colors cursor-link"
-            >
-              // work
-            </a>
-            <a
-              href="#experience"
-              onClick={(e) => handleNavClick(e, "#experience")}
-              className="hover:text-[#66d9ed] transition-colors cursor-link"
-            >
-              // experience
-            </a>
-            <a
-              href="#contact"
-              onClick={(e) => handleNavClick(e, "#contact")}
-              className="hover:text-[#66d9ed] transition-colors cursor-link"
-            >
-              // contact
-            </a>
-          </div>
+          <div className="lg:justify-self-end">
+            <p className="font-mono text-[9px] uppercase tracking-[0.17em] text-slate-600">
+              Navigation
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {links.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="rounded-full border border-white/[0.07] px-3.5 py-2 font-mono text-[10px] text-slate-500 transition hover:border-lime-300/25 hover:text-lime-300"
+                >
+                  /{item.label}
+                </Link>
+              ))}
+            </div>
 
-          {/* Socials */}
-          <div className="flex items-center gap-4">
-            <a
-              href={site.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-full border border-white/10 bg-white/[0.03] p-2 text-slate-400 hover:border-[#66d9ed] hover:text-[#66d9ed] transition-colors cursor-link"
-              aria-label="GitHub"
-            >
-              <span className="font-mono text-xs px-1">GitHub</span>
-            </a>
-            <a
-              href={site.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-full border border-white/10 bg-white/[0.03] p-2 text-slate-400 hover:border-[#66d9ed] hover:text-[#66d9ed] transition-colors cursor-link"
-              aria-label="LinkedIn"
-            >
-              <span className="font-mono text-xs px-1">LinkedIn</span>
-            </a>
-            <a
-              href={site.resume}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1 rounded-full border border-[#66d9ed]/30 bg-[#66d9ed]/10 px-3 py-1.5 font-mono text-xs text-[#66d9ed] hover:bg-[#66d9ed] hover:text-[#0f0f11] transition-all cursor-link"
-            >
-              <span>Resume</span>
-              <ArrowUpRight className="h-3 w-3" />
-            </a>
+            <div className="mt-5 flex flex-wrap gap-2">
+              <a
+                href={site.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 font-mono text-[10px] text-slate-400 transition hover:text-white"
+              >
+                GitHub <ArrowUpRight className="h-3 w-3" />
+              </a>
+              <span className="text-slate-800">·</span>
+              <a
+                href={site.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 font-mono text-[10px] text-slate-400 transition hover:text-white"
+              >
+                LinkedIn <ArrowUpRight className="h-3 w-3" />
+              </a>
+              <span className="text-slate-800">·</span>
+              <a
+                href={site.resume}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 font-mono text-[10px] text-lime-300 transition hover:text-lime-200"
+              >
+                Résumé <ArrowUpRight className="h-3 w-3" />
+              </a>
+            </div>
           </div>
         </div>
 
-        <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-slate-500 text-center sm:text-left">
-          <p>© {currentYear}. Made with passion by {site.name}. All rights reserved.</p>
-          <div className="flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-[#66d9ed] animate-pulse" />
-            <span className="text-slate-400">Built in Next.js 16 &amp; TypeScript</span>
-          </div>
+        <div className="mt-7 flex flex-col gap-3 font-mono text-[9px] uppercase tracking-[0.12em] text-slate-700 sm:flex-row sm:items-center sm:justify-between">
+          <p>© {currentYear} {site.name}</p>
+          <p className="inline-flex items-center gap-2">
+            <span className="h-1.5 w-1.5 rounded-full bg-lime-300 shadow-[0_0_10px_rgba(190,242,100,.7)]" />
+            Next.js 16 · TypeScript · built to keep evolving
+          </p>
         </div>
       </div>
     </footer>
