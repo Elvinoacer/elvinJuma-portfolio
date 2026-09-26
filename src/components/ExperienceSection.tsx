@@ -13,19 +13,19 @@ export default function ExperienceSection() {
   };
 
   const icons = [
-    <Building2 key="1" className="h-5 w-5 text-[#66d9ed]" />,
-    <Code key="2" className="h-5 w-5 text-[#66d9ed]" />,
-    <GraduationCap key="3" className="h-5 w-5 text-[#66d9ed]" />,
+    <Building2 key="1" className="h-5 w-5 text-lime-300" />,
+    <Code key="2" className="h-5 w-5 text-lime-300" />,
+    <GraduationCap key="3" className="h-5 w-5 text-lime-300" />,
   ];
 
   return (
     <section
       id="experience"
-      className="relative overflow-hidden py-24 sm:py-32 border-t border-white/[0.05] bg-[#0f0f11]"
+      className="relative overflow-hidden border-t border-white/[0.06] bg-[#090b0b] py-24 sm:py-32"
     >
-      <div className="pointer-events-none absolute top-1/2 -right-32 h-[450px] w-[450px] rounded-full bg-[#df058d]/5 blur-[150px]" />
+      <div className="pointer-events-none absolute top-1/2 -right-32 h-[450px] w-[450px] rounded-full bg-lime-300/[0.025] blur-[150px]" />
 
-      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Heading */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -34,12 +34,15 @@ export default function ExperienceSection() {
           transition={{ duration: 0.6 }}
           className="mb-16"
         >
-          <h2 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl leading-tight">
-            Professional <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400">
-              Experience
-            </span>
+          <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-lime-300">
+            Build history
+          </p>
+          <h2 className="mt-4 max-w-3xl text-4xl font-semibold tracking-[-0.05em] text-white sm:text-5xl">
+            The roles changed as ownership expanded.
           </h2>
+          <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-500 sm:text-base">
+            From client delivery to founding products, the common thread is increasingly owning the system end to end.
+          </p>
         </motion.div>
 
         {/* Ohio-Style Accordion List */}
@@ -55,7 +58,7 @@ export default function ExperienceSection() {
                 transition={{ duration: 0.45, delay: index * 0.1 }}
                 className={`overflow-hidden rounded-2xl border transition-all duration-300 ${
                   isOpen
-                    ? "border-[#66d9ed]/40 bg-[#15161c] shadow-[0_0_30px_rgba(0,0,0,0.4)]"
+                    ? "border-lime-300/25 bg-[#15161c] shadow-[0_0_30px_rgba(0,0,0,0.4)]"
                     : "border-white/[0.08] bg-[#121318] hover:border-white/20"
                 }`}
               >
@@ -73,7 +76,7 @@ export default function ExperienceSection() {
                     <div className="min-w-0">
                       <h3 className="text-base font-bold text-white sm:text-lg truncate">
                         {item.role}{" "}
-                        <span className="text-[#66d9ed] font-medium">@ {item.org}</span>
+                        <span className="text-lime-300 font-medium">@ {item.org}</span>
                       </h3>
                     </div>
                   </div>
@@ -85,7 +88,7 @@ export default function ExperienceSection() {
                     <div
                       className={`flex h-8 w-8 items-center justify-center rounded-full border transition-all duration-300 ${
                         isOpen
-                          ? "border-[#66d9ed] bg-[#66d9ed]/10 text-[#66d9ed] rotate-180"
+                          ? "border-lime-300/30 bg-lime-300/[0.06] text-lime-300 rotate-180"
                           : "border-white/10 bg-white/[0.03] text-slate-400"
                       }`}
                     >
@@ -107,7 +110,7 @@ export default function ExperienceSection() {
                       <div className="border-t border-white/[0.06] p-6 pt-4 text-sm sm:px-8 sm:pb-8">
                         <div className="flex flex-wrap items-center gap-4 mb-4 font-mono text-xs text-slate-400">
                           <span className="flex items-center gap-1.5 text-slate-300">
-                            <Globe className="h-3.5 w-3.5 text-[#66d9ed]" />
+                            <Globe className="h-3.5 w-3.5 text-lime-300" />
                             {item.location}
                           </span>
                           <span className="sm:hidden text-slate-500">• {item.period}</span>
@@ -119,7 +122,7 @@ export default function ExperienceSection() {
                               key={pIdx}
                               className="flex items-start gap-2.5 text-slate-300 leading-relaxed text-sm"
                             >
-                              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#66d9ed]" />
+                              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-lime-300" />
                               <span>{point}</span>
                             </li>
                           ))}
@@ -138,15 +141,15 @@ export default function ExperienceSection() {
                                   href={p.href}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="group flex items-center justify-between p-3 rounded-xl border border-white/[0.06] bg-white/[0.02] hover:border-[#66d9ed]/40 hover:bg-white/[0.04] transition-all cursor-link"
+                                  className="group flex items-center justify-between p-3 rounded-xl border border-white/[0.06] bg-white/[0.02] hover:border-lime-300/25 hover:bg-white/[0.04] transition-all cursor-link"
                                 >
                                   <div>
-                                    <p className="font-medium text-white text-xs group-hover:text-[#66d9ed] transition-colors">
+                                    <p className="font-medium text-white text-xs group-hover:text-lime-300 transition-colors">
                                       {p.name}
                                     </p>
                                     <p className="text-[11px] text-slate-500">{p.role}</p>
                                   </div>
-                                  <ArrowUpRight className="h-3.5 w-3.5 text-slate-500 group-hover:text-[#66d9ed] transition-colors" />
+                                  <ArrowUpRight className="h-3.5 w-3.5 text-slate-500 group-hover:text-lime-300 transition-colors" />
                                 </a>
                               ))}
                             </div>
