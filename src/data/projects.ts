@@ -27,7 +27,7 @@ export interface Project {
   tools: string[];
   integrations?: string[];
   highlights?: string[];
-  image?: string;
+  image: string;
   tone?: ProjectTone;
   visualLabel?: string;
   link: string;
@@ -66,6 +66,7 @@ export const projects: Project[] = [
       "Shared medicine library, storefronts, prescriptions, campaigns",
     ],
     tone: "lime",
+    image: "",
     visualLabel: "PHARMACY NETWORK / 2026",
     link: "https://afyvia.gtss.software",
     repo: "Elvinoacer/pharmacy_template_tier2",
