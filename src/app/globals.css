@@ -1,23 +1,23 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0f0f11;
-  --foreground: #e2e8f0;
+  --background: #070909;
+  --foreground: #e5e7eb;
   --muted: #8b949e;
-  --surface: #15161b;
-  --surface-2: #1c1d24;
+  --surface: #0c1010;
+  --surface-2: #111616;
   --border: rgba(255, 255, 255, 0.07);
   --border-strong: rgba(255, 255, 255, 0.12);
-  --brand-color: #66d9ed;
-  --brand-accent: #66d9ed;
-  --font-poppins: 'Poppins', system-ui, -apple-system, sans-serif;
+  --brand-color: #bef264;
+  --brand-accent: #67e8f9;
+  --font-manrope: 'Manrope', system-ui, -apple-system, sans-serif;
   --font-roboto-mono: 'Roboto Mono', monospace;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: 'Poppins', system-ui, -apple-system, sans-serif;
+  --font-sans: 'Manrope', system-ui, -apple-system, sans-serif;
   --font-mono: 'Roboto Mono', monospace;
 }
 
@@ -27,15 +27,15 @@
 
 html {
   scroll-behavior: smooth;
-  background-color: #0f0f11;
-  color: #e2e8f0;
+  background-color: #070909;
+  color: #e5e7eb;
 }
 
 body {
-  background-color: #0f0f11;
-  color: #e2e8f0;
+  background-color: #070909;
+  color: #e5e7eb;
   min-height: 100vh;
-  font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+  font-family: 'Manrope', system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -43,7 +43,7 @@ body {
 }
 
 /* ==========================================================================
-   CHONKY UNDERLINES (Signature Creative DNA from Tamal Sen)
+   CHONKY UNDERLINES (Legacy underline utilities)
    ========================================================================== */
 
 .chonky-underline-megenta {
@@ -143,7 +143,7 @@ body {
 }
 
 /* ==========================================================================
-   CODE EDITOR STYLE (Signature Style from Tamal Sen)
+   CODE EDITOR STYLE (Code-editor utility)
    ========================================================================== */
 
 .code-editor-style {
@@ -283,4 +283,46 @@ body {
     linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
   background-size: 56px 56px;
+}
+
+
+/* ==========================================================================
+   PERSONAL PORTFOLIO SYSTEM
+   ========================================================================== */
+
+.portfolio-grid {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 46px 46px;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,0.95), rgba(0,0,0,0.28));
+}
+
+.portfolio-grid::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(190, 242, 100, 0.06), transparent 28rem),
+    radial-gradient(circle at 80% 22%, rgba(103, 232, 249, 0.045), transparent 24rem);
+  pointer-events: none;
+}
+
+::selection {
+  background: rgba(190, 242, 100, 0.22);
+  color: #fff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

@@ -35,7 +35,7 @@ const testimonials = [
 
 export default function TestimonialsSection() {
   return (
-    <section className="relative overflow-hidden py-24 sm:py-32 border-t border-white/[0.05] bg-[#0f0f11]">
+    <section className="relative overflow-hidden py-24 sm:py-32 border-t border-white/[0.05] bg-[#070909]">
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -44,7 +44,7 @@ export default function TestimonialsSection() {
           transition={{ duration: 0.6 }}
           className="mb-14 text-center sm:text-left"
         >
-          <p className="font-mono text-xs uppercase tracking-[0.25em] text-[#66d9ed]">
+          <p className="font-mono text-xs uppercase tracking-[0.25em] text-lime-300">
             Endorsements
           </p>
           <h2 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
@@ -60,7 +60,7 @@ export default function TestimonialsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="has-quote-watermark relative flex flex-col justify-between rounded-3xl border border-white/[0.08] bg-[#14151a] p-7 transition-all duration-300 hover:border-white/20 hover:bg-[#181920]"
+              className="has-quote-watermark relative flex flex-col justify-between rounded-3xl border border-white/[0.08] bg-[#0c1010] p-7 transition-all duration-300 hover:border-white/20 hover:bg-[#181920]"
             >
               <div>
                 <p className="relative z-10 text-sm leading-relaxed text-slate-300">
@@ -88,7 +88,7 @@ export default function TestimonialsSection() {
                       href={item.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[#66d9ed] hover:underline cursor-link"
+                      className="text-lime-300 hover:underline cursor-link"
                     >
                       {item.company}
                     </a>

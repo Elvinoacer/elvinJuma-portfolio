@@ -9,36 +9,40 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://elvin-juma-portfolio.vercel.app"),
   title: {
-    default: `${site.name} - Software Engineer, Front-end & App Developer`,
+    default: `${site.name} · Founding Engineer & Product Systems Builder`,
     template: `%s | ${site.name}`,
   },
   description: site.tagline,
   keywords: [
-    "Software Engineer",
-    "Full-Stack Developer",
-    "Next.js Developer",
-    "TypeScript Engineer",
-    "React Developer Kenya",
-    "Great Thumbs Software Solutions",
-    "Founding Engineer",
-    "PostgreSQL",
+    "Elvin Omondi Juma",
+    "Founding Engineer Kenya",
+    "Full-Stack Developer Kenya",
     "Product Engineer",
-    "Tamal Sen style portfolio",
+    "Next.js 16 Developer",
+    "React 19 Developer",
+    "TypeScript Engineer",
+    "PostgreSQL",
+    "Prisma",
+    "M-Pesa Daraja Developer",
+    "Realtime Systems",
+    "Multi-tenant SaaS",
+    "Great Thumbs Software Solutions",
+    "Afyvia",
   ],
   authors: [{ name: site.name, url: site.github }],
   creator: site.name,
   openGraph: {
     type: "website",
     url: "https://elvin-juma-portfolio.vercel.app",
-    title: `${site.name} - Software Engineer, Front-end & App Developer`,
+    title: `${site.name} · Founding Engineer & Product Systems Builder`,
     description: site.tagline,
     images: [{ url: "/images/elvin-logo-1.png", width: 1200, height: 630 }],
-    locale: "en_US",
+    locale: "en_KE",
     siteName: site.name,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} - Software Engineer, Front-end & App Developer`,
+    title: `${site.name} · Founding Engineer & Product Systems Builder`,
     description: site.tagline,
   },
   robots: {
@@ -58,11 +62,11 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto+Mono:wght@400;500;600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body className="bg-[#0f0f11] text-[#e2e8f0] font-sans antialiased selection:bg-[#66d9ed]/25 selection:text-white">
+      <body className="bg-[#070909] text-slate-200 font-sans antialiased selection:bg-lime-300/25 selection:text-white">
         <CustomCursor />
         <ScrollToTop />
         <Header />

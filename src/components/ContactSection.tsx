@@ -52,10 +52,10 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden py-24 sm:py-32 border-t border-white/[0.05] bg-[#0f0f11]"
+      className="relative overflow-hidden py-24 sm:py-32 border-t border-white/[0.05] bg-[#070909]"
     >
       <div className="pointer-events-none absolute bottom-0 right-0 h-[500px] w-[500px] rounded-full bg-[#9440e8]/5 blur-[160px]" />
-      <div className="pointer-events-none absolute top-10 left-10 h-[400px] w-[400px] rounded-full bg-[#66d9ed]/5 blur-[140px]" />
+      <div className="pointer-events-none absolute top-10 left-10 h-[400px] w-[400px] rounded-full bg-lime-300/5 blur-[140px]" />
 
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
         <div className="grid gap-14 lg:grid-cols-12 lg:gap-16 items-start">
@@ -99,7 +99,7 @@ export default function ContactSection() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 font-mono text-sm text-slate-400 hover:text-[#66d9ed] transition-colors cursor-link"
+                    className="inline-flex items-center gap-1.5 font-mono text-sm text-slate-400 hover:text-lime-300 transition-colors cursor-link"
                   >
                     <span>{link.name}</span>
                     <ExternalLink className="h-3 w-3 text-slate-500" />
@@ -109,10 +109,10 @@ export default function ContactSection() {
             </div>
 
             {/* Quick Status Pill */}
-            <div className="mt-10 inline-flex items-center gap-2.5 rounded-full border border-[#66d9ed]/25 bg-[#66d9ed]/10 px-4 py-2 text-xs font-mono text-[#66d9ed]">
+            <div className="mt-10 inline-flex items-center gap-2.5 rounded-full border border-lime-300/25 bg-lime-300/10 px-4 py-2 text-xs font-mono text-lime-300">
               <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#66d9ed] opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-[#66d9ed]" />
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-lime-300 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-lime-300" />
               </span>
               <span>Available for projects in {new Date().getFullYear()}</span>
             </div>
@@ -126,9 +126,9 @@ export default function ContactSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="lg:col-span-6"
           >
-            <div className="rounded-3xl border border-white/10 bg-[#15161c] p-7 sm:p-9 shadow-2xl backdrop-blur-sm">
+            <div className="rounded-3xl border border-white/10 bg-[#0c1010] p-7 sm:p-9 shadow-2xl backdrop-blur-sm">
               <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2.5">
-                <MessageSquare className="h-5 w-5 text-[#66d9ed]" />
+                <MessageSquare className="h-5 w-5 text-lime-300" />
                 <span>Send a Message</span>
               </h3>
 
@@ -148,7 +148,7 @@ export default function ContactSection() {
                       onChange={handleChange}
                       placeholder="e.g. John Doe"
                       required
-                      className="w-full rounded-xl border border-white/10 bg-[#0f0f11] px-4 py-3 font-sans text-sm text-white placeholder:text-slate-600 focus:border-[#66d9ed] focus:outline-none focus:ring-1 focus:ring-[#66d9ed] transition-all"
+                      className="w-full rounded-xl border border-white/10 bg-[#070909] px-4 py-3 font-sans text-sm text-white placeholder:text-slate-600 focus:border-lime-300 focus:outline-none focus:ring-1 focus:ring-[#bef264] transition-all"
                     />
                   </div>
 
@@ -167,7 +167,7 @@ export default function ContactSection() {
                       onChange={handleChange}
                       placeholder="e.g. john@company.com"
                       required
-                      className="w-full rounded-xl border border-white/10 bg-[#0f0f11] px-4 py-3 font-sans text-sm text-white placeholder:text-slate-600 focus:border-[#66d9ed] focus:outline-none focus:ring-1 focus:ring-[#66d9ed] transition-all"
+                      className="w-full rounded-xl border border-white/10 bg-[#070909] px-4 py-3 font-sans text-sm text-white placeholder:text-slate-600 focus:border-lime-300 focus:outline-none focus:ring-1 focus:ring-[#bef264] transition-all"
                     />
                   </div>
                 </div>
@@ -187,14 +187,14 @@ export default function ContactSection() {
                     onChange={handleChange}
                     placeholder="Tell me about your project, timeline, or idea..."
                     required
-                    className="w-full resize-none rounded-xl border border-white/10 bg-[#0f0f11] px-4 py-3 font-sans text-sm text-white placeholder:text-slate-600 focus:border-[#66d9ed] focus:outline-none focus:ring-1 focus:ring-[#66d9ed] transition-all"
+                    className="w-full resize-none rounded-xl border border-white/10 bg-[#070909] px-4 py-3 font-sans text-sm text-white placeholder:text-slate-600 focus:border-lime-300 focus:outline-none focus:ring-1 focus:ring-[#bef264] transition-all"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#66d9ed] py-3.5 font-mono text-xs font-bold text-[#0f0f11] transition-all hover:bg-[#52cde2] hover:shadow-[0_0_25px_rgba(102,217,237,0.4)] disabled:opacity-60 cursor-link"
+                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-lime-300 py-3.5 font-mono text-xs font-bold text-[#070909] transition-all hover:bg-[#52cde2] hover:shadow-[0_0_25px_rgba(102,217,237,0.4)] disabled:opacity-60 cursor-link"
                 >
                   {isSubmitting ? (
                     <>
