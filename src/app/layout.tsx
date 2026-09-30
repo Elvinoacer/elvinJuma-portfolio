@@ -1,15 +1,24 @@
 import type { Metadata } from "next";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import CustomCursor from "../components/CustomCursor";
-import ScrollToTop from "../components/ScrollToTop";
+import localFont from "next/font/local";
+
 import { site } from "../data/site";
 import "./globals.css";
+
+const manrope = localFont({
+  src: [
+    { path: "./fonts/Manrope-Regular.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/Manrope-Semibold.woff2", weight: "500 600", style: "normal" },
+    { path: "./fonts/Manrope-ExtraBold.woff2", weight: "700 800", style: "normal" },
+  ], variable: "--font-manrope", display: "swap",
+});
+const mono = localFont({ src: "./fonts/DMMono-Regular.woff2", variable: "--font-dm-mono", display: "swap", preload: false });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://elvin-juma-portfolio.vercel.app"),
   title: {
-    default: `${site.name} - Software Engineer, Front-end & App Developer`,
+    default: `${site.name} - Full-Stack Engineer & Creative Developer`,
     template: `%s | ${site.name}`,
   },
   description: site.tagline,
@@ -23,14 +32,13 @@ export const metadata: Metadata = {
     "Founding Engineer",
     "PostgreSQL",
     "Product Engineer",
-    "Tamal Sen style portfolio",
   ],
   authors: [{ name: site.name, url: site.github }],
   creator: site.name,
   openGraph: {
     type: "website",
     url: "https://elvin-juma-portfolio.vercel.app",
-    title: `${site.name} - Software Engineer, Front-end & App Developer`,
+    title: `${site.name} - Full-Stack Engineer & Creative Developer`,
     description: site.tagline,
     images: [{ url: "/images/elvin-logo-1.png", width: 1200, height: 630 }],
     locale: "en_US",
@@ -38,7 +46,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} - Software Engineer, Front-end & App Developer`,
+    title: `${site.name} - Full-Stack Engineer & Creative Developer`,
     description: site.tagline,
   },
   robots: {
@@ -53,20 +61,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto+Mono:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body className="bg-[#0f0f11] text-[#e2e8f0] font-sans antialiased selection:bg-[#66d9ed]/25 selection:text-white">
-        <CustomCursor />
-        <ScrollToTop />
+    <html lang="en" className={`${manrope.variable} ${mono.variable}`}>
+      <body>
+        <a href="#main-content" className="skip-link">Skip to content</a>
         <Header />
-        <main className="relative min-h-screen">{children}</main>
+        <main id="main-content" className="relative min-h-screen" tabIndex={-1}>{children}</main>
         <Footer />
       </body>
     </html>

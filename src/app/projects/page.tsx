@@ -1,152 +1,47 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import ProjectCard from "@/components/ProjectCard";
-import { projects, type ProjectCategory } from "@/data/projects";
-import { githubProfile } from "@/data/github";
-import { fadeUp } from "@/lib/motion";
+import { useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import ProjectCard from "@/components/ProjectCard";
+import ProjectDetails from "@/components/ProjectDetails";
+import { projects, type Project, type ProjectCategory } from "@/data/projects";
+import { site } from "@/data/site";
 
-const filters: ("All" | ProjectCategory)[] = [
-  "All",
-  "Product",
-  "Platform",
-  "Education",
-  "Commerce",
-  "Experiment",
-];
+const filters: ("All" | ProjectCategory)[] = ["All", "Product", "Platform", "Education", "Commerce", "Experiment"];
 
 export default function Projects() {
   const [filter, setFilter] = useState<(typeof filters)[number]>("All");
-
-  const filtered = useMemo(() => {
-    if (filter === "All") return projects;
-    return projects.filter((p) => p.category === filter);
-  }, [filter]);
-
-  const featuredCount = projects.filter((p) => p.featured).length;
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const reduceMotion = useReducedMotion();
+  const filtered = filter === "All" ? projects : projects.filter((project) => project.category === filter);
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-[#030712] pb-20 pt-28 sm:pt-32">
-      <div className="pointer-events-none absolute inset-0 bg-radial-fade" />
-      <div className="pointer-events-none absolute inset-0 bg-grid opacity-40" />
-
-      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={fadeUp}
-          className="mb-10 max-w-3xl sm:mb-12"
-        >
-          <p className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-emerald-400/90">
-            Portfolio
-          </p>
-          <h1 className="text-balance text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-5xl">
-            Work that left the building.
-          </h1>
-          <p className="mt-4 text-base leading-relaxed text-slate-400 sm:text-lg">
-            From multi-tenant education platforms to hotel ops and commerce —
-            each project is a real problem solved with production constraints.
-          </p>
+    <section className="min-h-screen bg-[#10110f] pb-24 pt-32 text-[#f4f3ed] sm:pt-40 md:pb-32">
+      <div className="mx-auto max-w-[1440px] px-6 md:px-12">
+        <Link href="/" className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.12em] text-[#93978a] transition-colors hover:text-[#d7fb78]"><ArrowLeft className="h-3.5 w-3.5" aria-hidden="true" /> Back to home</Link>
+        <motion.div initial={reduceMotion ? false : { opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="mb-14 mt-14 flex flex-col justify-between gap-7 md:mb-20 md:flex-row md:items-end">
+          <div><p className="mb-6 font-mono text-[10px] uppercase tracking-[0.16em] text-[#d7fb78]">The project archive</p><h1 className="text-[clamp(3.5rem,9vw,8rem)] font-medium leading-[0.96] tracking-[-0.065em]">Built with<br /><span className="text-[#93978a]">intent.</span></h1></div>
+          <div className="max-w-[350px] md:pb-1"><p className="text-base leading-[1.8] text-[#a6aa9f]">Production platforms, client work, and experiments. A look at the problems I solve and how I build.</p><p className="mt-6 font-mono text-[10px] uppercase tracking-[0.13em] text-[#93978a]">{projects.length} projects / {filters.length - 1} disciplines</p></div>
         </motion.div>
-
-        {/* Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.15 }}
-          className="mb-10 grid grid-cols-2 gap-3 sm:mb-12 sm:grid-cols-4"
-        >
-          {[
-            { v: `${projects.length}`, l: "Projects listed" },
-            { v: `${featuredCount}`, l: "Featured production" },
-            {
-              v: githubProfile.totalContributions.toLocaleString(),
-              l: "GH contributions",
-            },
-            { v: String(githubProfile.totalRepos), l: "Repositories" },
-          ].map((s) => (
-            <div
-              key={s.l}
-              className="rounded-xl border border-white/[0.06] bg-white/[0.02] px-4 py-3.5"
-            >
-              <p className="text-xl font-semibold text-white sm:text-2xl">
-                {s.v}
-              </p>
-              <p className="text-[11px] text-slate-500 sm:text-xs">{s.l}</p>
-            </div>
-          ))}
-        </motion.div>
-
-        {/* Filters */}
-        <div className="mb-8 flex flex-wrap gap-2">
-          {filters.map((f) => (
-            <button
-              key={f}
-              type="button"
-              onClick={() => setFilter(f)}
-              className={`rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors sm:text-sm ${
-                filter === f
-                  ? "bg-emerald-500 text-slate-950"
-                  : "border border-white/10 bg-white/[0.02] text-slate-400 hover:text-slate-200"
-              }`}
-            >
-              {f}
-            </button>
-          ))}
+        <div aria-label="Filter projects by category" role="group" className="mb-4 flex flex-wrap items-center gap-2 border-t border-white/12 pt-6 sm:gap-3">
+          {filters.map((category) => {
+            const count = category === "All" ? projects.length : projects.filter((project) => project.category === category).length;
+            return <button key={category} type="button" aria-pressed={filter === category} onClick={() => setFilter(category)} className={`inline-flex min-h-11 items-center gap-2 rounded-full border px-4 py-2 text-xs transition-colors ${filter === category ? "border-[#d7fb78] bg-[#d7fb78] text-[#10110f]" : "border-white/12 text-[#a6aa9f] hover:border-white/35 hover:text-[#f4f3ed]"}`}>{category}<span className="font-mono text-[9px] opacity-60">{String(count).padStart(2, "0")}</span></button>;
+          })}
         </div>
-
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={filter}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.25 }}
-            className="grid gap-5 sm:grid-cols-2 sm:gap-6"
-          >
-            {filtered.map((project, index) => (
-              <motion.div
-                key={project.id}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: Math.min(index * 0.04, 0.3) }}
-              >
-                <ProjectCard {...project} />
-              </motion.div>
-            ))}
-          </motion.div>
-        </AnimatePresence>
-
-        {filtered.length === 0 && (
-          <p className="py-16 text-center text-slate-500">
-            No projects in this category yet.
-          </p>
-        )}
-
-        <div className="mt-16 flex flex-col items-center gap-5 border-t border-white/[0.06] pt-12 text-center">
-          <p className="text-lg text-slate-300">
-            Have a problem that needs a builder?
-          </p>
-          <div className="flex flex-wrap justify-center gap-3">
-            <Link
-              href="/contact"
-              className="rounded-xl bg-emerald-500 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-emerald-400"
-            >
-              Get in touch
-            </Link>
-            <a
-              href={githubProfile.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-xl border border-white/10 px-6 py-3 text-sm text-slate-300 transition hover:border-emerald-500/30 hover:text-white"
-            >
-              View GitHub
-            </a>
+        <p aria-live="polite" aria-atomic="true" className="mb-8 font-mono text-[10px] text-[#93978a]">Showing {filtered.length} {filter === "All" ? "projects" : `${filter.toLowerCase()} ${filtered.length === 1 ? "project" : "projects"}`}</p>
+        <div className="grid gap-x-8 gap-y-14 md:grid-cols-2 md:gap-y-20">{filtered.map((project, index) => <ProjectCard key={project.id} {...project} index={index} onSelect={setSelectedProject} />)}</div>
+        <div className="mt-20 flex flex-col justify-between gap-7 border-t border-white/12 pt-10 sm:flex-row sm:items-center md:mt-28">
+          <p className="text-2xl font-medium tracking-[-0.035em] sm:text-3xl">What are we building next?</p>
+          <div className="flex flex-wrap items-center gap-6">
+            <a href={site.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-xs text-[#93978a] transition-colors hover:text-[#d7fb78]">Explore GitHub <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" /></a>
+            <Link href="/contact" className="inline-flex items-center gap-5 rounded-full bg-[#d7fb78] px-6 py-4 text-xs font-semibold text-[#10110f] transition-colors hover:bg-[#e4ffae]">Let&apos;s talk <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></Link>
           </div>
         </div>
       </div>
+      {selectedProject ? <ProjectDetails project={selectedProject} onClose={() => setSelectedProject(null)} /> : null}
     </section>
   );
 }

@@ -1,164 +1,80 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, Code, Globe, Building2, GraduationCap, ArrowUpRight } from "lucide-react";
-import { experience, productsShipped } from "@/data/site";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowUpRight, Plus } from "lucide-react";
+import { experience, site } from "@/data/site";
 
 export default function ExperienceSection() {
-  const [openIndex, setOpenIndex] = useState<number>(0);
-
-  const toggleAccordion = (index: number) => {
-    setOpenIndex(openIndex === index ? -1 : index);
-  };
-
-  const icons = [
-    <Building2 key="1" className="h-5 w-5 text-[#66d9ed]" />,
-    <Code key="2" className="h-5 w-5 text-[#66d9ed]" />,
-    <GraduationCap key="3" className="h-5 w-5 text-[#66d9ed]" />,
-  ];
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const reduceMotion = useReducedMotion();
 
   return (
-    <section
-      id="experience"
-      className="relative overflow-hidden py-24 sm:py-32 border-t border-white/[0.05] bg-[#0f0f11]"
-    >
-      <div className="pointer-events-none absolute top-1/2 -right-32 h-[450px] w-[450px] rounded-full bg-[#df058d]/5 blur-[150px]" />
+    <section id="about" aria-labelledby="about-heading" className="border-t border-white/12 bg-[#10110f] py-24 text-[#f4f3ed] sm:py-32">
+      <div className="mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-16">
+        <div className="mb-14 flex items-center justify-between border-b border-white/12 pb-5 font-mono text-[10px] uppercase tracking-[0.18em] sm:text-xs">
+          <span className="flex items-center gap-3"><span className="h-1.5 w-1.5 rounded-full bg-[#d7fb78]" /> The person behind the pixels</span>
+          <span className="hidden text-[#a2a59b] sm:block">02 / About & experience</span>
+        </div>
 
-      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
-        {/* Section Heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mb-16"
-        >
-          <h2 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl leading-tight">
-            Professional <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400">
-              Experience
-            </span>
-          </h2>
-        </motion.div>
+        <div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24">
+          <motion.div initial={reduceMotion ? false : { opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.7 }}>
+            <div className="group relative max-w-[390px]">
+              <div className="relative aspect-[4/4.4] overflow-hidden rounded-sm bg-[#23251f]">
+                <Image src="/images/potrait5.webp" alt="Elvin Omondi Juma" fill sizes="(max-width: 1024px) 390px, 32vw" className="object-cover object-[50%_60%] grayscale transition-all duration-700 group-hover:scale-[1.025] group-hover:grayscale-0 motion-reduce:transition-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
+                <p className="absolute bottom-5 left-5 font-mono text-[10px] uppercase tracking-[0.16em] text-white/80">Eldoret, Kenya · Working everywhere</p>
+              </div>
+              <div className="absolute -right-3 -bottom-5 flex h-24 w-24 rotate-[-8deg] items-center justify-center rounded-full bg-[#d7fb78] text-center font-mono text-[10px] uppercase leading-relaxed tracking-wider text-[#10110f] sm:-right-6 sm:h-28 sm:w-28">Curious mind.<br />Builder at heart.</div>
+            </div>
+            <div className="mt-10">
+              <p className="text-xl font-semibold tracking-tight">{site.name}</p>
+              <p className="mt-2 text-sm text-[#a2a59b]">Founding engineer. Full-stack developer.</p>
+              <Link href="/about" className="group mt-7 inline-flex items-center gap-6 border-b border-white/30 pb-2 text-sm font-medium transition-colors hover:border-[#d7fb78] hover:text-[#d7fb78]">
+                A little more about me <ArrowUpRight size={17} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 motion-reduce:transform-none" />
+              </Link>
+            </div>
+          </motion.div>
 
-        {/* Ohio-Style Accordion List */}
-        <div className="space-y-4 max-w-4xl">
-          {experience.map((item, index) => {
-            const isOpen = openIndex === index;
-            return (
-              <motion.div
-                key={item.role + item.org}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.45, delay: index * 0.1 }}
-                className={`overflow-hidden rounded-2xl border transition-all duration-300 ${
-                  isOpen
-                    ? "border-[#66d9ed]/40 bg-[#15161c] shadow-[0_0_30px_rgba(0,0,0,0.4)]"
-                    : "border-white/[0.08] bg-[#121318] hover:border-white/20"
-                }`}
-              >
-                {/* Accordion Header */}
-                <button
-                  type="button"
-                  onClick={() => toggleAccordion(index)}
-                  className="flex w-full items-center justify-between gap-4 p-6 text-left cursor-link"
-                  aria-expanded={isOpen}
-                >
-                  <div className="flex items-center gap-4 min-w-0">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/[0.04] border border-white/10">
-                      {icons[index % icons.length]}
-                    </div>
-                    <div className="min-w-0">
-                      <h3 className="text-base font-bold text-white sm:text-lg truncate">
-                        {item.role}{" "}
-                        <span className="text-[#66d9ed] font-medium">@ {item.org}</span>
-                      </h3>
-                    </div>
+          <div>
+            <motion.div initial={reduceMotion ? false : { opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.1 }}>
+              <h2 id="about-heading" className="max-w-[680px] text-[clamp(2.3rem,4vw,3.75rem)] font-medium leading-[1.13] tracking-[-0.055em]">A thoughtful interface.<br /><span className="text-[#a2a59b]">A solid system beneath it.</span></h2>
+              <p className="mt-7 max-w-xl text-[15px] leading-7 text-[#a2a59b]">I build software for the people who use it every day. For {site.yearsShipping} years, that has meant taking education, commerce, and operations products from the first conversation to production.</p>
+              <p className="mt-4 max-w-xl text-[15px] leading-7 text-[#a2a59b]">I care as much about the data model as the last interaction. Currently building at <span className="text-[#f4f3ed]">Great Thumbs Software Solutions</span> and studying Computer Science at Moi University.</p>
+            </motion.div>
+
+            <div id="experience" className="mt-12 border-t border-white/12">
+              {experience.map((item, index) => {
+                const isOpen = openIndex === index;
+                const panelId = `experience-panel-${index}`;
+                return (
+                  <div key={item.role} className="border-b border-white/12">
+                    <h3>
+                      <button type="button" id={`experience-button-${index}`} aria-expanded={isOpen} aria-controls={panelId} onClick={() => setOpenIndex(isOpen ? null : index)} className="group flex w-full items-start justify-between gap-5 py-6 text-left">
+                        <span>
+                          <span className="mb-2 block font-mono text-[10px] uppercase tracking-wider text-[#a2a59b]">{item.period}</span>
+                          <span className="block text-lg font-medium tracking-tight transition-colors group-hover:text-[#d7fb78]">{item.role}</span>
+                          <span className="mt-1 block text-xs leading-relaxed text-[#a2a59b]">{item.org}</span>
+                        </span>
+                        <span className={`mt-4 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-colors ${isOpen ? "border-[#d7fb78] bg-[#d7fb78] text-[#10110f]" : "border-white/20 text-[#a2a59b] group-hover:border-[#d7fb78]"}`}><Plus size={16} className={`transition-transform motion-reduce:transition-none ${isOpen ? "rotate-45" : ""}`} /></span>
+                      </button>
+                    </h3>
+                    <AnimatePresence initial={false}>
+                      {isOpen && (
+                        <motion.div key={panelId} id={panelId} role="region" aria-labelledby={`experience-button-${index}`} initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: reduceMotion ? 0 : 0.25 }} className="overflow-hidden">
+                          <ul className="space-y-3 pb-7 pr-8 text-sm leading-6 text-[#a2a59b]">
+                            {item.points.map((point) => <li key={point} className="flex gap-3"><span className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-[#d7fb78]" /><span>{point}</span></li>)}
+                          </ul>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
-
-                  <div className="flex items-center gap-4 shrink-0">
-                    <span className="font-mono text-xs text-slate-400 hidden sm:inline-block">
-                      {item.period}
-                    </span>
-                    <div
-                      className={`flex h-8 w-8 items-center justify-center rounded-full border transition-all duration-300 ${
-                        isOpen
-                          ? "border-[#66d9ed] bg-[#66d9ed]/10 text-[#66d9ed] rotate-180"
-                          : "border-white/10 bg-white/[0.03] text-slate-400"
-                      }`}
-                    >
-                      <ChevronDown className="h-4 w-4" />
-                    </div>
-                  </div>
-                </button>
-
-                {/* Accordion Content */}
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      key="content"
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                    >
-                      <div className="border-t border-white/[0.06] p-6 pt-4 text-sm sm:px-8 sm:pb-8">
-                        <div className="flex flex-wrap items-center gap-4 mb-4 font-mono text-xs text-slate-400">
-                          <span className="flex items-center gap-1.5 text-slate-300">
-                            <Globe className="h-3.5 w-3.5 text-[#66d9ed]" />
-                            {item.location}
-                          </span>
-                          <span className="sm:hidden text-slate-500">• {item.period}</span>
-                        </div>
-
-                        <ul className="space-y-2.5">
-                          {item.points.map((point, pIdx) => (
-                            <li
-                              key={pIdx}
-                              className="flex items-start gap-2.5 text-slate-300 leading-relaxed text-sm"
-                            >
-                              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#66d9ed]" />
-                              <span>{point}</span>
-                            </li>
-                          ))}
-                        </ul>
-
-                        {/* Associated Shipped Products for this role */}
-                        {index === 0 && (
-                          <div className="mt-6 pt-5 border-t border-white/[0.06]">
-                            <p className="font-mono text-xs uppercase tracking-widest text-slate-400 mb-3">
-                              Products Shipped Under This Company:
-                            </p>
-                            <div className="grid gap-2.5 sm:grid-cols-2">
-                              {productsShipped.map((p) => (
-                                <a
-                                  key={p.name}
-                                  href={p.href}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="group flex items-center justify-between p-3 rounded-xl border border-white/[0.06] bg-white/[0.02] hover:border-[#66d9ed]/40 hover:bg-white/[0.04] transition-all cursor-link"
-                                >
-                                  <div>
-                                    <p className="font-medium text-white text-xs group-hover:text-[#66d9ed] transition-colors">
-                                      {p.name}
-                                    </p>
-                                    <p className="text-[11px] text-slate-500">{p.role}</p>
-                                  </div>
-                                  <ArrowUpRight className="h-3.5 w-3.5 text-slate-500 group-hover:text-[#66d9ed] transition-colors" />
-                                </a>
-                              ))}
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            );
-          })}
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
     </section>
