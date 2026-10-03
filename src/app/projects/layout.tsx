@@ -3,7 +3,7 @@ import { site } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Work",
-  description: `Selected production projects by ${site.name} — education platforms, commerce, operations systems, and product engineering.`,
+  description: `Selected projects by ${site.name} — multi-tenant SaaS, offline desktop systems, marketplaces, education platforms, mobile applications, and AI search.`,
 };
 
 export default function ProjectsLayout({

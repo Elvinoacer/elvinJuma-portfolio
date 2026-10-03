@@ -25,11 +25,7 @@ export default function ProjectsPreview() {
               Selected work
             </p>
             <h2 className="max-w-xl text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-              Products in production.
-              <span className="font-normal text-slate-500">
-                {" "}
-                Not just demos.
-              </span>
+              Software for real workflows.
             </h2>
           </motion.div>
           <Link
@@ -64,9 +60,9 @@ export default function ProjectsPreview() {
               >
                 <Image
                   src={project.image}
-                  alt={project.title}
+                  alt={project.imageAlt}
                   fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                  className="object-contain transition-transform duration-700"
                   sizes={
                     index === 0
                       ? "(max-width: 1024px) 100vw, 1100px"
@@ -118,7 +114,7 @@ export default function ProjectsPreview() {
               </div>
 
               <Link
-                href={project.link}
+                href={project.liveUrl ?? project.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="absolute inset-0 z-10 focus-ring rounded-2xl"

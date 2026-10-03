@@ -10,7 +10,9 @@ import { experience, site } from "@/data/site";
 const toolkit = [
   { area: "Interfaces", tools: "React · Next.js · TypeScript · Tailwind CSS" },
   { area: "Systems", tools: "Node.js · PostgreSQL · Prisma · Authentication" },
-  { area: "Connections", tools: "Payments · Realtime · Video · Cloud media" },
+  { area: "Connections", tools: "M-Pesa / Daraja · IntaSend · Socket.IO · REST APIs" },
+  { area: "Local & desktop", tools: "Electron · Express · SQLite · Linux · Local networks" },
+  { area: "Mobile & AI projects", tools: "Expo / React Native · Gemini · LangChain · Pinecone" },
 ];
 
 export default function About() {
@@ -26,23 +28,29 @@ export default function About() {
 
         <div className="mt-16 grid gap-12 lg:mt-24 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24">
           <motion.div initial={reduceMotion ? false : { opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.15 }}>
-            <div className="relative aspect-[4/4.6] overflow-hidden rounded-sm bg-[#24251f]">
-              <Image src="/images/potrait5.webp" alt="Elvin Omondi Juma, full-stack developer based in Eldoret, Kenya" fill priority sizes="(max-width: 1024px) 90vw, 38vw" className="object-cover object-[50%_65%] grayscale" />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-6 pb-6 pt-20"><p className="font-mono text-[10px] uppercase tracking-[0.16em] text-white/80">Based in Eldoret, Kenya</p></div>
+            <div className="relative isolate min-h-[480px] overflow-hidden sm:min-h-[620px] lg:min-h-[580px]">
+              <div className="absolute inset-0 -z-10" style={{ maskImage: "radial-gradient(ellipse 70% 58% at 50% 48%, black 20%, transparent 88%)" }}>
+                <Image src="/images/potrait5.webp" alt="" fill priority sizes="(max-width: 1024px) 90vw, 38vw" className="object-cover object-[50%_60%] opacity-45 grayscale" />
+              </div>
+              <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 opacity-40" style={{ backgroundImage: "linear-gradient(rgba(244,243,237,.10) 1px, transparent 1px), linear-gradient(90deg, rgba(244,243,237,.10) 1px, transparent 1px)", backgroundSize: "80px 80px", maskImage: "radial-gradient(ellipse at center, black 25%, transparent 75%)" }} />
+              <div aria-hidden="true" className="absolute inset-x-5 top-5 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.14em] text-[#a2a59b]"><span>Fig. 02 / The builder</span><span className="text-xl text-[#d7fb78]">+</span></div>
+              <p className="absolute bottom-20 left-5 text-[clamp(3.65rem,6.4vw,6.5rem)] font-semibold uppercase leading-[0.91] tracking-[-0.065em] sm:bottom-24" aria-hidden="true"><span style={{ color: "transparent", WebkitTextStroke: "1px rgba(244,243,237,.75)" }}>Human<br />by</span><br /><span className="text-[#f4f3ed]">design.</span></p>
+              <div className="absolute inset-x-5 bottom-5 flex items-end justify-between gap-4 border-t border-white/20 pt-4"><p className="font-mono text-[9px] uppercase leading-5 tracking-[0.13em] text-[#a2a59b]">{site.location}<br />EAT / UTC +3</p><p className="font-mono text-[9px] uppercase leading-5 tracking-[0.13em] text-[#d7fb78]">Thoughtful work.<br />Human perspective.</p></div>
             </div>
             <div className="mt-5 flex items-center justify-between font-mono text-[10px] uppercase tracking-wider text-[#a2a59b]"><span>Engineer by trade. Builder by nature.</span><ArrowDown size={14} /></div>
           </motion.div>
 
           <div className="lg:pt-3">
             <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-[#d7fb78]">Hello, I’m Elvin.</p>
-            <h2 className="mt-6 text-3xl font-medium leading-tight tracking-[-0.04em] sm:text-[2.5rem]">I connect the small details<br className="hidden sm:block" /> to the bigger picture.</h2>
+            <h2 className="mt-6 text-3xl font-medium leading-tight tracking-[-0.04em] sm:text-[2.5rem]">From everyday problems<br className="hidden sm:block" /> to working systems.</h2>
             <div className="mt-7 space-y-5 text-[15px] leading-7 text-[#a2a59b]">
-              <p>I’m a founding engineer at <a href={site.companyUrl} target="_blank" rel="noopener noreferrer" className="text-[#f4f3ed] underline decoration-white/30 underline-offset-4 transition-colors hover:text-[#d7fb78]">{site.company}</a>, building software for education, commerce, hospitality, and everyday business operations.</p>
-              <p>My work starts with understanding a problem and follows it through the whole stack: the interface, the data model, authentication, payments, and the details that make a product work in production.</p>
-              <p>Alongside client and product work, I study Computer Science at Moi University. I’m also an Equity Leadership Program alumnus. Both shape how I think about systems, collaboration, and the people on the other side of the screen.</p>
+              <p>I’m a full-stack software engineer and the founder and product engineer at <a href={site.companyUrl} target="_blank" rel="noopener noreferrer" className="text-[#f4f3ed] underline decoration-white/30 underline-offset-4 transition-colors hover:text-[#d7fb78]">{site.company}</a>. I build business software across healthcare, hospitality, commerce, and education.</p>
+              <p>JavaScript foundations in 2024 grew into marketplaces and business platforms in 2025. In 2026, my work spans multi-tenant pharmacy SaaS, offline desktop infrastructure, mobile services, and AI-assisted search.</p>
+              <p>I follow the workflow through the whole stack: interfaces, data models, access boundaries, payments, and deployment. Pharmacy and SME field feedback helps me refine the practical details.</p>
+              <p>I study Computer Science at Moi University, with graduation expected in 2027. Earlier work in client onboarding and banking operations at Equity Bank Kenya taught me the value of careful records and clear onboarding.</p>
             </div>
             <div className="mt-10 flex flex-wrap gap-x-10 gap-y-6 border-y border-white/12 py-6">
-              <div><span className="text-4xl font-medium tracking-tighter">{site.yearsShipping}</span><p className="mt-2 font-mono text-[10px] uppercase tracking-wider text-[#a2a59b]">Years shipping software</p></div>
+              <div><span className="text-4xl font-medium tracking-tighter">{site.yearsShipping}</span><p className="mt-2 font-mono text-[10px] uppercase tracking-wider text-[#a2a59b]">Years building software</p></div>
               <div><span className="text-4xl font-medium tracking-tighter">Full stack.</span><p className="mt-2 font-mono text-[10px] uppercase tracking-wider text-[#a2a59b]">From discovery to deployment</p></div>
             </div>
             <a href={site.resume} target="_blank" rel="noopener noreferrer" className="mt-8 inline-flex items-center gap-5 rounded-full bg-[#d7fb78] px-6 py-3.5 text-sm font-semibold text-[#10110f] transition-colors hover:bg-[#e3ff9c]">View my résumé <ArrowUpRight size={17} /></a>

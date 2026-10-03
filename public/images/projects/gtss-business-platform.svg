@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="cover-title cover-description">
+  <title id="cover-title">GTSS Business Platform — screenshot placeholder</title>
+  <desc id="cover-description">Typographic project cover. Preview pending; replace this SVG with a real GTSS Business Platform screenshot.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#111410"/><stop offset="1" stop-color="#21281a"/></linearGradient>
+    <radialGradient id="glow"><stop stop-color="#b9d77c" stop-opacity=".11"/><stop offset="1" stop-color="#b9d77c" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#background)"/>
+  <ellipse cx="1420" cy="240" rx="750" ry="640" fill="url(#glow)"/>
+  <path d="M100 142H1500" stroke="#e7eed9" opacity=".16"/>
+  <path d="M100 702H1500" stroke="#e7eed9" opacity=".16"/>
+  <circle cx="1420" cy="290" r="215" fill="none" stroke="#b9d77c" stroke-width="2" opacity=".22"/><circle cx="1420" cy="290" r="275" fill="none" stroke="#b9d77c" stroke-width="2" opacity=".13"/><circle cx="1420" cy="290" r="335" fill="none" stroke="#b9d77c" stroke-width="2" opacity=".07"/>
+  <rect x="100" y="91" width="9" height="9" fill="#b9d77c"/>
+  <text x="129" y="105" fill="#b9d77c" font-family="monospace" font-size="25" letter-spacing="2">PLATFORM / 13</text>
+  <text x="1500" y="105" text-anchor="end" fill="#aab0a4" font-family="monospace" font-size="25">2025–26</text>
+  <text x="100" y="340" fill="#f3f2ea" font-family="Arial, Helvetica, sans-serif" font-size="130" font-weight="600" letter-spacing="-5">GTSS</text>
+  <text x="100" y="479" fill="#f3f2ea" font-family="Arial, Helvetica, sans-serif" font-size="96" font-weight="600" letter-spacing="-5">Business Platform</text>
+  <text x="103" y="597" fill="#b9d77c" font-family="Arial, Helvetica, sans-serif" font-size="33" letter-spacing="-.3">Software-business operations platform</text>
+  <rect x="100" y="745" width="637" height="74" rx="3" fill="#b9d77c" fill-opacity=".1" stroke="#b9d77c" stroke-opacity=".4"/>
+  <text x="133" y="794" fill="#b9d77c" font-family="monospace" font-size="35" letter-spacing="1">SCREENSHOT PLACEHOLDER</text>
+  <text x="1500" y="790" text-anchor="end" fill="#959f8d" font-family="monospace" font-size="26" letter-spacing="1">PREVIEW PENDING ↗</text>
+</svg>

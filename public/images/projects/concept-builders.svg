@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="cover-title cover-description">
+  <title id="cover-title">Concept Builders — screenshot placeholder</title>
+  <desc id="cover-description">Typographic project cover. Preview pending; replace this SVG with a real Concept Builders screenshot.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#111410"/><stop offset="1" stop-color="#1d251f"/></linearGradient>
+    <radialGradient id="glow"><stop stop-color="#bddaaa" stop-opacity=".11"/><stop offset="1" stop-color="#bddaaa" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#background)"/>
+  <ellipse cx="1420" cy="240" rx="750" ry="640" fill="url(#glow)"/>
+  <path d="M100 142H1500" stroke="#e7eed9" opacity=".16"/>
+  <path d="M100 702H1500" stroke="#e7eed9" opacity=".16"/>
+  <path d="M1220 180V580M1420 180V580M1060 300H1560M1060 500H1560" fill="none" stroke="#bddaaa" stroke-width="2" opacity=".2"/><path d="M1120 440L1320 240L1520 440V600H1120Z" fill="none" stroke="#bddaaa" stroke-width="2" opacity=".24"/>
+  <rect x="100" y="91" width="9" height="9" fill="#bddaaa"/>
+  <text x="129" y="105" fill="#bddaaa" font-family="monospace" font-size="25" letter-spacing="2">PLATFORM / 04</text>
+  <text x="1500" y="105" text-anchor="end" fill="#aab0a4" font-family="monospace" font-size="25">2025–26</text>
+  <text x="100" y="340" fill="#f3f2ea" font-family="Arial, Helvetica, sans-serif" font-size="130" font-weight="600" letter-spacing="-5">Concept</text>
+  <text x="100" y="479" fill="#f3f2ea" font-family="Arial, Helvetica, sans-serif" font-size="130" font-weight="600" letter-spacing="-5">Builders</text>
+  <text x="103" y="597" fill="#bddaaa" font-family="Arial, Helvetica, sans-serif" font-size="33" letter-spacing="-.3">Design commerce and project management</text>
+  <rect x="100" y="745" width="637" height="74" rx="3" fill="#bddaaa" fill-opacity=".1" stroke="#bddaaa" stroke-opacity=".4"/>
+  <text x="133" y="794" fill="#bddaaa" font-family="monospace" font-size="35" letter-spacing="1">SCREENSHOT PLACEHOLDER</text>
+  <text x="1500" y="790" text-anchor="end" fill="#959f8d" font-family="monospace" font-size="26" letter-spacing="1">PREVIEW PENDING ↗</text>
+</svg>

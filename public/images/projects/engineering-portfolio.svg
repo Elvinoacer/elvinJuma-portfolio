@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="cover-title cover-description">
+  <title id="cover-title">Personal Engineering Portfolio — screenshot placeholder</title>
+  <desc id="cover-description">Typographic project cover. Preview pending; replace this SVG with a real Personal Engineering Portfolio screenshot.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#111410"/><stop offset="1" stop-color="#252b1d"/></linearGradient>
+    <radialGradient id="glow"><stop stop-color="#d5fb7e" stop-opacity=".11"/><stop offset="1" stop-color="#d5fb7e" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#background)"/>
+  <ellipse cx="1420" cy="240" rx="750" ry="640" fill="url(#glow)"/>
+  <path d="M100 142H1500" stroke="#e7eed9" opacity=".16"/>
+  <path d="M100 702H1500" stroke="#e7eed9" opacity=".16"/>
+  <circle cx="1420" cy="290" r="215" fill="none" stroke="#d5fb7e" stroke-width="2" opacity=".22"/><circle cx="1420" cy="290" r="275" fill="none" stroke="#d5fb7e" stroke-width="2" opacity=".13"/><circle cx="1420" cy="290" r="335" fill="none" stroke="#d5fb7e" stroke-width="2" opacity=".07"/>
+  <rect x="100" y="91" width="9" height="9" fill="#d5fb7e"/>
+  <text x="129" y="105" fill="#d5fb7e" font-family="monospace" font-size="25" letter-spacing="2">EXPERIMENT / 18</text>
+  <text x="1500" y="105" text-anchor="end" fill="#aab0a4" font-family="monospace" font-size="25">2025 onward</text>
+  <text x="100" y="340" fill="#f3f2ea" font-family="Arial, Helvetica, sans-serif" font-size="130" font-weight="600" letter-spacing="-5">Engineering</text>
+  <text x="100" y="479" fill="#f3f2ea" font-family="Arial, Helvetica, sans-serif" font-size="130" font-weight="600" letter-spacing="-5">Portfolio</text>
+  <text x="103" y="597" fill="#d5fb7e" font-family="Arial, Helvetica, sans-serif" font-size="33" letter-spacing="-.3">Portfolio design and engineering presentation</text>
+  <rect x="100" y="745" width="637" height="74" rx="3" fill="#d5fb7e" fill-opacity=".1" stroke="#d5fb7e" stroke-opacity=".4"/>
+  <text x="133" y="794" fill="#d5fb7e" font-family="monospace" font-size="35" letter-spacing="1">SCREENSHOT PLACEHOLDER</text>
+  <text x="1500" y="790" text-anchor="end" fill="#959f8d" font-family="monospace" font-size="26" letter-spacing="1">PREVIEW PENDING ↗</text>
+</svg>

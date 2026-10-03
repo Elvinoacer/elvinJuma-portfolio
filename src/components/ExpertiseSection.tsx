@@ -6,13 +6,13 @@ import { ArrowUpRight, Braces, Database, Layers3 } from "lucide-react";
 
 const capabilities = [
   { title: "Interfaces with intention.", label: "FRONTEND ENGINEERING", icon: Braces, description: "Responsive, accessible experiences with the small details that make software feel good to use.", tools: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Motion"] },
-  { title: "Systems you can build on.", label: "BACKEND & ARCHITECTURE", icon: Database, description: "The structure behind the screen. Data models, authentication, payments, and real-time connections.", tools: ["Node.js", "PostgreSQL", "Prisma", "Socket.IO", "REST APIs"] },
-  { title: "From what if to shipped.", label: "PRODUCT OWNERSHIP", icon: Layers3, description: "Understanding the problem, making the right tradeoffs, and owning the work all the way to production.", tools: ["Product thinking", "Integrations", "Git", "Vercel", "Cloudinary"] },
+  { title: "Systems you can build on.", label: "BACKEND & ARCHITECTURE", icon: Database, description: "Data models and access boundaries for multi-tenant products, with payment handling, real-time messaging, and local systems that work offline.", tools: ["Node.js", "PostgreSQL", "Prisma", "SQLite", "Socket.IO", "Electron"] },
+  { title: "From what if to shipped.", label: "PRODUCT OWNERSHIP", icon: Layers3, description: "Turning field feedback into practical business software. Requirements, integrations, deployment, and continuous refinement across SaaS, mobile, and AI search projects.", tools: ["M-Pesa / Daraja", "IntaSend", "Linux", "Expo", "LangChain", "Pinecone"] },
 ];
 const code = [
   { file: "interface.tsx", lines: ["const experience = {", "  clarity: 'before cleverness',", "  accessibility: 'by default',", "  details: 'never an afterthought',", "};", "", "export default thoughtfulUI;"] },
-  { file: "architecture.ts", lines: ["const system = {", "  data: 'PostgreSQL + Prisma',", "  identity: 'role-based access',", "  connections: 'realtime',", "};", "", "// Built for the work it needs to do."] },
-  { file: "process.ts", lines: ["async function build(problem) {", "  const insight = await understand(problem);", "  const product = await make(insight);", "  await ship(product);", "  return keepImproving(product);", "}", "// Good work is a continuous process."] },
+  { file: "architecture.ts", lines: ["const system = {", "  data: 'PostgreSQL / SQLite',", "  identity: 'tenant + role boundaries',", "  connections: 'realtime / local network',", "};", "", "// Built for the context it runs in."] },
+  { file: "process.ts", lines: ["async function build(workflow) {", "  const insight = await understand(workflow);", "  const product = await make(insight);", "  await ship(product);", "  return refine(product, await fieldFeedback());", "}", "// The next iteration starts with users."] },
 ];
 
 export default function ExpertiseSection() {

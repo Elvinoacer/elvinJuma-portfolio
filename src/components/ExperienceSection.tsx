@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Plus } from "lucide-react";
 import { experience, site } from "@/data/site";
@@ -16,22 +15,20 @@ export default function ExperienceSection() {
       <div className="mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-16">
         <div className="mb-14 flex items-center justify-between border-b border-white/12 pb-5 font-mono text-[10px] uppercase tracking-[0.18em] sm:text-xs">
           <span className="flex items-center gap-3"><span className="h-1.5 w-1.5 rounded-full bg-[#d7fb78]" /> The person behind the pixels</span>
-          <span className="hidden text-[#a2a59b] sm:block">02 / About & experience</span>
+          <span className="hidden text-[#a2a59b] sm:block">03 / About & experience</span>
         </div>
 
         <div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24">
           <motion.div initial={reduceMotion ? false : { opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.7 }}>
-            <div className="group relative max-w-[390px]">
-              <div className="relative aspect-[4/4.4] overflow-hidden rounded-sm bg-[#23251f]">
-                <Image src="/images/potrait5.webp" alt="Elvin Omondi Juma" fill sizes="(max-width: 1024px) 390px, 32vw" className="object-cover object-[50%_60%] grayscale transition-all duration-700 group-hover:scale-[1.025] group-hover:grayscale-0 motion-reduce:transition-none" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
-                <p className="absolute bottom-5 left-5 font-mono text-[10px] uppercase tracking-[0.16em] text-white/80">Eldoret, Kenya · Working everywhere</p>
-              </div>
-              <div className="absolute -right-3 -bottom-5 flex h-24 w-24 rotate-[-8deg] items-center justify-center rounded-full bg-[#d7fb78] text-center font-mono text-[10px] uppercase leading-relaxed tracking-wider text-[#10110f] sm:-right-6 sm:h-28 sm:w-28">Curious mind.<br />Builder at heart.</div>
+            <div className="relative max-w-[480px] border-l border-white/12 py-4 pl-6 sm:pl-8">
+              <span aria-hidden="true" className="absolute -left-[5px] top-0 h-2 w-2 bg-[#d7fb78]" />
+              <p className="mb-10 font-mono text-[10px] uppercase tracking-[0.17em] text-[#a2a59b]">A simple way of working</p>
+              <p className="text-[clamp(3rem,4.5vw,4.4rem)] font-medium leading-[1.1] tracking-[-0.065em]">Curiosity.<br /><span className="text-[#d7fb78]">Craft.</span><br />Follow-<br />through.</p>
+              <div className="mt-10 flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.12em] text-[#a2a59b]"><span aria-hidden="true" className="h-px w-8 bg-[#d7fb78]" /> From the first question<br />to the final detail.</div>
             </div>
             <div className="mt-10">
               <p className="text-xl font-semibold tracking-tight">{site.name}</p>
-              <p className="mt-2 text-sm text-[#a2a59b]">Founding engineer. Full-stack developer.</p>
+              <p className="mt-2 text-sm text-[#a2a59b]">Full-stack software engineer. Founder at GTSS.</p>
               <Link href="/about" className="group mt-7 inline-flex items-center gap-6 border-b border-white/30 pb-2 text-sm font-medium transition-colors hover:border-[#d7fb78] hover:text-[#d7fb78]">
                 A little more about me <ArrowUpRight size={17} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 motion-reduce:transform-none" />
               </Link>
@@ -41,8 +38,8 @@ export default function ExperienceSection() {
           <div>
             <motion.div initial={reduceMotion ? false : { opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: 0.1 }}>
               <h2 id="about-heading" className="max-w-[680px] text-[clamp(2.3rem,4vw,3.75rem)] font-medium leading-[1.13] tracking-[-0.055em]">A thoughtful interface.<br /><span className="text-[#a2a59b]">A solid system beneath it.</span></h2>
-              <p className="mt-7 max-w-xl text-[15px] leading-7 text-[#a2a59b]">I build software for the people who use it every day. For {site.yearsShipping} years, that has meant taking education, commerce, and operations products from the first conversation to production.</p>
-              <p className="mt-4 max-w-xl text-[15px] leading-7 text-[#a2a59b]">I care as much about the data model as the last interaction. Currently building at <span className="text-[#f4f3ed]">Great Thumbs Software Solutions</span> and studying Computer Science at Moi University.</p>
+              <p className="mt-7 max-w-xl text-[15px] leading-7 text-[#a2a59b]">My work has grown from JavaScript foundations in 2024 to full-stack business products, multi-tenant SaaS, and systems that keep working without internet. I follow the problem through the interface, data model, payments, and deployment.</p>
+              <p className="mt-4 max-w-xl text-[15px] leading-7 text-[#a2a59b]">Currently building healthcare, hospitality, and commerce products at <span className="text-[#f4f3ed]">{site.company}</span>. I also study Computer Science at Moi University, with graduation expected in 2027.</p>
             </motion.div>
 
             <div id="experience" className="mt-12 border-t border-white/12">

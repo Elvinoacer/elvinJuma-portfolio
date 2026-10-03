@@ -13,12 +13,13 @@ const manrope = localFont({
     { path: "./fonts/Manrope-ExtraBold.woff2", weight: "700 800", style: "normal" },
   ], variable: "--font-manrope", display: "swap",
 });
+const display = localFont({ src: "./fonts/BarlowCondensed-SemiBold.woff2", variable: "--font-display", display: "swap" });
 const mono = localFont({ src: "./fonts/DMMono-Regular.woff2", variable: "--font-dm-mono", display: "swap", preload: false });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://elvin-juma-portfolio.vercel.app"),
   title: {
-    default: `${site.name} - Full-Stack Engineer & Creative Developer`,
+    default: `${site.name} - ${site.title}`,
     template: `%s | ${site.name}`,
   },
   description: site.tagline,
@@ -29,7 +30,8 @@ export const metadata: Metadata = {
     "TypeScript Engineer",
     "React Developer Kenya",
     "Great Thumbs Software Solutions",
-    "Founding Engineer",
+    "Multi-tenant SaaS",
+    "Offline Systems",
     "PostgreSQL",
     "Product Engineer",
   ],
@@ -38,7 +40,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "https://elvin-juma-portfolio.vercel.app",
-    title: `${site.name} - Full-Stack Engineer & Creative Developer`,
+    title: `${site.name} - ${site.title}`,
     description: site.tagline,
     images: [{ url: "/images/elvin-logo-1.png", width: 1200, height: 630 }],
     locale: "en_US",
@@ -46,7 +48,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} - Full-Stack Engineer & Creative Developer`,
+    title: `${site.name} - ${site.title}`,
     description: site.tagline,
   },
   robots: {
@@ -61,7 +63,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${manrope.variable} ${mono.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${manrope.variable} ${mono.variable} ${display.variable}`}>
       <body>
         <a href="#main-content" className="skip-link">Skip to content</a>
         <Header />

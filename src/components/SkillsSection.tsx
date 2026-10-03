@@ -46,7 +46,7 @@ const skillGroups = {
       "CI/CD",
       "Docker",
       "Observability",
-      "GDPR-aware design",
+      "Role-based access",
     ],
   },
 } as const;

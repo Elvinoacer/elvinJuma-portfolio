@@ -1,12 +1,12 @@
-/** Central site content — honest, employer-grade copy */
+/** Central content drawn from the résumé and project history. */
 
 export const site = {
   name: "Elvin Omondi Juma",
   shortName: "Elvin",
-  title: "Founding Engineer · Full-Stack Developer",
+  title: "Full-Stack Software Engineer",
   tagline:
-    "I design and ship production software for real businesses — from education platforms to commerce and operations systems.",
-  location: "Eldoret, Kenya",
+    "I build business software from workflow discovery through deployment — multi-tenant SaaS, real-time platforms, and offline systems.",
+  location: "Kenya",
   email: "omondielvin@gmail.com",
   phone: "+254 790 670 542",
   phoneHref: "tel:+254790670542",
@@ -14,12 +14,12 @@ export const site = {
   github: "https://github.com/Elvinoacer",
   linkedin: "https://www.linkedin.com/in/elvin-omondi-juma",
   twitter: "https://x.com/Elvinoace",
-  resume: "/images/Elvin-Resume-template.pdf",
+  resume: "/Elvin_Omondi_Juma_Resume.pdf",
   company: "Great Thumbs Software Solutions",
   companyUrl: "https://gtss.vercel.app",
   availability: "Open to select freelance & full-time roles",
   yearsShipping: "2+",
-  focus: ["Next.js", "TypeScript", "PostgreSQL", "Realtime systems", "Product engineering"],
+  focus: ["Next.js", "TypeScript", "PostgreSQL", "Multi-tenant SaaS", "Offline & realtime systems"],
 } as const;
 
 export const navItems = [
@@ -30,78 +30,83 @@ export const navItems = [
 
 export const experience = [
   {
-    role: "Founding Engineer",
+    role: "Founder and Product Engineer",
     org: "Great Thumbs Software Solutions",
     period: "2025 — Present",
     location: "Kenya",
     points: [
-      "Architect and ship multi-product systems for hotels, marketplaces, and local businesses.",
-      "Own full stack: Next.js 16, React 19, PostgreSQL, Prisma, auth, payments, and realtime.",
-      "Lead product decisions from problem discovery through production launch.",
+      "Own product development across healthcare, hospitality, and local commerce: requirements, data models, APIs, interfaces, payments, and deployment.",
+      "Translate pharmacy and SME field feedback into clearer onboarding, administration, and payment workflows.",
+      "Build multi-tenant web platforms and offline systems, then iterate on reliability and usability.",
     ],
   },
   {
-    role: "Full-Stack Developer",
-    org: "Independent / Client work",
-    period: "2024 — Present",
-    location: "Remote",
+    role: "Client Onboarding and Banking Operations",
+    org: "Equity Bank Kenya",
+    period: "Jan — Dec 2023",
+    location: "Kenya",
     points: [
-      "Delivered production platforms: German Virtual School, Concept Builders, church ops, e-commerce.",
-      "Integrated payments (IntaSend/M-Pesa), live video (Jitsi), sockets, and cloud media pipelines.",
-      "Built systems used by real users — students, staff, vendors — not demos.",
+      "Opened client accounts, issued Equitel SIM cards, and printed ATM cards.",
+      "Learned KYC requirements and the importance of accurate client records.",
     ],
   },
   {
-    role: "Computer Science",
+    role: "Degree in Computer Science",
     org: "Moi University",
-    period: "Ongoing",
-    location: "Eldoret",
+    period: "Expected graduation 2027",
+    location: "Kenya",
     points: [
-      "Formal CS foundation paired with aggressive shipping practice.",
-      "Equity Leadership Program alumnus — leadership + community impact.",
+      "Study Computer Science while applying the work to business software and product development.",
+      "Team participant in the KenyaRe-UoN Hackathon 2024, exploring AI for insurance.",
     ],
   },
 ] as const;
 
 export const principles = [
   {
-    title: "Ship, then refine",
-    body: "Production is the best teacher. I move fast without leaving messes that compound.",
+    title: "Start with the workflow",
+    body: "Understand how people actually work before choosing the interface or architecture. Field feedback shapes the next iteration.",
   },
   {
     title: "Systems over screens",
-    body: "UI is the surface. I care about data models, auth, payments, and failure modes.",
+    body: "A useful interface needs a dependable foundation: clear data models, access boundaries, payment handling, and sensible failure modes.",
   },
   {
     title: "Respect the user",
-    body: "Clarity, speed, and accessibility beat clever animations every time.",
+    body: "Make the next step clear. Good software fits the user’s context, whether that is a browser, a phone, or a local network without internet.",
   },
 ] as const;
 
-/** Real products / clients — no fabricated social proof */
+/** Selected systems; URLs supplied by the résumé and project notes. */
 export const productsShipped = [
   {
-    name: "German Virtual School",
-    role: "Full-stack platform",
-    blurb: "Live classes, billing, assignments, GDPR reporting — A1–C2 German education.",
-    href: "https://germanvirtualschool.com",
+    name: "Afyvia",
+    role: "Multi-tenant pharmacy platform",
+    blurb: "Pharmacy storefronts, prescription requests, staff CRM, tenant isolation, and subscription billing.",
+    href: "https://afyvia.gtss.software",
+  },
+  {
+    name: "Restaurant Manager",
+    role: "Offline operations",
+    blurb: "Desktop software, guest ordering, kitchen tickets, and staff workflows on a local network.",
+    href: "https://github.com/Elvinoacer/hotel-intranet",
+  },
+  {
+    name: "JustInTime",
+    role: "Local services marketplace",
+    blurb: "Provider discovery, proposals, bookings, messaging, M-Pesa payments, and wallet workflows.",
+    href: "https://justintime.gtss.software",
   },
   {
     name: "Concept Builders",
-    role: "Construction web system",
-    blurb: "Project portfolios, design galleries, and client inquiry workflows.",
-    href: "https://conceptbuilders.co.ke",
+    role: "Architecture marketplace",
+    blurb: "Design discovery, custom requests, documents, payments, and project milestones.",
+    href: "https://github.com/Elvinoacer/concept-builders",
   },
   {
-    name: "GTSS",
-    role: "Parent product company",
-    blurb: "Hotel ordering, marketplace, and commerce products for local operators.",
-    href: "https://gtss.vercel.app",
-  },
-  {
-    name: "Zion Hill Platform",
-    role: "Church operations",
-    blurb: "Community engagement, payments, and day-to-day church management.",
-    href: "https://zion-hill.vercel.app/",
+    name: "German Virtual School",
+    role: "Education operations",
+    blurb: "Courses, live classes, assignments, progress, messaging, and fee workflows.",
+    href: "https://github.com/Elvinoacer/German-Virtual-School",
   },
 ] as const;

@@ -15,12 +15,12 @@ export default function ContactSection() {
         <div aria-hidden="true" className="pointer-events-none absolute -right-32 -top-44 h-[32rem] w-[32rem] rounded-full border border-black/10" />
         <div className="relative mx-auto max-w-[1400px] px-6 py-16 sm:px-10 sm:py-20 lg:px-12 lg:py-24">
           <div className="mb-12 flex flex-wrap items-center justify-between gap-4 font-mono text-[10px] uppercase tracking-[0.14em] sm:text-xs">
-            <span>Good things start with a conversation</span>
+            <span>04 / Good things start with a conversation</span>
             <span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-[#10110f]" /> Open to opportunities</span>
           </div>
           <motion.div initial={reduceMotion ? false : { opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
-            <Link href="/contact" className="group flex items-end justify-between gap-4">
-              <h2 id="contact-heading" className="text-[clamp(3.4rem,8.7vw,8.4rem)] font-medium leading-[0.99] tracking-[-0.075em]">Let’s make<br />something matter.</h2>
+            <Link href="/contact" className="group flex flex-col items-start justify-between gap-8 sm:flex-row sm:items-end sm:gap-4">
+              <h2 id="contact-heading" className="text-[clamp(2.65rem,8.7vw,8.4rem)] font-medium leading-[0.99] tracking-[-0.075em]">Let’s make<br />something matter.</h2>
               <span className="mb-1 flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-[#10110f]/30 transition-colors duration-300 group-hover:bg-[#10110f] group-hover:text-[#d7fb78] sm:mb-3 sm:h-24 sm:w-24 lg:h-32 lg:w-32"><ArrowUpRight className="h-7 w-7 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 motion-reduce:transform-none sm:h-12 sm:w-12 lg:h-16 lg:w-16" strokeWidth={1.25} /></span>
             </Link>
           </motion.div>
