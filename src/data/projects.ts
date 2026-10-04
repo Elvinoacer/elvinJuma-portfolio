@@ -66,7 +66,13 @@ export const projects: Project[] = [
     title: "Sphere Pharmacy",
     description:
       "A dedicated pharmacy application connecting medicine discovery, prescription review, orders, service bookings, delivery dispatch, loyalty, and staff administration.",
-    tags: ["Next.js 16", "Prisma / PostgreSQL", "Prescription workflows", "M-Pesa / IntaSend", "Notifications"],
+    tags: [
+      "Next.js 16",
+      "Prisma / PostgreSQL",
+      "Prescription workflows",
+      "M-Pesa / IntaSend",
+      "Notifications",
+    ],
     featured: true,
     category: "Product",
     domain: "Healthcare & pharmacy",
@@ -101,8 +107,9 @@ export const projects: Project[] = [
       "Next.js 16, React, TypeScript, Tailwind CSS, Prisma, and PostgreSQL connect customer, administrator, pharmacist, staff, and rider journeys. The reviewed payment/notification audit records remaining reconciliation, refund, settlement, and deployment-configuration work; live processing and POS synchronization are not established.",
     repositories: ["sphere_pharmacy"],
     repoSlug: "sphere_pharmacy",
-    image: "/images/projects/sphere-pharmacy.svg",
-    imageAlt: "Sphere Pharmacy abstract workflow cover connecting discovery, pharmacist review, and fulfilment; screenshot pending",
+    image: "/images/projects/sphere_pharmacy.png",
+    imageAlt:
+      "Sphere Pharmacy abstract workflow cover connecting discovery, pharmacist review, and fulfilment; screenshot pending",
     imageCaption: "Abstract workflow cover · screenshot pending",
     imagePlaceholder: true,
     imageWidth: 1366,
@@ -657,7 +664,7 @@ export const projects: Project[] = [
       "Inventory-",
       "Inventory-Management-System-V2",
     ],
-    liveUrl:"https://commerseley.vercel.app",
+    liveUrl: "https://commerseley.vercel.app",
     image: "/images/projects/commerce-inventory.webp",
     imageAlt:
       "Commerce storefront homepage featuring fashion products and a suit promotion",
