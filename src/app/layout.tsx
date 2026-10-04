@@ -16,6 +16,14 @@ const manrope = localFont({
 const display = localFont({ src: "./fonts/BarlowCondensed-SemiBold.woff2", variable: "--font-display", display: "swap" });
 const mono = localFont({ src: "./fonts/DMMono-Regular.woff2", variable: "--font-dm-mono", display: "swap", preload: false });
 
+const socialImage = {
+  url: "/images/elvin-juma-og-2026.jpg",
+  width: 1200,
+  height: 630,
+  type: "image/jpeg",
+  alt: "Elvin Juma, full-stack software engineer. An engineer with an artist’s eye. Portrait on a charcoal and lime background.",
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://elvin-juma-portfolio.vercel.app"),
   title: {
@@ -42,7 +50,7 @@ export const metadata: Metadata = {
     url: "https://elvin-juma-portfolio.vercel.app",
     title: `${site.name} - ${site.title}`,
     description: site.tagline,
-    images: [{ url: "/images/elvin-logo-1.png", width: 1200, height: 630 }],
+    images: [socialImage],
     locale: "en_US",
     siteName: site.name,
   },
@@ -50,6 +58,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${site.name} - ${site.title}`,
     description: site.tagline,
+    images: [socialImage],
   },
   robots: {
     index: true,

@@ -12,7 +12,7 @@ export const site = {
   phoneHref: "tel:+254790670542",
   whatsapp: "https://wa.me/254790670542",
   github: "https://github.com/Elvinoacer",
-  linkedin: "https://www.linkedin.com/in/elvin-omondi-juma",
+  linkedin: "https://www.linkedin.com/in/elvin-juma-680747281/",
   twitter: "https://x.com/Elvinoace",
   resume: "/Elvin_Omondi_Juma_Resume.pdf",
   company: "Great Thumbs Software Solutions",
