@@ -63,7 +63,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" data-scroll-behavior="smooth" className={`${manrope.variable} ${mono.variable} ${display.variable}`}>
+    <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning className={`${manrope.variable} ${mono.variable} ${display.variable}`}>
+      <head><script dangerouslySetInnerHTML={{ __html: 'try{if(localStorage.getItem("motion")==="off")document.documentElement.dataset.motion="off"}catch(e){}' }} /></head>
       <body>
         <a href="#main-content" className="skip-link">Skip to content</a>
         <Header />

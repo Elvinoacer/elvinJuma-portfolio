@@ -46,12 +46,73 @@ export interface Project {
   architecture: string;
   role?: string;
   repositories?: string[];
+  repoSlug?: string;
+  domain?: string;
+  scopeLabel?: string;
+  /** Repository creation → latest recorded push, in Africa/Nairobi; not a launch date. */
+  period?: string;
+  status?: string;
+  /** Source-code scope measurements, not usage, impact, or performance figures. */
+  metrics?: { label: string; value: string }[];
+  story?: { customer: string; operations: string; engineering: string };
 }
 
 // Place project screenshots in public/images/projects/ and reference them as
 // /images/projects/<project-slug>.<extension>.
 // Repository names preserve the spelling and case of the supplied project notes.
 export const projects: Project[] = [
+  {
+    id: 20,
+    title: "Sphere Pharmacy",
+    description:
+      "A dedicated pharmacy application connecting medicine discovery, prescription review, orders, service bookings, delivery dispatch, loyalty, and staff administration.",
+    tags: ["Next.js 16", "Prisma / PostgreSQL", "Prescription workflows", "M-Pesa / IntaSend", "Notifications"],
+    featured: true,
+    category: "Product",
+    domain: "Healthcare & pharmacy",
+    scopeLabel: "Flagship system",
+    period: "1–5 Sep 2026",
+    year: "2026",
+    status: "Integration & hardening · not production-ready",
+    outcome: "Dedicated pharmacy customer and operations workflows",
+    headline: "Beyond the medicine card.",
+    scene: "healthcare",
+    role: "Full-stack product engineering · pharmacy operations",
+    metrics: [
+      { label: "schema models", value: "36" },
+      { label: "API route files", value: "75" },
+    ],
+    story: {
+      customer:
+        "A customer needs more than a medicine listing: a way to request a prescription review, confirm availability, book a service, and choose collection or delivery.",
+      operations:
+        "Pharmacists, staff, and riders have different responsibilities. The application connects review actions, order queues, appointment records, fulfilment status, and customer updates.",
+      engineering:
+        "Access-controlled prescription records, separate payment attempts, payable-order checks, and queued notifications connect the workflow. Reconciliation, refunds, settlement, and deployment hardening remain release work.",
+    },
+    highlights: [
+      "Medicine discovery, prescription access and pharmacist review, and service bookings",
+      "Customer and guest orders, pickup/delivery, staff queues, and rider assignment",
+      "M-Pesa callbacks, IntaSend checkout, payment-state checks, and queued notifications",
+    ],
+    challenge:
+      "Translate a dedicated pharmacy's workflow into one connected application, from the first customer request through staff review, payment state, appointments, and fulfilment.",
+    architecture:
+      "Next.js 16, React, TypeScript, Tailwind CSS, Prisma, and PostgreSQL connect customer, administrator, pharmacist, staff, and rider journeys. The reviewed payment/notification audit records remaining reconciliation, refund, settlement, and deployment-configuration work; live processing and POS synchronization are not established.",
+    repositories: ["sphere_pharmacy"],
+    repoSlug: "sphere_pharmacy",
+    image: "/images/projects/sphere-pharmacy.svg",
+    imageAlt: "Sphere Pharmacy abstract workflow cover connecting discovery, pharmacist review, and fulfilment; screenshot pending",
+    imageCaption: "Abstract workflow cover · screenshot pending",
+    imagePlaceholder: true,
+    imageWidth: 1366,
+    imageHeight: 768,
+    github: "https://github.com/Elvinoacer/sphere_pharmacy",
+    link: "https://github.com/Elvinoacer/sphere_pharmacy",
+    featuredTitle: "A pharmacy’s whole journey.",
+    featuredSummary:
+      "Medicine discovery is the beginning. Sphere connects customer requests with pharmacist review, fulfilment, appointments, and the work behind the counter.",
+  },
   {
     id: 1,
     title: "Afyvia",
@@ -66,6 +127,22 @@ export const projects: Project[] = [
     ],
     featured: true,
     category: "Product",
+    domain: "Healthcare & pharmacy",
+    scopeLabel: "Flagship platform",
+    period: "2 Aug–29 Sep 2026",
+    repoSlug: "pharmacy_template_tier2",
+    metrics: [
+      { label: "schema models", value: "138" },
+      { label: "API route files", value: "122" },
+    ],
+    story: {
+      customer:
+        "A customer needs to find a nearby pharmacy, discover medicines, send a prescription request, or book a service through a recognizable storefront.",
+      operations:
+        "Independent pharmacies need their own staff access, inventory, customer relationships, and commercial settings while sharing onboarding and platform administration.",
+      engineering:
+        "Pharmacy-scoped tenancy connects shared Next.js infrastructure with Prisma and Neon PostgreSQL. Subscription, invoice, entitlement, job, and audit models capture the network's operational breadth.",
+    },
     year: "2026",
     outcome: "Multi-tenant pharmacy and care platform",
     headline: "Care, connected.",
@@ -82,7 +159,7 @@ export const projects: Project[] = [
     architecture:
       "A multi-tenant domain model spanning pharmacy CRM, branches, medication inventory, prescriptions, care services, and commerce, with billing, API keys, webhooks, scheduled jobs, MFA, and audit logs.",
     repositories: ["pharmacy_template_tier2", "pharmarcy_template"],
-    image: "/images/projects/afyvia.png",
+    image: "/images/projects/afyvia.webp",
     imageAlt:
       "Afyvia pharmacy network homepage with medicine search and patient care imagery",
     imagePlaceholder: false,
@@ -108,6 +185,22 @@ export const projects: Project[] = [
     ],
     featured: true,
     category: "Platform",
+    domain: "Services & marketplace",
+    scopeLabel: "Flagship platform",
+    period: "25 Nov 2025–15 Aug 2026",
+    repoSlug: "JustinTime",
+    metrics: [
+      { label: "schema models", value: "89" },
+      { label: "API route files", value: "145" },
+    ],
+    story: {
+      customer:
+        "Someone looking for a local professional needs to discover providers, compare their work, describe a job, and carry the conversation into a booking.",
+      operations:
+        "Providers need more than a listing. Proposals, schedules, messages, payment records, and team responsibilities follow the work after discovery.",
+      engineering:
+        "A Next.js and Prisma/PostgreSQL application joins marketplace, provider, and team domains with a separate Socket.IO service for real-time communication.",
+    },
     year: "2025–26",
     outcome: "Marketplace and service-business operations",
     headline: "Work, connected.",
@@ -124,7 +217,7 @@ export const projects: Project[] = [
     architecture:
       "A marketplace application and companion socket service, with domain workflows for service bookings, provider identity, finance, customer trust, team operations, and vertical-specific projects.",
     repositories: ["JustinTime", "jit-socket"],
-    image: "/images/projects/justintime.png",
+    image: "/images/projects/justintime.webp",
     imageAlt:
       "JustInTime homepage with professional service booking and local demand previews",
     imagePlaceholder: false,
@@ -150,6 +243,19 @@ export const projects: Project[] = [
     ],
     featured: true,
     category: "Systems",
+    domain: "Hospitality",
+    scopeLabel: "Desktop & local-network system",
+    period: "15 Dec 2025–25 Apr 2026",
+    repoSlug: "hotel-intranet",
+    metrics: [{ label: "schema models", value: "30" }],
+    story: {
+      customer:
+        "A guest needs to place an order and communicate with staff even when the venue's internet connection is unreliable.",
+      operations:
+        "Kitchen tickets, tables, customers, staff, and payment records need to stay connected inside the venue rather than depending on every action reaching the cloud.",
+      engineering:
+        "Electron packaging, a local Express server, SQLite persistence, and Socket.IO work alongside Linux captive-portal scripts. The architecture spans the application, desktop runtime, and local network.",
+    },
     year: "2025–26",
     outcome: "Local-first hospitality operations",
     headline: "Local by design",
@@ -181,6 +287,23 @@ export const projects: Project[] = [
   {
     id: 4,
     title: "Concept Builders",
+    featured: true,
+    domain: "Architecture & construction",
+    scopeLabel: "Flagship platform",
+    period: "21 Sep 2025–29 Sep 2026",
+    repoSlug: "concept-builders",
+    metrics: [
+      { label: "schema models", value: "46" },
+      { label: "API route files", value: "181" },
+    ],
+    story: {
+      customer:
+        "A client starts by exploring architectural designs, then needs a way to ask questions, request a custom design, and understand what delivery involves.",
+      operations:
+        "The initial inquiry becomes a project with requirements, documents, milestones, costs, invoices, feedback, and ongoing communication.",
+      engineering:
+        "A shared project-delivery domain connects public discovery with client and administrative workspaces. A separate Socket.IO service supports communication across the lifecycle.",
+    },
     liveUrl: "https://conceptbuilders.co.ke",
     description:
       "An architecture and design marketplace that carries customers from design discovery and inquiries through orders, documents, payments, and project milestones.",
@@ -206,7 +329,7 @@ export const projects: Project[] = [
     architecture:
       "A marketplace and project-management domain model covering designs, customers, orders, custom requests, documents, and delivery, with a companion socket service for communication.",
     repositories: ["concept-builders", "concept-builders-sockets"],
-    image: "/images/projects/concept-builders.png",
+    image: "/images/projects/concept-builders.webp",
     imageAlt:
       "Concept Builders homepage with building plan discovery and house design previews",
     imagePlaceholder: false,
@@ -218,6 +341,23 @@ export const projects: Project[] = [
   {
     id: 5,
     title: "German Virtual School",
+    featured: true,
+    domain: "Education",
+    scopeLabel: "Flagship platform",
+    period: "6 Jan–8 May 2026",
+    repoSlug: "German-Virtual-School",
+    metrics: [
+      { label: "schema models", value: "43" },
+      { label: "API route files", value: "124" },
+    ],
+    story: {
+      customer:
+        "Students need to follow a course, join live sessions, find learning resources, complete assignments, and understand their progress.",
+      operations:
+        "Teachers and administrators coordinate classes, attendance, submissions, academic terms, fee plans, invoices, and communication around that learning journey.",
+      engineering:
+        "Next.js and Prisma/PostgreSQL connect academic and financial records across student, teacher, and administrator workflows, with a dedicated socket service for communication.",
+    },
     description:
       "A virtual education platform bringing students, teachers, live classes, coursework, academic progress, and fee administration into one workspace.",
     tags: [
@@ -243,7 +383,7 @@ export const projects: Project[] = [
     architecture:
       "A multi-role education application with a companion socket server, connecting course and term structures to live sessions, attendance, submissions, messaging, and billing workflows.",
     repositories: ["German-Virtual-School", "gvs-socket-server"],
-    image: "/images/projects/german-virtual-school.png",
+    image: "/images/projects/german-virtual-school.webp",
     imageAlt:
       "German Virtual School homepage presenting German language courses and academic learning",
     imagePlaceholder: false,
@@ -291,8 +431,22 @@ export const projects: Project[] = [
   {
     id: 7,
     title: "Kampus",
+    featured: true,
+    domain: "Campus & student life",
+    scopeLabel: "Mobile platform",
+    period: "28 Feb–20 Jul 2026",
+    repoSlug: "Kampus",
+    metrics: [{ label: "user-service schema models", value: "94" }],
+    story: {
+      customer:
+        "A student moves between social connection and practical campus needs: communities, trading, events, messages, and learning resources.",
+      operations:
+        "Profiles, content, permissions, and communication need to remain coherent across these modules rather than becoming separate student experiences.",
+      engineering:
+        "An Expo/React Native app, shared types, an API gateway, and backend services give the mobile platform a distinct architecture. The earlier Uni-Link repository remains a related iteration.",
+    },
     description:
-      "A university-focused mobile platform built as an Expo / React Native monorepo with gateway and user services, mobile infrastructure, and device capabilities.",
+      "A campus-focused mobile platform connecting social interaction, communities, student trading, events, messaging, and learning resources through an Expo app and backend services.",
     tags: ["Expo", "React Native", "Monorepo", "Gateway services", "Mobile"],
     category: "Mobile",
     year: "2026",
@@ -302,14 +456,14 @@ export const projects: Project[] = [
     highlights: [
       "Expo and React Native mobile application",
       "Monorepo organization with gateway and user services",
-      "Camera, sensor, and mobile infrastructure capabilities",
+      "Campus feed, profiles, communities, messaging, marketplace, and learning resources",
     ],
     challenge:
       "Move beyond browser-based products into a university mobile experience with device features and distinct service responsibilities.",
     architecture:
       "An Expo / React Native monorepo separates the mobile application from gateway and user-service responsibilities, with support for camera and sensor capabilities.",
-    repositories: ["Kampus"],
-    image: "/images/projects/kampus.png",
+    repositories: ["Kampus", "uni-link"],
+    image: "/images/projects/kampus.webp",
     imageAlt:
       "Kampus mobile app profile editing screen with student details and profile photo",
     imagePlaceholder: false,
@@ -346,7 +500,7 @@ export const projects: Project[] = [
     architecture:
       "Prisma/PostgreSQL stores election and audit records, Africa's Talking supports communication workflows, and a companion Socket.IO service handles realtime events alongside rate limiting.",
     repositories: ["ELC_IEC_mu", "iec_socket"],
-    image: "/images/projects/elc-iec-voting.png",
+    image: "/images/projects/elc-iec-voting.webp",
     imageAlt:
       "ELC / IEC election administration dashboard with voter totals, candidate status, and election controls",
     imagePlaceholder: false,
@@ -376,7 +530,7 @@ export const projects: Project[] = [
     architecture:
       "Separate client and server repositories connect opportunity and application workflows to Gemini/LangChain processing and Pinecone-backed semantic retrieval.",
     repositories: ["oppslab-client", "oppslab-server"],
-    image: "/images/projects/oppslab.png",
+    image: "/images/projects/oppslab.webp",
     imageAlt:
       "OppsLab opportunity discovery homepage with AI search and opportunity browsing",
     imagePlaceholder: false,
@@ -389,6 +543,24 @@ export const projects: Project[] = [
   {
     id: 10,
     title: "Church Management Platform",
+    featured: true,
+    domain: "Community & institutions",
+    scopeLabel: "Institutional platform family",
+    period: "10 Aug 2025–26 Jan 2026 · family window",
+    repoSlug: "church-web-v2",
+    metrics: [
+      { label: "schema models per related schema", value: "72" },
+      { label: "API route files · church-web-v2", value: "218" },
+      { label: "API route files · Zion Hill", value: "215" },
+    ],
+    story: {
+      customer:
+        "A community member needs to find activities, connect with a ministry, volunteer, learn, or communicate with the organization.",
+      operations:
+        "Different responsibilities call for different workspaces: membership, families, ministries, events, counseling, resources, giving, and finance share related records.",
+      engineering:
+        "Role-aware workflows organize broad institutional data. Church Platform and Zion Hill share substantial schema and application structure, so their source counts stay separate rather than being added together.",
+    },
     description:
       "An organizational platform for church membership, ministries, events, communication, content, media, giving, and administration.",
     tags: [
@@ -414,7 +586,7 @@ export const projects: Project[] = [
     architecture:
       "A Prisma-backed application combines authentication, S3 and Firebase integrations, IntaSend, document workflows, rich-text content, push notifications, maps, and analytics.",
     repositories: ["church-web-v2", "ZION-HILL"],
-    image: "/images/projects/church-management.png",
+    image: "/images/projects/church-management.webp",
     imageAlt:
       "Zion Hill church homepage welcoming visitors and linking to community ministries",
     imagePlaceholder: false,
@@ -444,7 +616,7 @@ export const projects: Project[] = [
     architecture:
       "An education web application using Prisma, AWS/S3, Redux, Socket.IO, analytics/charting tools, and IntaSend alongside authentication.",
     repositories: ["ClassMind"],
-    image: "/images/projects/classmind.png",
+    image: "/images/projects/classmind.webp",
     imageAlt:
       "ClassMind learning platform homepage with student imagery and learning resource introduction",
     imagePlaceholder: false,
@@ -486,7 +658,7 @@ export const projects: Project[] = [
       "Inventory-Management-System-V2",
     ],
     liveUrl:"https://commerseley.vercel.app",
-    image: "/images/projects/commerce-inventory.jpg",
+    image: "/images/projects/commerce-inventory.webp",
     imageAlt:
       "Commerce storefront homepage featuring fashion products and a suit promotion",
     imagePlaceholder: false,
@@ -572,7 +744,7 @@ export const projects: Project[] = [
       "majid_restaurant",
       "mama_oliech_demo",
     ],
-    image: "/images/projects/sme-digitalization.png",
+    image: "/images/projects/sme-digitalization.webp",
     imageAlt: "ShopEase storefront with premium product promotion",
     imageCaption: "Representative commerce interface",
     imagePlaceholder: false,
@@ -620,7 +792,6 @@ export const projects: Project[] = [
       "haven_park",
       "kasarani_medic",
       "kephane",
-      "sphere_pharmacy",
       "gem-island-drift-crisp",
     ],
     image: "/images/projects/healthcare-digitalization.webp",
@@ -660,7 +831,7 @@ export const projects: Project[] = [
     architecture:
       "A marketplace prototype with linked customer and administrative surfaces for catalog records, carts, orders, support tickets, inventory, and reporting.",
     repositories: ["internationalkychub"],
-    image: "/images/projects/international-kyc-hub.png",
+    image: "/images/projects/international-kyc-hub.webp",
     imageAlt: "KYC Hub homepage advertising access to global betting markets",
     imagePlaceholder: false,
     github: "https://github.com/Elvinoacer/internationalkychub",
@@ -689,7 +860,7 @@ export const projects: Project[] = [
     architecture:
       "A travel-system demonstration with Prisma-backed data, reporting and analytics, PDF/Excel generation, and a separate socket-server repository.",
     repositories: ["kenya_airways_254", "kenya_airways_socket_server"],
-    image: "/images/projects/kenya-airways-demo.png",
+    image: "/images/projects/kenya-airways-demo.webp",
     imageAlt:
       "Kenya Airways travel demo homepage with flight search and booking form",
     imagePlaceholder: false,
@@ -731,7 +902,7 @@ export const projects: Project[] = [
       "elvin-profile-2",
       "next_port",
     ],
-    image: "/images/projects/engineering-portfolio.png",
+    image: "/images/projects/engineering-portfolio.webp",
     imageAlt:
       "Elvin engineering portfolio homepage with a 3D computer scene and developer introduction",
     imagePlaceholder: false,
@@ -778,7 +949,7 @@ export const projects: Project[] = [
       "tiktok-clone-feasible",
       "chat",
     ],
-    image: "/images/projects/frontend-realtime-foundations.png",
+    image: "/images/projects/frontend-realtime-foundations.webp",
     imageAlt:
       "Realtime messaging application with a contact list and add-contact form",
     imagePlaceholder: false,
@@ -789,7 +960,10 @@ export const projects: Project[] = [
   },
 ];
 
-export const featuredProjects = projects.filter((project) => project.featured);
+const featuredProjectOrder = [20, 1, 2, 4, 3, 5, 7, 10];
+export const featuredProjects = featuredProjectOrder
+  .map((id) => projects.find((project) => project.id === id))
+  .filter((project): project is Project => project !== undefined);
 
 export const engineeringTimeline = [
   {

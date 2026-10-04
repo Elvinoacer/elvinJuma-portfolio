@@ -1,10 +1,12 @@
 "use client";
 
 import type { CSSProperties, PointerEvent } from "react";
-import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import Image from "next/image";
 import { ArrowUpRight, MoveUpRight } from "lucide-react";
 import type { Project } from "@/data/projects";
+import { getImageMeta } from "@/data/image-meta";
+import { useMotionEnabled } from "@/lib/motion-preference";
 import styles from "./WorkShowcase.module.css";
 
 type ProjectCardProps = Project & {
@@ -20,7 +22,8 @@ const featuredCaptions: Record<string, string> = {
 };
 
 export default function ProjectCard({ index = 0, wide = false, onSelect, ...project }: ProjectCardProps) {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = !useMotionEnabled();
+  const imageMeta = getImageMeta(project.image);
   const pointerX = useMotionValue(0);
   const pointerY = useMotionValue(0);
   const x = useSpring(pointerX, { stiffness: 75, damping: 23 });
@@ -52,7 +55,7 @@ export default function ProjectCard({ index = 0, wide = false, onSelect, ...proj
         <div className={`${styles.desktopFrame} ${project.imageWidth < project.imageHeight ? styles.portraitFrame : ""}`}>
           {wide && !project.imageHasBrowserChrome ? <div className={styles.browserBar} aria-hidden="true"><div><i /><i /><i /></div><span>{new URL(project.liveUrl ?? project.github).hostname}</span><ArrowUpRight size={11} /></div> : null}
           <div className={styles.desktopImage}>
-            <Image src={project.image} alt={project.imageAlt} fill className="object-contain" sizes={wide ? "(max-width: 767px) 85vw, (max-width: 1440px) 85vw, 1180px" : "(max-width: 767px) 85vw, (max-width: 1440px) 42vw, 640px"} />
+            <Image src={project.image} alt={project.imageAlt} fill placeholder={imageMeta ? "blur" : "empty"} blurDataURL={imageMeta?.blurDataURL} className="object-contain" sizes={wide ? "(max-width: 900px) 85vw, (max-width: 1440px) 65vw, 990px" : "(max-width: 767px) 85vw, (max-width: 1440px) 42vw, 640px"} />
           </div>
         </div>
       </motion.div>
@@ -69,15 +72,15 @@ export default function ProjectCard({ index = 0, wide = false, onSelect, ...proj
   );
 
   return (
-    <motion.article initial={reduceMotion ? false : { opacity: 0, y: 32 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.08 }} transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }} className={`${styles.project} ${wide ? styles.chapter : styles.compact}`}>
+    <article className={`${styles.project} ${wide ? styles.chapter : styles.compact}`}>
       {wide ? <div className={styles.chapterMasthead}>
-        <div className={styles.chapterTitle}><span className={styles.chapterNumber}>/ {String(index + 1).padStart(2, "0")}</span><div><p className={styles.chapterCategory}>{project.category} / {project.year}</p><h3>{project.title}<span className={styles.titleDot}>.</span></h3></div></div>
+        <div className={styles.chapterTitle}><span className={styles.chapterNumber}>/ {String(index + 1).padStart(2, "0")}</span><div><p className={styles.chapterCategory}>{project.domain ?? project.category} / {project.year}</p><h3>{project.title}<span className={styles.titleDot}>.</span></h3></div></div>
         <div className={styles.chapterSummary}><p className={styles.featuredStatement}>{project.featuredTitle ?? project.headline}</p><p>{project.featuredSummary ?? project.description}</p>{actions}</div>
       </div> : null}
       <div className={styles.previewWrap} onPointerMove={moveScene} onPointerLeave={resetScene}>
         {onSelect ? <button type="button" onClick={() => onSelect(project)} aria-label={`Explore ${project.title}`} className={styles.previewButton}>{preview}</button> : <a href={project.github} target="_blank" rel="noopener noreferrer" aria-label={`View ${project.title} on GitHub (opens in a new tab)`} className={styles.previewButton}>{preview}</a>}
       </div>
       {wide ? <div className={styles.chapterFooter}><p>{project.outcome}</p><div>{project.tags.slice(0, 4).map((tag) => <span key={tag}>{tag}</span>)}</div></div> : <div className={styles.compactDetails}><p className={styles.chapterCategory}>{project.category} / {project.year}</p><h3>{project.title}</h3><p>{project.description}</p><div className={styles.compactTags}>{project.tags.slice(0, 4).map((tag) => <span key={tag}>{tag}</span>)}</div>{actions}</div>}
-    </motion.article>
+    </article>
   );
 }

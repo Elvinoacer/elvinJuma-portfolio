@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1366" height="768" viewBox="0 0 1366 768" role="img" aria-labelledby="sphere-title sphere-description">
+  <title id="sphere-title">Sphere Pharmacy — abstract workflow cover</title>
+  <desc id="sphere-description">A typographic placeholder and abstract diagram connecting discovery, pharmacist review, and fulfilment. This is not a product screenshot.</desc>
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#edf0e5"/><stop offset="1" stop-color="#d1dfd0"/></linearGradient>
+    <radialGradient id="halo"><stop stop-color="#7c9c7b" stop-opacity=".23"/><stop offset="1" stop-color="#7c9c7b" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1366" height="768" fill="url(#paper)"/>
+  <ellipse cx="1025" cy="376" rx="410" ry="395" fill="url(#halo)"/>
+  <g stroke="#436b4c" fill="none">
+    <path d="M70 118H1296M70 646H1296" opacity=".2"/>
+    <circle cx="1012" cy="379" r="222" opacity=".18"/>
+    <circle cx="1012" cy="379" r="271" opacity=".1"/>
+    <path d="M934 238C1026 217 1110 272 1110 358C1110 436 1056 505 952 521" stroke-width="2" opacity=".55"/>
+    <path d="M897 505C839 445 826 350 875 277" stroke-dasharray="4 9" opacity=".35"/>
+  </g>
+  <rect x="70" y="76" width="7" height="7" fill="#325a40"/>
+  <g fill="#325a40" font-family="monospace" font-size="16" letter-spacing="2">
+    <text x="94" y="89">SPHERE PHARMACY</text>
+    <text x="1296" y="89" text-anchor="end">WORKFLOW STUDY / 2026</text>
+  </g>
+  <g fill="#183c2c" font-family="Arial, Helvetica, sans-serif" font-size="65" font-weight="600" letter-spacing="-2.5">
+    <text x="70" y="294">One pharmacy.</text>
+    <text x="70" y="374">A connected</text>
+    <text x="70" y="454">journey.</text>
+  </g>
+  <text x="74" y="535" fill="#55715c" font-family="Arial, Helvetica, sans-serif" font-size="21">Customers, pharmacists, staff, and riders.</text>
+  <g font-family="monospace" font-size="15" letter-spacing="1.3">
+    <circle cx="893" cy="244" r="53" fill="#eaf0df" stroke="#739271"/>
+    <text x="893" y="250" text-anchor="middle" fill="#34563b">DISCOVER</text>
+    <circle cx="1110" cy="379" r="70" fill="#214d37"/>
+    <text x="1110" y="374" text-anchor="middle" fill="#e7eddf">PHARMACIST</text>
+    <text x="1110" y="398" text-anchor="middle" fill="#c2d4b5">REVIEW</text>
+    <circle cx="914" cy="522" r="56" fill="#eaf0df" stroke="#739271"/>
+    <text x="914" y="528" text-anchor="middle" fill="#34563b">FULFIL</text>
+  </g>
+  <g fill="#345c42"><circle cx="1003" cy="239" r="4"/><circle cx="1056" cy="478" r="4"/><circle cx="840" cy="378" r="4"/></g>
+  <text x="70" y="699" fill="#325a40" font-family="monospace" font-size="15" letter-spacing="1.4">ABSTRACT COVER · SCREENSHOT PENDING</text>
+  <text x="1296" y="699" text-anchor="end" fill="#68816c" font-family="monospace" font-size="14">DISCOVERY → REVIEW → FULFILMENT</text>
+</svg>

@@ -2,15 +2,18 @@
 
 import { useEffect, useId, useRef } from "react";
 import Image from "next/image";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowUpRight, Github, X } from "lucide-react";
 import type { Project } from "@/data/projects";
+import { getImageMeta } from "@/data/image-meta";
+import { useMotionEnabled } from "@/lib/motion-preference";
 
 export default function ProjectDetails({ project, onClose }: { project: Project; onClose: () => void }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const titleId = useId();
   const descriptionId = useId();
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = !useMotionEnabled();
+  const imageMeta = getImageMeta(project.image);
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -36,9 +39,12 @@ export default function ProjectDetails({ project, onClose }: { project: Project;
           <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#d7fb78]">{project.category}{project.role ? ` / ${project.role}` : ""}</p>
           <h2 id={titleId} className="mt-3 max-w-2xl text-3xl font-medium leading-[1.12] tracking-[-0.045em] sm:text-[44px]">{project.title}</h2>
           <p id={descriptionId} className="mt-5 max-w-2xl text-sm leading-[1.85] text-[#b1b5aa]">{project.description}</p>
-          <div style={project.imageWidth < project.imageHeight ? { height: "min(65dvh, 600px)" } : { aspectRatio: `${project.imageWidth} / ${project.imageHeight}` }} className="relative mt-7 overflow-hidden rounded border border-white/10 bg-[#111315]"><Image src={project.image} alt={project.imageAlt} fill className="object-contain" sizes="(max-width: 768px) 90vw, 816px" /></div>
+          {project.status ? <p className="mt-5 border-l border-[#d7fb78]/50 pl-4 text-xs leading-relaxed text-[#bdc9ad]"><span className="mr-2 font-mono text-[9px] uppercase tracking-wider text-[#91a07e]">Project status</span>{project.status}</p> : null}
+          <div style={project.imageWidth < project.imageHeight ? { height: "min(65dvh, 600px)" } : { aspectRatio: `${project.imageWidth} / ${project.imageHeight}` }} className="relative mt-7 overflow-hidden rounded border border-white/10 bg-[#111315]"><Image src={project.image} alt={project.imageAlt} fill placeholder={imageMeta ? "blur" : "empty"} blurDataURL={imageMeta?.blurDataURL} className="object-contain" sizes="(max-width: 768px) 90vw, 816px" /></div>
           {project.imageCaption ? <p className="mt-3 font-mono text-[10px] text-[#a0a795]">{project.imageCaption}</p> : null}
           {project.imagePlaceholder ? <p className="mt-3 font-mono text-[9px] uppercase tracking-[0.1em] text-[#a0a795]">Project screenshot coming soon</p> : null}
+          {project.metrics?.length ? <div className="mt-7 border-y border-white/12 py-5"><p className="font-mono text-[9px] uppercase tracking-wider text-[#91a07e]">Source-code scope / reviewed 3 Oct 2026</p><dl className="mt-4 grid grid-cols-2 gap-5">{project.metrics.map((metric) => <div key={metric.label}><dd className="text-3xl font-medium tracking-tight text-[#d7fb78]">{metric.value}</dd><dt className="mt-2 text-xs text-[#abb99a]">{metric.label}</dt></div>)}</dl><p className="mt-4 text-[10px] leading-relaxed text-[#91a07e]">Schema and route counts describe implementation breadth, not usage or runtime performance.</p></div> : null}
+          {project.period ? <p className="mt-5 font-mono text-[10px] leading-relaxed text-[#a0a795]">Repository activity: {project.period} · Kenya time</p> : null}
           <div className="mt-8 grid gap-8 sm:grid-cols-[1.4fr_1fr] sm:gap-10">
             <div className="space-y-7">
               <div><h3 className="font-mono text-[10px] uppercase tracking-[0.14em] text-[#d7fb78]">The problem</h3><p className="mt-3 text-sm leading-[1.8] text-[#d0d3c8]">{project.challenge}</p></div>
