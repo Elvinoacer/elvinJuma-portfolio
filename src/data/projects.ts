@@ -960,7 +960,7 @@ export const projects: Project[] = [
   },
 ];
 
-const featuredProjectOrder = [20, 1, 2, 4, 3, 5, 7, 10];
+const featuredProjectOrder = [1, 20, 2, 4, 3, 5, 7, 10];
 export const featuredProjects = featuredProjectOrder
   .map((id) => projects.find((project) => project.id === id))
   .filter((project): project is Project => project !== undefined);
